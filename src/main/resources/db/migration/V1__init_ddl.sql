@@ -167,4 +167,28 @@ create
 create
     index api_idx03 on api (updated_at);
 
+-- api
+drop table if exists screen;
+create table screen
+(
+    -- 기본 정보
+    screen_id          bigint auto_increment primary key comment '화면의 식별자',
+    screen_token       varchar(255) not null comment '화면을 구분하기 위한 대체키',
+    screen_name        varchar(255) not null comment '화면의 이름',
+    screen_description varchar(1024) comment '화면의 설명',
+    screen_enable      boolean default true comment '화면의 사용 여부',
+
+    created_at      datetime(6)  not null comment '화면의 정보 생성 일시',
+    updated_at      datetime(6)  null comment '화면의 정보 수정 일시'
+) comment '화면' charset = utf8mb4;
+
+create
+    index screen_idx01 on screen (screen_token);
+
+create
+    index screen_idx02 on screen (created_at);
+
+create
+    index screen_idx03 on screen (updated_at);
+
 set foreign_key_checks = 1; -- 외래키 체크 설정
