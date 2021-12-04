@@ -1,4 +1,4 @@
-package com.sirenk.core.user.domain.authoiry;
+package com.sirenk.core.user.domain.api;
 
 import com.sirenk.core.common.exception.InvalidParamException;
 import com.sirenk.core.common.jpa.AbstractEntity;
@@ -15,39 +15,34 @@ import javax.persistence.*;
 @Getter
 @Entity
 @NoArgsConstructor
-@Table(name = "authority")
-public class Authority extends AbstractEntity {
+@Table(name = "api")
+public class Api extends AbstractEntity {
 
-    private static final String PREFIX_AUTHORITY = "AUTH_";
+    private static final String PREFIX_API = "API_";
 
     // 기본 정보
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "authority_id")
+    @Column(name = "api_id")
     private Long id;
-    @Column(name = "authority_token")
+    @Column(name = "api_token")
     private String token;
-    @Column(name = "authority_name")
+    @Column(name = "api_name")
     private String name;
-    @Column(name = "authority_description")
+    @Column(name = "api_description")
     private String description;
-    @Column(name = "authority_enable")
+    @Column(name = "api_enable")
     private boolean enable;
 
     @Builder
-    public Authority(String name, String description) {
-        if (StringUtils.isEmpty(name)) throw new InvalidParamException("Authority.name");
+    public Api(String name, String description) {
+        if (StringUtils.isEmpty(name)) throw new InvalidParamException("Api.name");
 
         // 기본 정보
-        this.token = TokenGenerator.randomCharacterWithPrefix(PREFIX_AUTHORITY);
+        this.token = TokenGenerator.randomCharacterWithPrefix(PREFIX_API);
         this.name = name;
         this.description = description;
         this.enable = true;
-    }
-
-    public void changeBasicInfo(String name, String description) {
-        this.name = name;
-        this.description = description;
     }
 
 }
