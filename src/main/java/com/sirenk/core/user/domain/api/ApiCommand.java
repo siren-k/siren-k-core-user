@@ -30,4 +30,14 @@ public class ApiCommand {
         private String token;
     }
 
+    @Getter
+    @Builder
+    @ToString
+    public static class ChangeBasicInfo {
+        // 기본 정보
+        private String token;
+        private String name;
+        private String description;
+    }
+
 }

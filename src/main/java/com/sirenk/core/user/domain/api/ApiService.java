@@ -6,4 +6,6 @@ public interface ApiService {
 
     ApiInfo.Retrieve retrieve(ApiCommand.Retrieve command);
 
+    ApiInfo.ChangeBasicInfo changeBasicInfo(ApiCommand.ChangeBasicInfo command);
+
 }

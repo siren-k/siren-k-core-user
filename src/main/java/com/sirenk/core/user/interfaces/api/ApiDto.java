@@ -48,4 +48,26 @@ public class ApiDto {
         private final String description;
     }
 
+    @Getter
+    @Setter
+    @ToString
+    public static class ChangeBasicInfoRequest {
+        // 기본 정보
+        @NotNull(message = "token: 필수값입니다")
+        private String token;
+        @NotNull(message = "name: 필수값입니다")
+        private String name;
+        private String description;
+    }
+
+    @Getter
+    @Builder
+    @ToString
+    public static class ChangeBasicInfoResponse {
+        // 기본 정보
+        private final String token;
+        private final String name;
+        private final String description;
+    }
+
 }

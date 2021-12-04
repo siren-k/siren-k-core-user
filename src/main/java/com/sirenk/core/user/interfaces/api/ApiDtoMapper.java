@@ -21,4 +21,8 @@ public interface ApiDtoMapper {
 
     ApiDto.RetrieveResponse of(ApiInfo.Retrieve info);
 
+    ApiCommand.ChangeBasicInfo of(ApiDto.ChangeBasicInfoRequest request);
+
+    ApiDto.ChangeBasicInfoResponse of(ApiInfo.ChangeBasicInfo info);
+
 }

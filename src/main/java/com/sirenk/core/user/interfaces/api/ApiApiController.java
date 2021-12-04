@@ -33,4 +33,12 @@ public class ApiApiController {
         return CommonResponse.success(response);
     }
 
+    @PutMapping(value = "{token}")
+    public CommonResponse<ApiDto.ChangeBasicInfoResponse> changeBasicInfo(@RequestBody @Valid ApiDto.ChangeBasicInfoRequest request) {
+        var command = apiDtoMapper.of(request);
+        var info = apiFacade.changeBasicInfo(command);
+        var response = apiDtoMapper.of(info);
+        return CommonResponse.success(response);
+    }
+
 }
