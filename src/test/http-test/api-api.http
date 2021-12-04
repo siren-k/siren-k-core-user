@@ -39,7 +39,7 @@ Content-Type: application/json
 }
 
 > {%
-client.test("API 조회", function() {
+client.test("API 기본 정보 변경", function() {
     client.assert(response.status === 200, "unexpected http status: " + response.status);
     client.assert(response.body.data.name === "API 변경", "unexpected data.name: " + response.body.data.name);
     client.assert(response.body.data.description === "API 설명 변경", "unexpected data.description: " + response.body.data.description);
