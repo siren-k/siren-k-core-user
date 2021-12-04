@@ -22,4 +22,8 @@ public class ApiFacade {
         return apiService.retrieve(command);
     }
 
+    public ApiInfo.ChangeBasicInfo changeBasicInfo(ApiCommand.ChangeBasicInfo command) {
+        return apiService.changeBasicInfo(command);
+    }
+
 }

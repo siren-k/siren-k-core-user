@@ -45,4 +45,9 @@ public class Api extends AbstractEntity {
         this.enable = true;
     }
 
+    public void changeBasicInfo(String name, String description) {
+        this.name = name;
+        this.description = description;
+    }
+
 }

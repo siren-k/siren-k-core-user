@@ -15,4 +15,6 @@ public interface ApiInfoMapper {
 
     ApiInfo.Retrieve retrieve(Api api);
 
+    ApiInfo.ChangeBasicInfo changeBasicInfo(Api api);
+
 }
