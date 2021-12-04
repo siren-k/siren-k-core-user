@@ -597,4 +597,7 @@ gradle-app.setting
 ### Gradle Patch ###
 **/build/
 
+### Docker ###
+docker-compose
+
 # End of https://www.toptal.com/developers/gitignore/api/windows,macos,linux,java,node,angular,c,c++,cmake,maven,gradle,intellij+all,webstorm+all,eclipse,visualstudiocode
