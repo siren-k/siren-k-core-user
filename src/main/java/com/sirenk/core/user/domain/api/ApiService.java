@@ -8,4 +8,6 @@ public interface ApiService {
 
     ApiInfo.ChangeBasicInfo changeBasicInfo(ApiCommand.ChangeBasicInfo command);
 
+    ApiInfo.Remove remove(ApiCommand.Remove command);
+
 }

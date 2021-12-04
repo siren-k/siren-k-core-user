@@ -25,4 +25,8 @@ public interface ApiDtoMapper {
 
     ApiDto.ChangeBasicInfoResponse of(ApiInfo.ChangeBasicInfo info);
 
+    ApiCommand.Remove of(ApiDto.RemoveRequest request);
+
+    ApiDto.RemoveResponse of(ApiInfo.Remove info);
+
 }

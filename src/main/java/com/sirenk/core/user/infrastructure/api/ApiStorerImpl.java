@@ -30,4 +30,10 @@ public class ApiStorerImpl implements ApiStorer {
         }
     }
 
+    @Override
+    public void remove(Api api) {
+        if (api == null) throw new InvalidParamException("api is null");
+        apiJpaRepository.delete(api);
+    }
+
 }

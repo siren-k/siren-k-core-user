@@ -41,4 +41,12 @@ public class ApiApiController {
         return CommonResponse.success(response);
     }
 
+    @DeleteMapping(value = "{token}")
+    public CommonResponse<ApiDto.RemoveResponse> remove(@Valid ApiDto.RemoveRequest request) {
+        var command = apiDtoMapper.of(request);
+        var info = apiFacade.remove(command);
+        var response = apiDtoMapper.of(info);
+        return CommonResponse.success(response);
+    }
+
 }

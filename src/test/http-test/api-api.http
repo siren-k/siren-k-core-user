@@ -45,3 +45,14 @@ client.test("API 조회", function() {
     client.assert(response.body.data.description === "API 설명 변경", "unexpected data.description: " + response.body.data.description);
 })
 %}
+
+### API 삭제
+DELETE http://{{host-user}}/api/v1/api/{{api_token}}
+Content-Type: application/json
+
+> {%
+client.test("API 삭제", function() {
+    client.assert(response.status === 200, "unexpected http status: " + response.status);
+    client.assert(response.body.data.token === String(client.global.get("api_token")), "unexpected data.token: " + response.body.data.token);
+})
+%}

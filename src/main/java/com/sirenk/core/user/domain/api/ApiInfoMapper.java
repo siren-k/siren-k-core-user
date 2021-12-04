@@ -17,4 +17,6 @@ public interface ApiInfoMapper {
 
     ApiInfo.ChangeBasicInfo changeBasicInfo(Api api);
 
+    ApiInfo.Remove remove(Api api);
+
 }
