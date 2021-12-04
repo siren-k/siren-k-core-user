@@ -1,0 +1,186 @@
+### 최상위 메뉴 등록
+POST http://{{host-user}}/api/v1/menu
+Content-Type: application/json
+
+{
+  "name": "최상위 메뉴",
+  "description": "최상위 메뉴 설명"
+}
+
+> {%
+client.test("최상위 메뉴 등록", function() {
+    client.assert(response.status === 200, "unexpected http status: " + response.status);
+    client.assert(response.body.data.name === "최상위 메뉴", "unexpected data name: " + response.body.data.name);
+    client.assert(response.body.data.description === "최상위 메뉴 설명", "unexpected data description: " + response.body.data.description);
+    client.assert(response.body.data.path === "최상위 메뉴", "unexpected data path: " + response.body.data.path);
+})
+client.global.set("top_menu_token", response.body.data.token)
+%}
+
+### 차상위 메뉴 1 등록
+POST http://{{host-user}}/api/v1/menu
+Content-Type: application/json
+
+{
+  "name": "차상위 메뉴 1",
+  "description": "차상위 메뉴 1 설명",
+  "parentToken": "{{top_menu_token}}"
+}
+
+> {%
+client.test("차상위 메뉴 1 등록", function() {
+    client.assert(response.status === 200, "unexpected http status: " + response.status);
+    client.assert(response.body.data.name === "차상위 메뉴 1", "unexpected data name: " + response.body.data.name);
+    client.assert(response.body.data.description === "차상위 메뉴 1 설명", "unexpected data description: " + response.body.data.description);
+    client.assert(response.body.data.path === "최상위 메뉴 > 차상위 메뉴 1", "unexpected data path: " + response.body.data.path);
+    client.assert(response.body.data.parent !== null, "unexpected data parent: " + response.body.data.parent);
+})
+client.global.set("one_tire_menu_1_token", response.body.data.token)
+%}
+
+### 차상위 메뉴 2 등록
+POST http://{{host-user}}/api/v1/menu
+Content-Type: application/json
+
+{
+  "name": "차상위 메뉴 2",
+  "description": "차상위 메뉴 2 설명",
+  "parentToken": "{{top_menu_token}}"
+}
+
+> {%
+client.test("차상위 메뉴 2 등록", function() {
+    client.assert(response.status === 200, "unexpected http status: " + response.status);
+    client.assert(response.body.data.name === "차상위 메뉴 2", "unexpected data name: " + response.body.data.name);
+    client.assert(response.body.data.description === "차상위 메뉴 2 설명", "unexpected data description: " + response.body.data.description);
+    client.assert(response.body.data.path === "최상위 메뉴 > 차상위 메뉴 2", "unexpected data path: " + response.body.data.path);
+    client.assert(response.body.data.parent !== null, "unexpected data parent: " + response.body.data.parent);
+})
+client.global.set("one_tire_menu_2_token", response.body.data.token)
+%}
+
+### 최하위 메뉴 1 등록
+POST http://{{host-user}}/api/v1/menu
+Content-Type: application/json
+
+{
+  "name": "최하위 메뉴 1",
+  "description": "최하위 메뉴 1 설명",
+  "parentToken": "{{one_tire_menu_1_token}}"
+}
+
+> {%
+client.test("최하위 메뉴 1 등록", function() {
+    client.assert(response.status === 200, "unexpected http status: " + response.status);
+    client.assert(response.body.data.name === "최하위 메뉴 1", "unexpected data name: " + response.body.data.name);
+    client.assert(response.body.data.description === "최하위 메뉴 1 설명", "unexpected data description: " + response.body.data.description);
+    client.assert(response.body.data.path === "최상위 메뉴 > 차상위 메뉴 1 > 최하위 메뉴 1", "unexpected data path: " + response.body.data.path);
+    client.assert(response.body.data.parent !== null, "unexpected data parent: " + response.body.data.parent);
+})
+%}
+
+### 최하위 메뉴 2 등록
+POST http://{{host-user}}/api/v1/menu
+Content-Type: application/json
+
+{
+  "name": "최하위 메뉴 2",
+  "description": "최하위 메뉴 2 설명",
+  "parentToken": "{{one_tire_menu_1_token}}"
+}
+
+> {%
+client.test("최하위 메뉴 2 등록", function() {
+    client.assert(response.status === 200, "unexpected http status: " + response.status);
+    client.assert(response.body.data.name === "최하위 메뉴 2", "unexpected data name: " + response.body.data.name);
+    client.assert(response.body.data.description === "최하위 메뉴 2 설명", "unexpected data description: " + response.body.data.description);
+    client.assert(response.body.data.path === "최상위 메뉴 > 차상위 메뉴 1 > 최하위 메뉴 2", "unexpected data path: " + response.body.data.path);
+    client.assert(response.body.data.parent !== null, "unexpected data parent: " + response.body.data.parent);
+})
+client.global.set("bottom_menu_token", response.body.data.token)
+%}
+
+### 전체 메뉴 조회
+GET http://{{host-user}}/api/v1/menu
+Content-Type: application/json
+
+> {%
+client.test("전체 메뉴 조회", function() {
+    client.assert(response.status === 200, "unexpected http status: " + response.status);
+    client.assert(response.body.data[0].name === "최상위 메뉴", "unexpected data[0] name: " + response.body.data[0].name);
+    client.assert(response.body.data[0].description === "최상위 메뉴 설명", "unexpected data[0] description: " + response.body.data[0].description);
+    client.assert(response.body.data[0].path === "최상위 메뉴", "unexpected data[0] path: " + response.body.data[0].path);
+    client.assert(response.body.data[0].children[0].name === "차상위 메뉴 1", "unexpected data[0] children[0] name: " + response.body.data[0].children[0].name);
+    client.assert(response.body.data[0].children[0].description === "차상위 메뉴 1 설명", "unexpected data[0] children[0] description: " + response.body.data[0].children[0].description);
+    client.assert(response.body.data[0].children[0].path === "최상위 메뉴 > 차상위 메뉴 1", "unexpected data[0] children[0] path: " + response.body.data[0].children[0].path);
+    client.assert(response.body.data[0].children[0].children[0].name === "최하위 메뉴 1", "unexpected data[0] children[0] children[0] name: " + response.body.data[0].children[0].children[0].name);
+    client.assert(response.body.data[0].children[0].children[0].description === "최하위 메뉴 1 설명", "unexpected data[0] children[0] children[0] description: " + response.body.data[0].children[0].children[0].description);
+    client.assert(response.body.data[0].children[0].children[0].path === "최상위 메뉴 > 차상위 메뉴 1 > 최하위 메뉴 1", "unexpected data[0] children[0] children[0] path: " + response.body.data[0].children[0].children[0].path);
+    client.assert(response.body.data[0].children[0].children[1].name === "최하위 메뉴 2", "unexpected data[0] children[0] children[1] name: " + response.body.data[0].children[0].children[1].name);
+    client.assert(response.body.data[0].children[0].children[1].description === "최하위 메뉴 2 설명", "unexpected data[0] children[0] children[1] description: " + response.body.data[0].children[0].children[1].description);
+    client.assert(response.body.data[0].children[0].children[1].path === "최상위 메뉴 > 차상위 메뉴 1 > 최하위 메뉴 2", "unexpected data[0] children[0] children[1] path: " + response.body.data[0].children[0].children[1].path);
+    client.assert(response.body.data[0].children[1].name === "차상위 메뉴 2", "unexpected data[0] children[1] name: " + response.body.data[0].children[1].name);
+    client.assert(response.body.data[0].children[1].description === "차상위 메뉴 2 설명", "unexpected data[0] children[1] description: " + response.body.data[0].children[1].description);
+    client.assert(response.body.data[0].children[1].path === "최상위 메뉴 > 차상위 메뉴 2", "unexpected data[0] children[1] path: " + response.body.data[0].children[1].path);
+})
+%}
+
+### 최하위 메뉴 2 기본 정보 변경
+PUT http://{{host-user}}/api/v1/menu/{{bottom_menu_token}}
+Content-Type: application/json
+
+{
+  "token": "{{bottom_menu_token}}",
+  "name": "최하위 메뉴 2 변경",
+  "description": "최하위 메뉴 2 설명 변경"
+}
+
+> {%
+client.test("최하위 메뉴 2 변경", function() {
+    client.assert(response.status === 200, "unexpected http status: " + response.status);
+    client.assert(response.body.data.name === "최하위 메뉴 2 변경", "unexpected data name: " + response.body.data.name);
+    client.assert(response.body.data.description === "최하위 메뉴 2 설명 변경", "unexpected data description: " + response.body.data.description);
+})
+%}
+
+### 차상위 메뉴 1 삭제
+DELETE http://{{host-user}}/api/v1/menu/{{one_tire_menu_1_token}}
+Content-Type: application/json
+
+> {%
+client.test("차상위 메뉴 1 삭제", function() {
+    client.assert(response.status === 200, "unexpected http status: " + response.status);
+    client.assert(response.body.result === "FAIL", "unexpected http status: " + response.body.result);
+    client.assert(response.body.data === null, "unexpected body.data: " + response.body.data);
+    client.assert(response.body.message === "엔티티의 자식 엔티티가 존재합니다. (차상위 메뉴 1: 2)", "unexpected body.message: " + response.body.message);
+})
+%}
+
+### 최하위 메뉴 2 삭제
+DELETE http://{{host-user}}/api/v1/menu/{{bottom_menu_token}}
+Content-Type: application/json
+
+> {%
+client.test("최상위 메뉴 1 삭제", function() {
+    client.assert(response.status === 200, "unexpected http status: " + response.status);
+    client.assert(response.body.result === "SUCCESS", "unexpected http status: " + response.body.result);
+    client.assert(response.body.data.token === String(client.global.get("bottom_menu_token")), "unexpected body.data: " + response.body.data.token);
+})
+%}
+
+### 차상위 메뉴 1을 차상위 메뉴 2 밑으로 이동
+PUT http://{{host-user}}/api/v1/menu/{{one_tire_menu_1_token}}/move/{{one_tire_menu_2_token}}
+Content-Type: application/json
+
+> {%
+client.test("차상위 메뉴 1을 차상위 메뉴 2 밑으로 이동", function() {
+    client.assert(response.status === 200, "unexpected http status: " + response.status);
+    client.assert(response.body.result === "SUCCESS", "unexpected http status: " + response.body.result);
+    client.assert(response.body.data.name === "차상위 메뉴 1", "unexpected body.data.name: " + response.body.data.name);
+    client.assert(response.body.data.description === "차상위 메뉴 1 설명", "unexpected body.data.description: " + response.body.data.description);
+    client.assert(response.body.data.path === "최상위 메뉴 > 차상위 메뉴 2 > 차상위 메뉴 1", "unexpected body.data.path: " + response.body.data.path);
+    client.assert(response.body.data.parent.name === "차상위 메뉴 2", "unexpected body.data.parent.name: " + response.body.data.parent.name);
+    client.assert(response.body.data.parent.description === "차상위 메뉴 2 설명", "unexpected body.data.parent.description: " + response.body.data.parent.description);
+    client.assert(response.body.data.parent.path === "최상위 메뉴 > 차상위 메뉴 2", "unexpected body.data.parent.path : " + response.body.data.parent.path);
+})
+%}
