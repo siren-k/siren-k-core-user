@@ -17,4 +17,8 @@ public interface ApiDtoMapper {
 
     ApiDto.RegisterResponse of(ApiInfo.Basic info);
 
+    ApiCommand.Retrieve of(ApiDto.RetrieveRequest request);
+
+    ApiDto.RetrieveResponse of(ApiInfo.Retrieve info);
+
 }
