@@ -26,4 +26,8 @@ public class ApiFacade {
         return apiService.changeBasicInfo(command);
     }
 
+    public ApiInfo.Remove remove(ApiCommand.Remove command) {
+        return apiService.remove(command);
+    }
+
 }

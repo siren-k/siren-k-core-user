@@ -36,4 +36,12 @@ public class ApiInfo {
         private String description;
     }
 
+    @Getter
+    @Builder
+    @ToString
+    public static class Remove {
+        // 기본 정보
+        private String token;
+    }
+
 }

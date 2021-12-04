@@ -37,4 +37,12 @@ public class ApiServiceImpl implements ApiService {
         return apiInfoMapper.changeBasicInfo(api);
     }
 
+    @Override
+    @Transactional
+    public ApiInfo.Remove remove(ApiCommand.Remove command) {
+        var api = apiReader.read(command.getToken());
+        apiStorer.remove(api);
+        return apiInfoMapper.remove(api);
+    }
+
 }

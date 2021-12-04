@@ -70,4 +70,21 @@ public class ApiDto {
         private final String description;
     }
 
+    @Getter
+    @Setter
+    @ToString
+    public static class RemoveRequest {
+        // 기본 정보
+        @NotNull(message = "token: 필수값입니다")
+        private String token;
+    }
+
+    @Getter
+    @Builder
+    @ToString
+    public static class RemoveResponse {
+        // 기본 정보
+        private final String token;
+    }
+
 }
