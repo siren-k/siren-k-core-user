@@ -1,0 +1,58 @@
+### 권한 등록
+POST http://{{host-user}}/api/v1/authority
+Content-Type: application/json
+
+{
+  "name": "권한",
+  "description": "권한 설명"
+}
+
+> {%
+client.test("권한 등록", function() {
+    client.assert(response.status === 200, "unexpected http status: " + response.status);
+    client.assert(response.body.data.name === "권한", "unexpected data.name: " + response.body.data.name);
+    client.assert(response.body.data.description === "권한 설명", "unexpected data.description: " + response.body.data.description);
+})
+client.global.set("authority_token", response.body.data.token)
+%}
+
+### 권한 조회
+GET http://{{host-user}}/api/v1/authority/{{authority_token}}
+Content-Type: application/json
+
+> {%
+client.test("권한 조회", function() {
+    client.assert(response.status === 200, "unexpected http status: " + response.status);
+    client.assert(response.body.data.name === "권한", "unexpected data.name: " + response.body.data.name);
+    client.assert(response.body.data.description === "권한 설명", "unexpected data.description: " + response.body.data.description);
+})
+%}
+
+### 권한 기본 정보 변경
+PUT http://{{host-user}}/api/v1/authority/{{authority_token}}
+Content-Type: application/json
+
+{
+  "token": "{{authority_token}}",
+  "name": "권한 변경",
+  "description": "권한 설명 변경"
+}
+
+> {%
+client.test("권한 기본 정보 변경", function() {
+    client.assert(response.status === 200, "unexpected http status: " + response.status);
+    client.assert(response.body.data.name === "권한 변경", "unexpected data.name: " + response.body.data.name);
+    client.assert(response.body.data.description === "권한 설명 변경", "unexpected data.description: " + response.body.data.description);
+})
+%}
+
+### 권한 삭제
+DELETE http://{{host-user}}/api/v1/authority/{{authority_token}}
+Content-Type: application/json
+
+> {%
+client.test("권한 삭제", function() {
+    client.assert(response.status === 200, "unexpected http status: " + response.status);
+    client.assert(response.body.data.token === String(client.global.get("authority_token")), "unexpected data.description: " + response.body.data.description);
+})
+%}
