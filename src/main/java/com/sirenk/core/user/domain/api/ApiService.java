@@ -4,4 +4,6 @@ public interface ApiService {
 
     ApiInfo.Basic register(ApiCommand.Register command);
 
+    ApiInfo.Retrieve retrieve(ApiCommand.Retrieve command);
+
 }

@@ -22,4 +22,10 @@ public class ApiServiceImpl implements ApiService {
         return apiInfoMapper.basic(api);
     }
 
+    @Override
+    public ApiInfo.Retrieve retrieve(ApiCommand.Retrieve command) {
+        var api = apiReader.read(command.getToken());
+        return apiInfoMapper.retrieve(api);
+    }
+
 }

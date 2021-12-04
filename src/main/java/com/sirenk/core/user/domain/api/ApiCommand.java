@@ -22,4 +22,12 @@ public class ApiCommand {
         }
     }
 
+    @Getter
+    @Builder
+    @ToString
+    public static class Retrieve {
+        // 기본 정보
+        private String token;
+    }
+
 }

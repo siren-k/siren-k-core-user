@@ -29,4 +29,23 @@ public class ApiDto {
         private final String description;
     }
 
+    @Getter
+    @Setter
+    @ToString
+    public static class RetrieveRequest {
+        // 기본 정보
+        @NotNull(message = "token: 필수값입니다")
+        private String token;
+    }
+
+    @Getter
+    @Builder
+    @ToString
+    public static class RetrieveResponse {
+        // 기본 정보
+        private final String token;
+        private final String name;
+        private final String description;
+    }
+
 }
