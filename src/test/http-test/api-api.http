@@ -1,0 +1,17 @@
+### API 등록
+POST http://{{host-user}}/api/v1/api
+Content-Type: application/json
+
+{
+  "name": "API",
+  "description": "API 설명"
+}
+
+> {%
+client.test("API 등록", function() {
+    client.assert(response.status === 200, "unexpected http status: " + response.status);
+    client.assert(response.body.data.name === "API", "unexpected data.name: " + response.body.data.name);
+    client.assert(response.body.data.description === "API 설명", "unexpected data.description: " + response.body.data.description);
+})
+client.global.set("api_token", response.body.data.token)
+%}
