@@ -1,5 +1,6 @@
 package com.sirenk.core.user.interfaces.api;
 
+import com.sirenk.core.user.domain.api.Api;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -16,6 +17,8 @@ public class ApiDto {
         @NotNull(message = "name: 필수값입니다")
         private String name;
         private String description;
+        @NotNull(message = "method: 필수값입니다")
+        private Api.Method method;
     }
 
     @Getter
@@ -36,6 +39,8 @@ public class ApiDto {
         private String token;
         @NotNull(message = "name: 필수값입니다")
         private String name;
+        @NotNull(message = "method: 필수값입니다")
+        private Api.Method method;
         private String description;
         @NotNull(message = "enable: 필수값입니다")
         private boolean enable;
@@ -51,7 +56,7 @@ public class ApiDto {
     }
 
     public record BasicResponse(String token, String name, String description,
-                                   boolean enable) {
+                                Api.Method method, boolean enable) {
     }
 
     public record RemoveResponse(String token) {

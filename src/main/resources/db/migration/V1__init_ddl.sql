@@ -154,6 +154,7 @@ create table api
     api_token       varchar(255) not null comment 'API를 구분하기 위한 대체키',
     api_name        varchar(255) not null comment 'API의 이름',
     api_description varchar(1024) comment 'API의 설명',
+    api_method      varchar(255) not null comment 'API 호출 방법(GET, POST, PUT, DELETE, etc)',
     api_enable      boolean default true comment 'API의 사용 여부',
 
     created_at      datetime(6)  not null comment 'API의 정보 생성 일시',

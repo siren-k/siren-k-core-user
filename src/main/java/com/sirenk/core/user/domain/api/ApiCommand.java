@@ -13,11 +13,13 @@ public class ApiCommand {
         // 기본 정보
         private String name;
         private String description;
+        private Api.Method method;
 
         public Api toEntity() {
             return Api.builder()
                     .name(name)
                     .description(description)
+                    .method(method)
                     .build();
         }
     }
@@ -38,6 +40,7 @@ public class ApiCommand {
         private String token;
         private String name;
         private String description;
+        private Api.Method method;
         private boolean enable;
     }
 
