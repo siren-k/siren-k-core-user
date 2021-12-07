@@ -44,11 +44,7 @@ public class Menu extends AbstractEntity {
     private final List<Menu> children = Lists.newArrayList();
 
     @Builder
-    public Menu(
-            String name,
-            String description,
-            Menu parent
-    ) {
+    public Menu(String name, String description, Menu parent) {
         // 기본 정보
         this.token = TokenGenerator.randomCharacterWithPrefix(PREFIX_PROGRAM);
         this.name = name;
@@ -76,9 +72,10 @@ public class Menu extends AbstractEntity {
         return parent != null ? parent.getPath() + " > " : "";
     }
 
-    public void changeBasicInfo(String name, String description) {
+    public void changeBasicInfo(String name, String description, boolean enable) {
         this.name = name;
         this.description = description;
+        this.enable = enable;
     }
 
     public void enable() {

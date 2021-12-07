@@ -18,11 +18,11 @@ public class AuthorityFacade {
         return authorityService.register(command);
     }
 
-    public AuthorityInfo.Retrieve retrieve(AuthorityCommand.Retrieve command) {
+    public AuthorityInfo.Basic retrieve(AuthorityCommand.Retrieve command) {
         return authorityService.retrieve(command);
     }
 
-    public AuthorityInfo.ChangeBasicInfo changeBasicInfo(AuthorityCommand.ChangeBasicInfo command) {
+    public AuthorityInfo.Basic changeBasicInfo(AuthorityCommand.ChangeBasicInfo command) {
         return authorityService.changeBasicInfo(command);
     }
 

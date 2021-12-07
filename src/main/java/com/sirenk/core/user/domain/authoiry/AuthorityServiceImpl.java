@@ -30,17 +30,17 @@ public class AuthorityServiceImpl implements AuthorityService {
 
     @Override
     @Transactional(readOnly = true)
-    public AuthorityInfo.Retrieve retrieve(AuthorityCommand.Retrieve command) {
+    public AuthorityInfo.Basic retrieve(AuthorityCommand.Retrieve command) {
         var authority = authorityReader.read(command.getToken());
-        return authorityInfoMapper.retrieve(authority);
+        return authorityInfoMapper.basic(authority);
     }
 
     @Override
     @Transactional
-    public AuthorityInfo.ChangeBasicInfo changeBasicInfo(AuthorityCommand.ChangeBasicInfo command) {
+    public AuthorityInfo.Basic changeBasicInfo(AuthorityCommand.ChangeBasicInfo command) {
         var authority = authorityReader.read(command.getToken());
-        authority.changeBasicInfo(command.getName(), command.getDescription());
-        return authorityInfoMapper.changeBasicInfo(authority);
+        authority.changeBasicInfo(command.getName(), command.getDescription(), command.isEnable());
+        return authorityInfoMapper.basic(authority);
     }
 
     @Override

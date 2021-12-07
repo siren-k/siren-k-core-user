@@ -9,31 +9,12 @@ public class RoleInfo {
     @Getter
     @Builder
     @ToString
-    public static class Register {
+    public static class Basic {
         // 기본 정보
         private String token;
         private String name;
         private String description;
-    }
-
-    @Getter
-    @Builder
-    @ToString
-    public static class Retrieve {
-        // 기본 정보
-        private String token;
-        private String name;
-        private String description;
-    }
-
-    @Getter
-    @Builder
-    @ToString
-    public static class ChangeBasicInfo {
-        // 기본 정보
-        private String token;
-        private String name;
-        private String description;
+        private boolean enable;
     }
 
     @Getter

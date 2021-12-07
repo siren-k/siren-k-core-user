@@ -31,6 +31,10 @@ public class Department extends AbstractEntity {
     private String token;
     @Column(name = "department_name")
     private String name;
+    @Column(name = "department_description")
+    private String description;
+    @Column(name = "department_enable")
+    private boolean enable;
 
     // 상위 부서 정보
     @Column(name = "department_path", length = 2048)
@@ -49,6 +53,7 @@ public class Department extends AbstractEntity {
     @Builder
     public Department(
             String name,
+            String description,
             Department parent,
             int order
     ) {
@@ -57,6 +62,8 @@ public class Department extends AbstractEntity {
         // 기본 정보
         this.token = TokenGenerator.randomCharacterWithPrefix(PREFIX_DEPARTMENT);
         this.name = name;
+        this.description = description;
+        this.enable = true;
 
         // 상위 부서 정보
         this.path = getParentPath(parent) + name;
@@ -66,8 +73,11 @@ public class Department extends AbstractEntity {
         this.order = order;
     }
 
-    public void changeBasicInfo(String name) {
+    public void changeBasicInfo(String name, String description, boolean enable, int order) {
         this.name = name;
+        this.description = description;
+        this.enable = enable;
+        this.order = order;
         changeParent(parent);
         for (Department child : children) {
             child.renewPath();

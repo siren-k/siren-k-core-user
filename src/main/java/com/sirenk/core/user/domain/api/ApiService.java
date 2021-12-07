@@ -4,9 +4,9 @@ public interface ApiService {
 
     ApiInfo.Basic register(ApiCommand.Register command);
 
-    ApiInfo.Retrieve retrieve(ApiCommand.Retrieve command);
+    ApiInfo.Basic retrieve(ApiCommand.Retrieve command);
 
-    ApiInfo.ChangeBasicInfo changeBasicInfo(ApiCommand.ChangeBasicInfo command);
+    ApiInfo.Basic changeBasicInfo(ApiCommand.ChangeBasicInfo command);
 
     ApiInfo.Remove remove(ApiCommand.Remove command);
 

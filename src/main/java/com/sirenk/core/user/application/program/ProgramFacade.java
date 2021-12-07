@@ -14,15 +14,15 @@ public class ProgramFacade {
 
     private final ProgramService programService;
 
-    public ProgramInfo.Register register(ProgramCommand.Register command) {
+    public ProgramInfo.Basic register(ProgramCommand.Register command) {
         return programService.register(command);
     }
 
-    public ProgramInfo.Retrieve retrieve(ProgramCommand.Retrieve command) {
+    public ProgramInfo.Basic retrieve(ProgramCommand.Retrieve command) {
         return programService.retrieve(command);
     }
 
-    public ProgramInfo.ChangeBasicInfo changeBasicInfo(ProgramCommand.ChangeBasicInfo command) {
+    public ProgramInfo.Basic changeBasicInfo(ProgramCommand.ChangeBasicInfo command) {
         return programService.changeBasicInfo(command);
     }
 

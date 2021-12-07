@@ -13,13 +13,15 @@ import org.mapstruct.ReportingPolicy;
 public interface MenuInfoMapper {
 
     @Mapping(target = "parent", ignore = true)
-    MenuInfo.Basic of(Menu menu);
-    
-    MenuInfo.Retrieve retrieve(Menu menu);
+    MenuInfo.BasicParent of(Menu menu);
 
-    MenuInfo.ChangeBasicInfo changeBasicInfo(Menu menu);
+    MenuInfo.BasicChildren retrieve(Menu menu);
 
-    MenuInfo.Move move(Menu menu);
+    @Mapping(target = "parent", ignore = true)
+    MenuInfo.BasicParent changeBasicInfo(Menu menu);
+
+    @Mapping(target = "parent", ignore = true)
+    MenuInfo.BasicParent move(Menu menu);
 
     MenuInfo.Remove remove(Menu menu);
 

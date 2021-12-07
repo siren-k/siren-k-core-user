@@ -17,21 +17,9 @@ public class DepartmentDto {
         // 기본 정보
         @NotNull(message = "name: 필수값입니다")
         private String name;
+        private String description;
         // 상위 부서 정보
         private String parentToken;
-    }
-
-    @Getter
-    @Builder
-    @ToString
-    public static class RegisterResponse {
-        // 기본 정보
-        private final String token;
-        private final String name;
-        private final String path;
-        private final int order;
-        // 상위 부서 정보
-        private final RegisterResponse parent;
     }
 
     @Getter
@@ -44,19 +32,6 @@ public class DepartmentDto {
     }
 
     @Getter
-    @Builder
-    @ToString
-    public static class RetrieveResponse {
-        // 기본 정보
-        private final String token;
-        private final String name;
-        private final String path;
-        private final int order;
-        // 하위 부서 정보
-        private final List<RetrieveResponse> children;
-    }
-
-    @Getter
     @Setter
     @ToString
     public static class ChangeBasicInfoRequest {
@@ -65,37 +40,23 @@ public class DepartmentDto {
         private String token;
         @NotNull(message = "name: 필수값입니다")
         private String name;
-    }
-
-    @Getter
-    @Builder
-    @ToString
-    public static class ChangeBasicInfoResponse {
-        // 기본 정보
-        private final String token;
-        private final String name;
-        private final String path;
+        private String description;
+        @NotNull(message = "enable: 필수값입니다")
+        private boolean enable;
+        // 추가 정보
+        private int order;
     }
 
     @Getter
     @Setter
     @ToString
     public static class MoveRequest {
+        // 기본 정보
         @NotNull(message = "token: 필수값입니다")
         private String token;
+        // 상위 부서 정보
         @NotNull(message = "parentToken: 필수값입니다")
         private String parentToken;
-    }
-
-    @Getter
-    @Builder
-    @ToString
-    public static class MoveResponse {
-        private final String token;
-        private final String name;
-        private final String path;
-        private final int order;
-        private final MoveResponse parent;
     }
 
     @Getter
@@ -106,11 +67,28 @@ public class DepartmentDto {
         private String token;
     }
 
+    public record BasicParentResponse(String token, String name, String description, String path,
+                                      boolean enable, int order,
+                                      DepartmentDto.BasicParentResponse parent) {
+    }
+
     @Getter
     @Builder
     @ToString
-    public static class RemoveResponse {
+    public static class BasicChildrenResponse {
+        // 기본 정보
         private final String token;
+        private final String name;
+        private final String description;
+        private final String path;
+        private final boolean enable;
+        // 하위 부서 정보
+        private final List<BasicChildrenResponse> children;
+        // 추가 정보
+        private final int order;
+    }
+
+    public record RemoveResponse(String token) {
     }
 
 }

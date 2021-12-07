@@ -16,7 +16,7 @@ public class MenuFacade {
 
     private final MenuService menuService;
 
-    public MenuInfo.Basic register(MenuCommand.Register command) {
+    public MenuInfo.BasicParent register(MenuCommand.Register command) {
         var menu =
                 menuService.find(
                         MenuCommand.Retrieve.builder()
@@ -29,15 +29,15 @@ public class MenuFacade {
         return menuService.register(newCommand);
     }
 
-    public List<MenuInfo.Retrieve> retrieve() {
+    public List<MenuInfo.BasicChildren> retrieve() {
         return menuService.retrieve();
     }
 
-    public MenuInfo.ChangeBasicInfo changeBasicInfo(MenuCommand.ChangeBasicInfo command) {
+    public MenuInfo.BasicParent changeBasicInfo(MenuCommand.ChangeBasicInfo command) {
         return menuService.changeBasicInfo(command);
     }
 
-    public MenuInfo.Move move(MenuCommand.Move command) {
+    public MenuInfo.BasicParent move(MenuCommand.Move command) {
         return menuService.move(command);
     }
 

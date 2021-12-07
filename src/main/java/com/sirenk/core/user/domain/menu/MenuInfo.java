@@ -11,49 +11,36 @@ public class MenuInfo {
     @Getter
     @Builder(toBuilder = true)
     @ToString
-    public static class Basic {
+    public static class BasicParent {
+        // 기본 정보
         private String token;
         private String name;
         private String description;
+        private boolean enable;
+        // 상위 메뉴 정보
         private String path;
-        private Basic parent;
+        private BasicParent parent;
     }
 
     @Getter
     @Builder(toBuilder = true)
     @ToString
-    public static class Retrieve {
+    public static class BasicChildren {
+        // 기본 정보
         private String token;
         private String name;
         private String description;
+        private boolean enable;
+        // 하위 메뉴 정보
         private String path;
-        private List<Retrieve> children;
-    }
-
-    @Getter
-    @Builder
-    @ToString
-    public static class ChangeBasicInfo {
-        private String token;
-        private String name;
-        private String description;
-    }
-
-    @Getter
-    @Builder(toBuilder = true)
-    @ToString
-    public static class Move {
-        private String token;
-        private String name;
-        private String description;
-        private String path;
-        private Move parent;
+        private List<BasicChildren> children;
     }
 
     @Getter
     @Builder
     @ToString
     public static class Remove {
+        // 기본 정보
         private String token;
     }
 

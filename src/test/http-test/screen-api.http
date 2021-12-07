@@ -12,6 +12,7 @@ client.test("화면 등록", function() {
     client.assert(response.status === 200, "unexpected http status: " + response.status);
     client.assert(response.body.data.name === "화면", "unexpected data.name: " + response.body.data.name);
     client.assert(response.body.data.description === "화면 설명", "unexpected data.description: " + response.body.data.description);
+    client.assert(response.body.data.enable === true, "unexpected data.enable: " + response.body.data.enable);
 })
 client.global.set("screen_token", response.body.data.token)
 %}
@@ -25,6 +26,7 @@ client.test("화면 조회", function() {
     client.assert(response.status === 200, "unexpected http status: " + response.status);
     client.assert(response.body.data.name === "화면", "unexpected data.name: " + response.body.data.name);
     client.assert(response.body.data.description === "화면 설명", "unexpected data.description: " + response.body.data.description);
+    client.assert(response.body.data.enable === true, "unexpected data.enable: " + response.body.data.enable);
 })
 %}
 
@@ -35,7 +37,8 @@ Content-Type: application/json
 {
   "token": "{{screen_token}}",
   "name": "화면 변경",
-  "description": "화면 설명 변경"
+  "description": "화면 설명 변경",
+  "enable": false
 }
 
 > {%
@@ -43,6 +46,7 @@ client.test("화면 기본 정보 변경", function() {
     client.assert(response.status === 200, "unexpected http status: " + response.status);
     client.assert(response.body.data.name === "화면 변경", "unexpected data.name: " + response.body.data.name);
     client.assert(response.body.data.description === "화면 설명 변경", "unexpected data.description: " + response.body.data.description);
+    client.assert(response.body.data.enable === false, "unexpected data.enable: " + response.body.data.enable);
 })
 %}
 

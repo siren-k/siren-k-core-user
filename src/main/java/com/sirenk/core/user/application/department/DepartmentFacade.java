@@ -14,7 +14,7 @@ public class DepartmentFacade {
 
     private final DepartmentService departmentService;
 
-    public DepartmentInfo.Basic register(DepartmentCommand.Register command) {
+    public DepartmentInfo.BasicParent register(DepartmentCommand.Register command) {
         var department =
                 departmentService.find(
                         DepartmentCommand.Retrieve.builder()
@@ -27,15 +27,15 @@ public class DepartmentFacade {
         return departmentService.register(newCommand);
     }
 
-    public DepartmentInfo.Hierarchy retrieve(DepartmentCommand.Retrieve command) {
+    public DepartmentInfo.BasicChildren retrieve(DepartmentCommand.Retrieve command) {
         return departmentService.retrieve(command);
     }
 
-    public DepartmentInfo.ChangeBasicInfo changeBasicInfo(DepartmentCommand.ChangeBasicInfo command) {
+    public DepartmentInfo.BasicParent changeBasicInfo(DepartmentCommand.ChangeBasicInfo command) {
         return departmentService.changeBasicInfo(command);
     }
 
-    public DepartmentInfo.Move move(DepartmentCommand.Move command) {
+    public DepartmentInfo.BasicParent move(DepartmentCommand.Move command) {
         return departmentService.move(command);
     }
 

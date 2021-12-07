@@ -18,31 +18,31 @@ public class ScreenServiceImpl implements ScreenService {
     @Transactional
     public ScreenInfo.Basic register(ScreenCommand.Register command) {
         var initApi = command.toEntity();
-        var api = screenStorer.store(initApi);
-        return screenInfoMapper.basic(api);
+        var screen = screenStorer.store(initApi);
+        return screenInfoMapper.basic(screen);
     }
 
     @Override
     @Transactional(readOnly = true)
-    public ScreenInfo.Retrieve retrieve(ScreenCommand.Retrieve command) {
-        var api = screenReader.read(command.getToken());
-        return screenInfoMapper.retrieve(api);
+    public ScreenInfo.Basic retrieve(ScreenCommand.Retrieve command) {
+        var screen = screenReader.read(command.getToken());
+        return screenInfoMapper.basic(screen);
     }
 
     @Override
     @Transactional
-    public ScreenInfo.ChangeBasicInfo changeBasicInfo(ScreenCommand.ChangeBasicInfo command) {
-        var api = screenReader.read(command.getToken());
-        api.changeBasicInfo(command.getName(), command.getDescription());
-        return screenInfoMapper.changeBasicInfo(api);
+    public ScreenInfo.Basic changeBasicInfo(ScreenCommand.ChangeBasicInfo command) {
+        var screen = screenReader.read(command.getToken());
+        screen.changeBasicInfo(command.getName(), command.getDescription(), command.isEnable());
+        return screenInfoMapper.basic(screen);
     }
 
     @Override
     @Transactional
     public ScreenInfo.Remove remove(ScreenCommand.Remove command) {
-        var api = screenReader.read(command.getToken());
-        screenStorer.remove(api);
-        return screenInfoMapper.remove(api);
+        var screen = screenReader.read(command.getToken());
+        screenStorer.remove(screen);
+        return screenInfoMapper.remove(screen);
     }
 
 }

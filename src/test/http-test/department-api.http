@@ -1,139 +1,208 @@
-### 부서 등록 1
+### 최상위 부서 등록
 POST http://{{host-user}}/api/v1/department
 Content-Type: application/json
 
 {
-  "name": "나우네버"
+  "name": "최상위 부서",
+  "description": "최상위 부서 설명"
 }
 
 > {%
-client.test("최상위 부서(회사) 등록", function() {
+client.test("최상위 부서 등록", function() {
     client.assert(response.status === 200, "unexpected http status: " + response.status);
+    client.assert(response.body.data.name === "최상위 부서", "unexpected data.name: " + response.body.data.name);
+    client.assert(response.body.data.description === "최상위 부서 설명", "unexpected data.description: " + response.body.data.description);
+    client.assert(response.body.data.enable === true, "unexpected data.enable: " + response.body.data.enable);
+    client.assert(response.body.data.path === "최상위 부서", "unexpected data.path: " + response.body.data.path);
+    client.assert(response.body.data.order === 0, "unexpected data.order: " + response.body.data.order);
+    client.assert(response.body.data.parent === null, "unexpected data.parent: " + response.body.data.parent);
 })
-client.global.set("company_token", response.body.data.token)
+client.global.set("top_level_department_token", response.body.data.token)
  %}
 
-### 부서 등록 2
+### 경영지원팀 등록
 POST http://{{host-user}}/api/v1/department
 Content-Type: application/json
 
 {
   "name": "경영지원팀",
-  "parentToken": "{{company_token}}"
+  "description": "경영지원팀 설명",
+  "parentToken": "{{top_level_department_token}}"
 }
 
 > {%
-client.test("경영지원팀 부서 등록", function() {
+client.test("경영지원팀 등록", function() {
     client.assert(response.status === 200, "unexpected http status: " + response.status);
+    client.assert(response.body.data.name === "경영지원팀", "unexpected data.name: " + response.body.data.name);
+    client.assert(response.body.data.description === "경영지원팀 설명", "unexpected data.description: " + response.body.data.description);
+    client.assert(response.body.data.enable === true, "unexpected data.enable: " + response.body.data.enable);
+    client.assert(response.body.data.path === "최상위 부서 > 경영지원팀", "unexpected data.path: " + response.body.data.path);
+    client.assert(response.body.data.order === 0, "unexpected data.order: " + response.body.data.order);
+    client.assert(response.body.data.parent.name === "최상위 부서", "unexpected data.parent.name: " + response.body.data.parent.name);
+    client.assert(response.body.data.parent.description === "최상위 부서 설명", "unexpected data.parent.description: " + response.body.data.parent.description);
+    client.assert(response.body.data.parent.enable === true, "unexpected data.parent.enable: " + response.body.data.parent.enable);
+    client.assert(response.body.data.parent.path === "최상위 부서", "unexpected data.parent.path: " + response.body.data.parent.path);
+    client.assert(response.body.data.parent.order === 0, "unexpected data.parent.order: " + response.body.data.parent.order);
+    client.assert(response.body.data.parent.parent === null, "unexpected data.parent.parent: " + response.body.data.parent.parent);
 })
-client.global.set("department_token_1", response.body.data.token)
+client.global.set("one_level_department_token_1", response.body.data.token)
  %}
 
-### 부서 등록 3
-POST http://{{host-user}}/api/v1/department
-Content-Type: application/json
-
-{
-  "name": "대외지원팀",
-  "parentToken": "{{department_token_1}}"
-}
-
-> {%
-client.test("대외지원팀 부서 등록", function() {
-    client.assert(response.status === 200, "unexpected http status: " + response.status);
-})
-client.global.set("department_token_2", response.body.data.token)
- %}
-
-### 부서 등록 4
+### 사내지원팀 등록
 POST http://{{host-user}}/api/v1/department
 Content-Type: application/json
 
 {
   "name": "사내지원팀",
-  "parentToken": "{{department_token_1}}"
+  "description": "사내지원팀 설명",
+  "parentToken": "{{top_level_department_token}}"
 }
 
 > {%
-client.test("사내지원팀 부서 등록", function() {
+client.test("사내지원팀 등록", function() {
     client.assert(response.status === 200, "unexpected http status: " + response.status);
+    client.assert(response.body.data.name === "사내지원팀", "unexpected data.name: " + response.body.data.name);
+    client.assert(response.body.data.description === "사내지원팀 설명", "unexpected data.description: " + response.body.data.description);
+    client.assert(response.body.data.enable === true, "unexpected data.enable: " + response.body.data.enable);
+    client.assert(response.body.data.path === "최상위 부서 > 사내지원팀", "unexpected data path: " + response.body.data.path);
+    client.assert(response.body.data.order === 0, "unexpected data.order: " + response.body.data.order);
+    client.assert(response.body.data.parent.name === "최상위 부서", "unexpected data.parent.name: " + response.body.data.parent.name);
+    client.assert(response.body.data.parent.description === "최상위 부서 설명", "unexpected data.parent.description: " + response.body.data.parent.description);
+    client.assert(response.body.data.parent.enable === true, "unexpected data.parent.enable: " + response.body.data.parent.enable);
+    client.assert(response.body.data.parent.path === "최상위 부서", "unexpected data.parent.path: " + response.body.data.parent.path);
+    client.assert(response.body.data.parent.order === 0, "unexpected data.parent.order: " + response.body.data.parent.order);
+    client.assert(response.body.data.parent.parent === null, "unexpected data.parent.parent: " + response.body.data.parent.parent);
 })
-client.global.set("department_token_3", response.body.data.token)
-%}
-
-### 부서 조회
-GET http://{{host-user}}/api/v1/department/{{company_token}}
-Content-Type: application/json
-
-> {%
-client.test("부서 조회", function() {
-    client.assert(response.status === 200, "unexpected http status: " + response.status);
-    client.assert(response.body.result === 'SUCCESS', "unexpected body.result: " + response.body.result);
-    client.assert(response.body.data.name === '나우네버', "unexpected data.name: " + response.body.data.name);
-    client.assert(response.body.data.path === '나우네버', "unexpected data.path: " + response.body.data.path);
-    client.assert(response.body.data.children[0].name === "경영지원팀", "unexpected data children length: " + response.body.data.children[0].name);
-    client.assert(response.body.data.children[0].path === "나우네버 > 경영지원팀", "unexpected data children length: " + response.body.data.children[0].path);
-    client.assert(response.body.data.children[0].children[0].name === "대외지원팀", "unexpected data children length: " + response.body.data.children[0].children[0].name);
-    client.assert(response.body.data.children[0].children[0].path === "나우네버 > 경영지원팀 > 대외지원팀", "unexpected data children length: " + response.body.data.children[0].children[0].path);
-    client.assert(response.body.data.children[0].children[1].name === "사내지원팀", "unexpected data children length: " + response.body.data.children[0].children[1].name);
-    client.assert(response.body.data.children[0].children[1].path === "나우네버 > 경영지원팀 > 사내지원팀", "unexpected data children length: " + response.body.data.children[0].children[1].path);
-})
+client.global.set("one_level_department_token_2", response.body.data.token)
  %}
 
-### 부서 기본 정보 변경
-PUT http://{{host-user}}/api/v1/department/{{department_token_1}}
+### 회계팀 등록
+POST http://{{host-user}}/api/v1/department
 Content-Type: application/json
 
 {
-  "token": "{{department_token_1}}",
-  "name": "경영지원팀 변경"
+  "name": "회계팀",
+  "description": "회계팀 설명",
+  "parentToken": "{{one_level_department_token_1}}"
 }
 
 > {%
-client.test("부서 기본 정보 변경", function() {
+client.test("회계팀 등록", function() {
     client.assert(response.status === 200, "unexpected http status: " + response.status);
-    client.assert(response.body.result === 'SUCCESS', "unexpected body.result: " + response.body.result);
-    client.assert(response.body.data.name === '경영지원팀 변경', "unexpected data.name: " + response.body.data.name);
-    client.assert(response.body.data.path === '나우네버 > 경영지원팀 변경', "unexpected data.path: " + response.body.data.path);
+    client.assert(response.body.data.name === "회계팀", "unexpected data.name: " + response.body.data.name);
+    client.assert(response.body.data.description === "회계팀 설명", "unexpected data.description: " + response.body.data.description);
+    client.assert(response.body.data.enable === true, "unexpected data.enable: " + response.body.data.enable);
+    client.assert(response.body.data.path === "최상위 부서 > 경영지원팀 > 회계팀", "unexpected data.path: " + response.body.data.path);
+    client.assert(response.body.data.order === 0, "unexpected data.order: " + response.body.data.order);
+    client.assert(response.body.data.parent.name === "경영지원팀", "unexpected data.parent.name: " + response.body.data.parent.name);
+    client.assert(response.body.data.parent.description === "경영지원팀 설명", "unexpected data.parent.description: " + response.body.data.parent.description);
+    client.assert(response.body.data.parent.enable === true, "unexpected data.parent.enable: " + response.body.data.parent.enable);
+    client.assert(response.body.data.parent.path === "최상위 부서 > 경영지원팀", "unexpected data.parent.path: " + response.body.data.parent.path);
+    client.assert(response.body.data.parent.order === 0, "unexpected data.parent.order: " + response.body.data.parent.order);
+    client.assert(response.body.data.parent.parent === null, "unexpected data.parent.parent: " + response.body.data.parent.parent);
 })
+client.global.set("two_level_department_token", response.body.data.token)
 %}
 
-### 하위 부서를 가지고 있는 부서 삭제
-DELETE http://{{host-user}}/api/v1/department/{{department_token_1}}
+### 최상위 부서 조회
+GET http://{{host-user}}/api/v1/department/{{top_level_department_token}}
 Content-Type: application/json
 
 > {%
-client.test("하위 부서를 가지고 있는 부서 삭제", function() {
+client.test("최상위 부서 조회", function() {
+    client.assert(response.status === 200, "unexpected http status: " + response.status);
+    client.assert(response.body.result === 'SUCCESS', "unexpected body.result: " + response.body.result);
+    client.assert(response.body.data.name === '최상위 부서', "unexpected data.name: " + response.body.data.name);
+    client.assert(response.body.data.description === '최상위 부서 설명', "unexpected data.description: " + response.body.data.description);
+    client.assert(response.body.data.enable === true, "unexpected data.path: " + response.body.data.enable);
+    client.assert(response.body.data.path === '최상위 부서', "unexpected data.path: " + response.body.data.path);
+    client.assert(response.body.data.order === 0, "unexpected data.path: " + response.body.data.order);
+    client.assert(response.body.data.children[0].name === "경영지원팀", "unexpected data.children[0].length: " + response.body.data.children[0].name);
+    client.assert(response.body.data.children[0].description === "경영지원팀 설명", "unexpected data.children[0].description: " + response.body.data.children[0].description);
+    client.assert(response.body.data.children[0].enable === true, "unexpected data.children[0].enable: " + response.body.data.children[0].enable);
+    client.assert(response.body.data.children[0].path === "최상위 부서 > 경영지원팀", "unexpected data.children[0].path: " + response.body.data.children[0].path);
+    client.assert(response.body.data.children[0].order === 0, "unexpected data.children[0].order: " + response.body.data.children[0].order);
+    client.assert(response.body.data.children[0].children[0].name === "회계팀", "unexpected data.children[0].children[0].name: " + response.body.data.children[0].children[0].name);
+    client.assert(response.body.data.children[0].children[0].description === "회계팀 설명", "unexpected data.children[0].children[0].description: " + response.body.data.children[0].children[0].description);
+    client.assert(response.body.data.children[0].children[0].enable === true, "unexpected data.children[0].children[0].enable: " + response.body.data.children[0].children[0].enable);
+    client.assert(response.body.data.children[0].children[0].path === "최상위 부서 > 경영지원팀 > 회계팀", "unexpected data.children[0].children[0].path: " + response.body.data.children[0].children[0].path);
+    client.assert(response.body.data.children[0].children[0].order === 0, "unexpected data.children[0].children[0].order: " + response.body.data.children[0].children[0].order);
+    client.assert(response.body.data.children[0].children[0].children.length === 0, "unexpected data.children[0].children[0].children.length: " + response.body.data.children[0].children[0].children.length);
+    client.assert(response.body.data.children[1].name === "사내지원팀", "unexpected data.children[1].length: " + response.body.data.children[1].name);
+    client.assert(response.body.data.children[1].description === "사내지원팀 설명", "unexpected data.children[1].description: " + response.body.data.children[1].description);
+    client.assert(response.body.data.children[1].enable === true, "unexpected data.children[1].enable: " + response.body.data.children[1].enable);
+    client.assert(response.body.data.children[1].path === "최상위 부서 > 사내지원팀", "unexpected data.children[1].path: " + response.body.data.children[1].path);
+    client.assert(response.body.data.children[1].order === 0, "unexpected data.children[1].order: " + response.body.data.children[1].order);
+    client.assert(response.body.data.children[1].children.length === 0, "unexpected data.children[1].children: " + response.body.data.children[1].children.length);
+})
+ %}
+
+### 회계팀 기본 정보 변경
+PUT http://{{host-user}}/api/v1/department/{{two_level_department_token}}
+Content-Type: application/json
+
+{
+  "token": "{{two_level_department_token}}",
+  "name": "회계팀 변경",
+  "description": "회계팀 설명 변경",
+  "enable": false,
+  "order": 10
+}
+
+> {%
+client.test("회계팀 기본 정보 변경", function() {
+    client.assert(response.status === 200, "unexpected http status: " + response.status);
+    client.assert(response.body.data.name === '회계팀 변경', "unexpected data.name: " + response.body.data.name);
+    client.assert(response.body.data.description === '회계팀 설명 변경', "unexpected data.description: " + response.body.data.description);
+    client.assert(response.body.data.enable === false, "unexpected data.path: " + response.body.data.enable);
+    client.assert(response.body.data.path === '최상위 부서 > 경영지원팀 > 회계팀 변경', "unexpected data.path: " + response.body.data.path);
+    client.assert(response.body.data.order === 10, "unexpected data.order: " + response.body.data.order);
+    client.assert(response.body.data.parent === null, "unexpected data.parent: " + response.body.data.parent);
+})
+%}
+
+### 하위 부서를 가지고 있는 경영지원팀 삭제
+DELETE http://{{host-user}}/api/v1/department/{{one_level_department_token_1}}
+Content-Type: application/json
+
+> {%
+client.test("하위 부서를 가지고 있는 경영지원팀 삭제", function() {
     client.assert(response.status === 200, "unexpected http status: " + response.status);
     client.assert(response.body.result === "FAIL", "unexpected result: " + response.body.result);
-    client.assert(response.body.message === "엔티티의 자식 엔티티가 존재합니다. (경영지원팀 변경: 2)", "unexpected message: " + response.body.message);
+    client.assert(response.body.message === "엔티티의 자식 엔티티가 존재합니다. (경영지원팀: 1)", "unexpected message: " + response.body.message);
     client.assert(response.body.errorCode === 'ENTITY_HAS_CHILDREN', "unexpected errorCode: " + response.body.errorCode);
 })
 %}
 
-### 부서 이동 (사내지원팀 -> 대외지원팀)
-PUT http://{{host-user}}/api/v1/department/{{department_token_3}}/move/{{department_token_2}}
+### 부서 이동 (사내지원팀 -> 회계팀)
+PUT http://{{host-user}}/api/v1/department/{{one_level_department_token_2}}/move/{{two_level_department_token}}
 Content-Type: application/json
 
 > {%
-client.test("부서 이동 (사내지원팀 -> 대외지원팀)", function() {
+client.test("부서 이동 (사내지원팀 -> 회계팀)", function() {
     client.assert(response.status === 200, "unexpected http status: " + response.status);
-    client.assert(response.body.result === "SUCCESS", "unexpected result: " + response.body.result);
     client.assert(response.body.data.name === "사내지원팀", "unexpected data.name: " + response.body.data.name);
-    client.assert(response.body.data.path === "나우네버 > 경영지원팀 변경 > 대외지원팀 > 사내지원팀", "unexpected data.path: " + response.body.data.path);
-    client.assert(response.body.data.parent.name === "대외지원팀", "unexpected data.parent.name: " + response.body.data.parent.name);
-    client.assert(response.body.data.parent.path === "나우네버 > 경영지원팀 변경 > 대외지원팀", "unexpected data.parent.path: " + response.body.data.parent.path);
+    client.assert(response.body.data.description === "사내지원팀 설명", "unexpected data.description: " + response.body.data.description);
+    client.assert(response.body.data.path === "최상위 부서 > 경영지원팀 > 회계팀 변경 > 사내지원팀", "unexpected data.path: " + response.body.data.path);
+    client.assert(response.body.data.enable === true, "unexpected data.enable: " + response.body.data.enable);
+    client.assert(response.body.data.order === 0, "unexpected data.order: " + response.body.data.order);
+    client.assert(response.body.data.parent.name === "회계팀 변경", "unexpected data.parent.name: " + response.body.data.parent.name);
+    client.assert(response.body.data.parent.description === "회계팀 설명 변경", "unexpected data.parent.name: " + response.body.data.parent.description);
+    client.assert(response.body.data.parent.path === "최상위 부서 > 경영지원팀 > 회계팀 변경", "unexpected data.parent.path: " + response.body.data.parent.path);
+    client.assert(response.body.data.parent.enable === false, "unexpected data.parent.enable: " + response.body.data.parent.enable);
+    client.assert(response.body.data.parent.order === 10, "unexpected data.parent.order: " + response.body.data.parent.order);
+    client.assert(response.body.data.parent.parent === null, "unexpected data.parent.parent: " + response.body.data.parent.parent);
 })
 %}
 
-### 부서 삭제
-DELETE http://{{host-user}}/api/v1/department/{{department_token_3}}
+### 사내지원팀 삭제
+DELETE http://{{host-user}}/api/v1/department/{{one_level_department_token_2}}
 Content-Type: application/json
 
 > {%
-client.test("부서 삭제", function() {
+client.test("사내지원팀 삭제", function() {
     client.assert(response.status === 200, "unexpected http status: " + response.status);
     client.assert(response.body.result === "SUCCESS", "unexpected result: " + response.body.result);
-    client.assert(response.body.data.token === String(client.global.get("department_token_3")), "unexpected data.token: " + response.body.data.token);
+    client.assert(response.body.data.token === String(client.global.get("one_level_department_token_2")), "unexpected data.token: " + response.body.data.token);
 })
 %}

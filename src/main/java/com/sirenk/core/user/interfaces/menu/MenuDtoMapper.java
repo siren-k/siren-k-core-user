@@ -19,20 +19,18 @@ public interface MenuDtoMapper {
     @Mapping(target = "parent", ignore = true)
     MenuCommand.Register of(MenuDto.RegisterRequest request);
 
-    @Mapping(source = "info.parent", target = "parent")
-    MenuDto.RegisterResponse of(MenuInfo.Basic info);
-
-    List<MenuDto.RetrieveResponse> of(List<MenuInfo.Retrieve> info);
-
     MenuCommand.ChangeBasicInfo of(MenuDto.ChangeBasicInfoRequest request);
-
-    MenuDto.ChangeBasicInfoResponse of(MenuInfo.ChangeBasicInfo info);
 
     MenuCommand.Move of(MenuDto.MoveRequest request);
 
-    MenuDto.MoveResponse of(MenuInfo.Move info);
-
     MenuCommand.Remove of(MenuDto.RemoveRequest request);
+
+    @Mapping(source = "info.parent", target = "parent")
+    MenuDto.BasicParentResponse of(MenuInfo.BasicParent info);
+
+    List<MenuDto.BasicChildrenResponse> of(List<MenuInfo.BasicChildren> info);
+
+    MenuDto.BasicChildrenResponse of(MenuInfo.BasicChildren info);
 
     MenuDto.RemoveResponse of(MenuInfo.Remove info);
 

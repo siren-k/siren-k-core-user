@@ -22,7 +22,7 @@ public class MenuServiceImpl implements MenuService {
 
     @Override
     @Transactional
-    public MenuInfo.Basic register(MenuCommand.Register command) {
+    public MenuInfo.BasicParent register(MenuCommand.Register command) {
         var initMenu = command.toEntity();
         var menu = menuStorer.store(initMenu);
         var info = menuInfoMapper.of(menu);
@@ -38,8 +38,8 @@ public class MenuServiceImpl implements MenuService {
   
     @Override
     @Transactional(readOnly = true)
-    public List<MenuInfo.Retrieve> retrieve() {
-        List<MenuInfo.Retrieve> infos = new ArrayList<>();
+    public List<MenuInfo.BasicChildren> retrieve() {
+        List<MenuInfo.BasicChildren> infos = new ArrayList<>();
         var menus = menuReader.read();
         for (Menu menu : menus) {
             var info = menuInfoMapper.retrieve(menu);
@@ -50,15 +50,15 @@ public class MenuServiceImpl implements MenuService {
 
     @Override
     @Transactional
-    public MenuInfo.ChangeBasicInfo changeBasicInfo(MenuCommand.ChangeBasicInfo command) {
+    public MenuInfo.BasicParent changeBasicInfo(MenuCommand.ChangeBasicInfo command) {
         var menu = menuReader.read(command.getToken());
-        menu.changeBasicInfo(command.getName(), command.getDescription());
+        menu.changeBasicInfo(command.getName(), command.getDescription(), command.isEnable());
         return menuInfoMapper.changeBasicInfo(menu);
     }
 
     @Override
     @Transactional
-    public MenuInfo.Move move(MenuCommand.Move command) {
+    public MenuInfo.BasicParent move(MenuCommand.Move command) {
         var menu = menuReader.read(command.getToken());
         var parentMenu= menuReader.read(command.getParentToken());
         menu.changeParent(parentMenu);

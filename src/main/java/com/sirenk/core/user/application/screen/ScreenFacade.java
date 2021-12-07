@@ -18,11 +18,11 @@ public class ScreenFacade {
         return screenService.register(command);
     }
 
-    public ScreenInfo.Retrieve retrieve(ScreenCommand.Retrieve command) {
+    public ScreenInfo.Basic retrieve(ScreenCommand.Retrieve command) {
         return screenService.retrieve(command);
     }
 
-    public ScreenInfo.ChangeBasicInfo changeBasicInfo(ScreenCommand.ChangeBasicInfo command) {
+    public ScreenInfo.Basic changeBasicInfo(ScreenCommand.ChangeBasicInfo command) {
         return screenService.changeBasicInfo(command);
     }
 

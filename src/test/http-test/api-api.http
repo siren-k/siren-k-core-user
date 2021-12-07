@@ -12,6 +12,7 @@ client.test("API 등록", function() {
     client.assert(response.status === 200, "unexpected http status: " + response.status);
     client.assert(response.body.data.name === "API", "unexpected data.name: " + response.body.data.name);
     client.assert(response.body.data.description === "API 설명", "unexpected data.description: " + response.body.data.description);
+    client.assert(response.body.data.enable === true, "unexpected data.enable: " + response.body.data.enable);
 })
 client.global.set("api_token", response.body.data.token)
 %}
@@ -25,6 +26,7 @@ client.test("API 조회", function() {
     client.assert(response.status === 200, "unexpected http status: " + response.status);
     client.assert(response.body.data.name === "API", "unexpected data.name: " + response.body.data.name);
     client.assert(response.body.data.description === "API 설명", "unexpected data.description: " + response.body.data.description);
+    client.assert(response.body.data.enable === true, "unexpected data.enable: " + response.body.data.enable);
 })
 %}
 
@@ -43,6 +45,7 @@ client.test("API 기본 정보 변경", function() {
     client.assert(response.status === 200, "unexpected http status: " + response.status);
     client.assert(response.body.data.name === "API 변경", "unexpected data.name: " + response.body.data.name);
     client.assert(response.body.data.description === "API 설명 변경", "unexpected data.description: " + response.body.data.description);
+    client.assert(response.body.data.enable === false, "unexpected data.enable: " + response.body.data.enable);
 })
 %}
 

@@ -18,11 +18,11 @@ public class ApiFacade {
         return apiService.register(command);
     }
 
-    public ApiInfo.Retrieve retrieve(ApiCommand.Retrieve command) {
+    public ApiInfo.Basic retrieve(ApiCommand.Retrieve command) {
         return apiService.retrieve(command);
     }
 
-    public ApiInfo.ChangeBasicInfo changeBasicInfo(ApiCommand.ChangeBasicInfo command) {
+    public ApiInfo.Basic changeBasicInfo(ApiCommand.ChangeBasicInfo command) {
         return apiService.changeBasicInfo(command);
     }
 

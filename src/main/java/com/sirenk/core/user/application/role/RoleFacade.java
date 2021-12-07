@@ -14,15 +14,15 @@ public class RoleFacade {
 
     private final RoleService roleService;
 
-    public RoleInfo.Register register(RoleCommand.Register command) {
+    public RoleInfo.Basic register(RoleCommand.Register command) {
         return roleService.register(command);
     }
 
-    public RoleInfo.Retrieve retrieve(RoleCommand.Retrieve command) {
+    public RoleInfo.Basic retrieve(RoleCommand.Retrieve command) {
         return roleService.retrieve(command);
     }
 
-    public RoleInfo.ChangeBasicInfo changeBasicInfo(RoleCommand.ChangeBasicInfo command) {
+    public RoleInfo.Basic changeBasicInfo(RoleCommand.ChangeBasicInfo command) {
         return roleService.changeBasicInfo(command);
     }
 
