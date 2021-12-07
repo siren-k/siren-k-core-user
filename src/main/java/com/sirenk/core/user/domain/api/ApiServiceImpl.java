@@ -33,7 +33,11 @@ public class ApiServiceImpl implements ApiService {
     @Transactional
     public ApiInfo.Basic changeBasicInfo(ApiCommand.ChangeBasicInfo command) {
         var api = apiReader.read(command.getToken());
-        api.changeBasicInfo(command.getName(), command.getDescription(), command.isEnable());
+        api.changeBasicInfo(
+                command.getName(),
+                command.getDescription(),
+                command.isEnable(),
+                command.getMethod());
         return apiInfoMapper.basic(api);
     }
 
