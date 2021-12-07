@@ -17,22 +17,18 @@ public interface DepartmentDtoMapper {
     @Mapping(target = "parent", ignore = true)
     DepartmentCommand.Register of(DepartmentDto.RegisterRequest request);
 
-    @Mapping(source = "info.parent", target = "parent")
-    DepartmentDto.RegisterResponse of(DepartmentInfo.Basic info);
-
     DepartmentCommand.Retrieve of(DepartmentDto.RetrieveRequest request);
-
-    DepartmentDto.RetrieveResponse of(DepartmentInfo.Hierarchy info);
 
     DepartmentCommand.ChangeBasicInfo of(DepartmentDto.ChangeBasicInfoRequest request);
 
-    DepartmentDto.ChangeBasicInfoResponse of(DepartmentInfo.ChangeBasicInfo info);
-
     DepartmentCommand.Move of(DepartmentDto.MoveRequest request);
 
-    DepartmentDto.MoveResponse of(DepartmentInfo.Move info);
-
     DepartmentCommand.Remove of(DepartmentDto.RemoveRequest request);
+
+    @Mapping(source = "info.parent", target = "parent")
+    DepartmentDto.BasicParentResponse of(DepartmentInfo.BasicParent info);
+
+    DepartmentDto.BasicChildrenResponse of(DepartmentInfo.BasicChildren info);
 
     DepartmentDto.RemoveResponse of(DepartmentInfo.Remove info);
 

@@ -19,7 +19,7 @@ public class DepartmentServiceImpl implements DepartmentService {
 
     @Override
     @Transactional
-    public DepartmentInfo.Basic register(DepartmentCommand.Register command) {
+    public DepartmentInfo.BasicParent register(DepartmentCommand.Register command) {
         var initDepartment = command.toEntity();
         var department = departmentStorer.store(initDepartment);
         var info = departmentInfoMapper.of(department);
@@ -35,22 +35,27 @@ public class DepartmentServiceImpl implements DepartmentService {
 
     @Override
     @Transactional(readOnly = true)
-    public DepartmentInfo.Hierarchy retrieve(DepartmentCommand.Retrieve command) {
+    public DepartmentInfo.BasicChildren retrieve(DepartmentCommand.Retrieve command) {
         var department = departmentReader.readRecursively(command.getToken());
-        return departmentInfoMapper.hierarchy(department);
+        return departmentInfoMapper.retrieve(department);
     }
 
     @Override
     @Transactional
-    public DepartmentInfo.ChangeBasicInfo changeBasicInfo(DepartmentCommand.ChangeBasicInfo command) {
+    public DepartmentInfo.BasicParent changeBasicInfo(DepartmentCommand.ChangeBasicInfo command) {
         var deparment = departmentReader.read(command.getToken());
-        deparment.changeBasicInfo(command.getName());
+        deparment.changeBasicInfo(
+                command.getName(),
+                command.getDescription(),
+                command.isEnable(),
+                command.getOrder()
+        );
         return departmentInfoMapper.changeBasicInfo(deparment);
     }
 
     @Override
     @Transactional
-    public DepartmentInfo.Move move(DepartmentCommand.Move command) {
+    public DepartmentInfo.BasicParent move(DepartmentCommand.Move command) {
         var department = departmentReader.read(command.getToken());
         var parentDepartment = departmentReader.read(command.getParentToken());
         department.changeParent(parentDepartment);

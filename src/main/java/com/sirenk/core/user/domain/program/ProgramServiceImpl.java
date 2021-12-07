@@ -16,25 +16,25 @@ public class ProgramServiceImpl implements ProgramService {
 
     @Override
     @Transactional
-    public ProgramInfo.Register register(ProgramCommand.Register command) {
+    public ProgramInfo.Basic register(ProgramCommand.Register command) {
         var initProgram = command.toEntity();
         var program = programStorer.store(initProgram);
-        return programInfoMapper.register(program);
+        return programInfoMapper.basic(program);
     }
 
     @Override
     @Transactional(readOnly = true)
-    public ProgramInfo.Retrieve retrieve(ProgramCommand.Retrieve command) {
+    public ProgramInfo.Basic retrieve(ProgramCommand.Retrieve command) {
         var program = programReader.read(command.getToken());
-        return programInfoMapper.retrieve(program);
+        return programInfoMapper.basic(program);
     }
 
     @Override
     @Transactional
-    public ProgramInfo.ChangeBasicInfo changeBasicInfo(ProgramCommand.ChangeBasicInfo command) {
+    public ProgramInfo.Basic changeBasicInfo(ProgramCommand.ChangeBasicInfo command) {
         var program = programReader.read(command.getToken());
-        program.changeBasicInfo(command.getName(), command.getDescription());
-        return programInfoMapper.changeBasicInfo(program);
+        program.changeBasicInfo(command.getName(), command.getDescription(), command.isEnable());
+        return programInfoMapper.basic(program);
     }
 
     @Override

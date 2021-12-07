@@ -19,7 +19,7 @@ public class ScreenApiController {
     private final ScreenDtoMapper screenDtoMapper;
 
     @PostMapping(value = "")
-    public CommonResponse<ScreenDto.RegisterResponse> register(@RequestBody @Valid ScreenDto.RegisterRequest request) {
+    public CommonResponse<ScreenDto.BasicResponse> register(@RequestBody @Valid ScreenDto.RegisterRequest request) {
         var command = screenDtoMapper.of(request);
         var info = screenFacade.register(command);
         var response = screenDtoMapper.of(info);
@@ -27,7 +27,7 @@ public class ScreenApiController {
     }
 
     @GetMapping(value = "{token}")
-    public CommonResponse<ScreenDto.RetrieveResponse> retrieve(@Valid ScreenDto.RetrieveRequest request) {
+    public CommonResponse<ScreenDto.BasicResponse> retrieve(@Valid ScreenDto.RetrieveRequest request) {
         var command = screenDtoMapper.of(request);
         var info = screenFacade.retrieve(command);
         var response = screenDtoMapper.of(info);
@@ -35,7 +35,7 @@ public class ScreenApiController {
     }
 
     @PutMapping(value = "{token}")
-    public CommonResponse<ScreenDto.ChangeBasicInfoResponse> changeBasicInfo(@RequestBody @Valid ScreenDto.ChangeBasicInfoRequest request) {
+    public CommonResponse<ScreenDto.BasicResponse> changeBasicInfo(@RequestBody @Valid ScreenDto.ChangeBasicInfoRequest request) {
         var command = screenDtoMapper.of(request);
         var info = screenFacade.changeBasicInfo(command);
         var response = screenDtoMapper.of(info);

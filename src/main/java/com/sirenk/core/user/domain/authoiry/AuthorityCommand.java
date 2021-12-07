@@ -38,6 +38,7 @@ public class AuthorityCommand {
         private String token;
         private String name;
         private String description;
+        private boolean enable;
     }
 
     @Getter

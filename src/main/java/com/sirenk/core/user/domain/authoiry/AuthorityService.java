@@ -6,9 +6,9 @@ public interface AuthorityService {
 
     Authority find(AuthorityCommand.Retrieve command);
 
-    AuthorityInfo.Retrieve retrieve(AuthorityCommand.Retrieve command);
+    AuthorityInfo.Basic retrieve(AuthorityCommand.Retrieve command);
 
-    AuthorityInfo.ChangeBasicInfo changeBasicInfo(AuthorityCommand.ChangeBasicInfo command);
+    AuthorityInfo.Basic changeBasicInfo(AuthorityCommand.ChangeBasicInfo command);
 
     AuthorityInfo.Remove remove(AuthorityCommand.Remove command);
 

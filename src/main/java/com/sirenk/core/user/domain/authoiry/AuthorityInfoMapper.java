@@ -13,10 +13,6 @@ public interface AuthorityInfoMapper {
 
     AuthorityInfo.Basic basic(Authority authority);
 
-    AuthorityInfo.Retrieve retrieve(Authority authority);
-
-    AuthorityInfo.ChangeBasicInfo changeBasicInfo(Authority authority);
-
     AuthorityInfo.Remove remove(Authority authority);
 
 }

@@ -33,10 +33,7 @@ public class Role extends AbstractEntity {
     private boolean enable;
 
     @Builder
-    public Role(
-            String name,
-            String description
-    ) {
+    public Role(String name, String description) {
         // 기본 정보
         this.token = TokenGenerator.randomCharacterWithPrefix(PREFIX_ROLE);
         this.name = name;
@@ -44,9 +41,10 @@ public class Role extends AbstractEntity {
         this.enable = true;
     }
 
-    public void changeBasicInfo(String name, String description) {
+    public void changeBasicInfo(String name, String description, boolean enable) {
         this.name = name;
         this.description = description;
+        this.enable = enable;
     }
 
 }

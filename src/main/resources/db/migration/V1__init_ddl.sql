@@ -5,19 +5,21 @@ drop table if exists department;
 create table department
 (
     -- 기본 정보
-    department_id        bigint auto_increment primary key comment '부서의 식별자',
-    department_token     varchar(255)  not null comment '부서를 구분하기 위한 대체키',
-    department_name      varchar(255)  not null comment '부서의 이름',
+    department_id          bigint auto_increment primary key comment '부서의 식별자',
+    department_token       varchar(255)  not null comment '부서를 구분하기 위한 대체키',
+    department_name        varchar(255)  not null comment '부서의 이름',
+    department_description varchar(1024) comment '부서의 설명',
+    department_enable      boolean default true comment '부서 사용 여부',
 
     -- 상위 부서 정보
-    department_path      varchar(2048) not null comment '부서와 상위 부서의 명칭 나열',
-    department_parent_id bigint comment '부서의 상위 부서 식별자',
+    department_path        varchar(2048) not null comment '부서와 상위 부서의 명칭 나열',
+    department_parent_id   bigint comment '부서의 상위 부서 식별자',
 
     -- 추가 정보
-    department_order     int comment '부서 정렬',
+    department_order       int comment '부서 정렬',
 
-    created_at           datetime(6)   not null comment '부서의 정보 생성 일시',
-    updated_at           datetime(6)   null comment '부서의 정보 수정 일시'
+    created_at             datetime(6)   not null comment '부서의 정보 생성 일시',
+    updated_at             datetime(6)   null comment '부서의 정보 수정 일시'
 ) comment '부서' charset = utf8mb4;
 
 create
@@ -178,8 +180,8 @@ create table screen
     screen_description varchar(1024) comment '화면의 설명',
     screen_enable      boolean default true comment '화면의 사용 여부',
 
-    created_at      datetime(6)  not null comment '화면의 정보 생성 일시',
-    updated_at      datetime(6)  null comment '화면의 정보 수정 일시'
+    created_at         datetime(6)  not null comment '화면의 정보 생성 일시',
+    updated_at         datetime(6)  null comment '화면의 정보 수정 일시'
 ) comment '화면' charset = utf8mb4;
 
 create

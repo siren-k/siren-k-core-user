@@ -18,7 +18,7 @@ public class ProgramApiController {
     private final ProgramDtoMapper programDtoMapper;
 
     @PostMapping(value = "")
-    public CommonResponse<ProgramDto.RegisterResponse> register(@RequestBody @Valid ProgramDto.RegisterRequest request) {
+    public CommonResponse<ProgramDto.BasicResponse> register(@RequestBody @Valid ProgramDto.RegisterRequest request) {
         var command = programDtoMapper.of(request);
         var info = programFacade.register(command);
         var response = programDtoMapper.of(info);
@@ -26,7 +26,7 @@ public class ProgramApiController {
     }
 
     @GetMapping(value = "{token}")
-    public CommonResponse<ProgramDto.RetrieveResponse> retrieve(@Valid ProgramDto.RetrieveRequest request) {
+    public CommonResponse<ProgramDto.BasicResponse> retrieve(@Valid ProgramDto.RetrieveRequest request) {
         var command = programDtoMapper.of(request);
         var info = programFacade.retrieve(command);
         var response = programDtoMapper.of(info);
@@ -34,7 +34,7 @@ public class ProgramApiController {
     }
 
     @PutMapping(value = "{token}")
-    public CommonResponse<ProgramDto.ChangeBasicInfoResponse> changeBasicInfo(@RequestBody @Valid ProgramDto.ChangeBasicInfoRequest request) {
+    public CommonResponse<ProgramDto.BasicResponse> changeBasicInfo(@RequestBody @Valid ProgramDto.ChangeBasicInfoRequest request) {
         var command = programDtoMapper.of(request);
         var info = programFacade.changeBasicInfo(command);
         var response = programDtoMapper.of(info);

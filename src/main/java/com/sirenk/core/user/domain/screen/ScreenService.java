@@ -4,9 +4,9 @@ public interface ScreenService {
 
     ScreenInfo.Basic register(ScreenCommand.Register command);
 
-    ScreenInfo.Retrieve retrieve(ScreenCommand.Retrieve command);
+    ScreenInfo.Basic retrieve(ScreenCommand.Retrieve command);
 
-    ScreenInfo.ChangeBasicInfo changeBasicInfo(ScreenCommand.ChangeBasicInfo command);
+    ScreenInfo.Basic changeBasicInfo(ScreenCommand.ChangeBasicInfo command);
 
     ScreenInfo.Remove remove(ScreenCommand.Remove command);
 

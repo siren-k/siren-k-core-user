@@ -18,7 +18,7 @@ public class AuthorityApiController {
     private final AuthorityDtoMapper authorityDtoMapper;
 
     @PostMapping(value = "")
-    public CommonResponse<AuthorityDto.RegisterResponse> register(@RequestBody @Valid AuthorityDto.RegisterRequest request) {
+    public CommonResponse<AuthorityDto.BasicResponse> register(@RequestBody @Valid AuthorityDto.RegisterRequest request) {
         var command = authorityDtoMapper.of(request);
         var info = authorityFacade.register(command);
         var response = authorityDtoMapper.of(info);
@@ -26,7 +26,7 @@ public class AuthorityApiController {
     }
 
     @GetMapping(value = "{token}")
-    public CommonResponse<AuthorityDto.RetrieveResponse> retrieve(@Valid AuthorityDto.RetrieveRequest request) {
+    public CommonResponse<AuthorityDto.BasicResponse> retrieve(@Valid AuthorityDto.RetrieveRequest request) {
         var command = authorityDtoMapper.of(request);
         var info = authorityFacade.retrieve(command);
         var response = authorityDtoMapper.of(info);
@@ -34,7 +34,7 @@ public class AuthorityApiController {
     }
 
     @PutMapping(value = "{token}")
-    public CommonResponse<AuthorityDto.ChangeBasicInfoResponse> changeBasicInfo(@RequestBody @Valid AuthorityDto.ChangeBasicInfoRequest request) {
+    public CommonResponse<AuthorityDto.BasicResponse> changeBasicInfo(@RequestBody @Valid AuthorityDto.ChangeBasicInfoRequest request) {
         var command = authorityDtoMapper.of(request);
         var info = authorityFacade.changeBasicInfo(command);
         var response = authorityDtoMapper.of(info);

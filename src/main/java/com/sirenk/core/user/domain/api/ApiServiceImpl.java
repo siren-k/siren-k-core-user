@@ -24,17 +24,17 @@ public class ApiServiceImpl implements ApiService {
 
     @Override
     @Transactional(readOnly = true)
-    public ApiInfo.Retrieve retrieve(ApiCommand.Retrieve command) {
+    public ApiInfo.Basic retrieve(ApiCommand.Retrieve command) {
         var api = apiReader.read(command.getToken());
-        return apiInfoMapper.retrieve(api);
+        return apiInfoMapper.basic(api);
     }
 
     @Override
     @Transactional
-    public ApiInfo.ChangeBasicInfo changeBasicInfo(ApiCommand.ChangeBasicInfo command) {
+    public ApiInfo.Basic changeBasicInfo(ApiCommand.ChangeBasicInfo command) {
         var api = apiReader.read(command.getToken());
-        api.changeBasicInfo(command.getName(), command.getDescription());
-        return apiInfoMapper.changeBasicInfo(api);
+        api.changeBasicInfo(command.getName(), command.getDescription(), command.isEnable());
+        return apiInfoMapper.basic(api);
     }
 
     @Override

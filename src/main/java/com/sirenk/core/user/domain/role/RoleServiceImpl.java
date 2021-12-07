@@ -16,25 +16,25 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     @Transactional
-    public RoleInfo.Register register(RoleCommand.Register command) {
+    public RoleInfo.Basic register(RoleCommand.Register command) {
         var initRole = command.toEntity();
         var role = roleStorer.store(initRole);
-        return roleInfoMapper.register(role);
+        return roleInfoMapper.basic(role);
     }
 
     @Override
     @Transactional(readOnly = true)
-    public RoleInfo.Retrieve retrieve(RoleCommand.Retrieve command) {
+    public RoleInfo.Basic retrieve(RoleCommand.Retrieve command) {
         var role = roleReader.read(command.getToken());
-        return roleInfoMapper.retrieve(role);
+        return roleInfoMapper.basic(role);
     }
 
     @Override
     @Transactional
-    public RoleInfo.ChangeBasicInfo changeBasicInfo(RoleCommand.ChangeBasicInfo command) {
+    public RoleInfo.Basic changeBasicInfo(RoleCommand.ChangeBasicInfo command) {
         var role = roleReader.read(command.getToken());
-        role.changeBasicInfo(command.getName(), command.getDescription());
-        return roleInfoMapper.changeBasicInfo(role);
+        role.changeBasicInfo(command.getName(), command.getDescription(), command.isEnable());
+        return roleInfoMapper.basic(role);
     }
 
     @Override

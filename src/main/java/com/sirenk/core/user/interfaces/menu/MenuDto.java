@@ -23,32 +23,6 @@ public class MenuDto {
     }
 
     @Getter
-    @Builder
-    @ToString
-    public static class RegisterResponse {
-        // 기본 정보
-        private final String token;
-        private final String name;
-        private final String description;
-        // 상위 메뉴 정보
-        private final String path;
-        private final RegisterResponse parent;
-    }
-
-    @Getter
-    @Builder
-    @ToString
-    public static class RetrieveResponse {
-        // 기본 정보
-        private final String token;
-        private final String name;
-        private final String description;
-        // 하위 메뉴 정보
-        private final String path;
-        private List<RetrieveResponse> children;
-    }
-
-    @Getter
     @Setter
     @ToString
     public static class ChangeBasicInfoRequest {
@@ -58,25 +32,8 @@ public class MenuDto {
         @NotNull(message = "name: 필수값입니다")
         private String name;
         private String description;
-    }
-
-    @Getter
-    @Builder
-    @ToString
-    public static class ChangeBasicInfoResponse {
-        // 기본 정보
-        private final String token;
-        private final String name;
-        private final String description;
-    }
-
-    @Getter
-    @Setter
-    @ToString
-    public static class RemoveRequest {
-        // 기본 정보
-        @NotNull(message = "token: 필수값입니다")
-        private String token;
+        @NotNull(message = "enable: 필수값입니다")
+        private boolean enable;
     }
 
     @Getter
@@ -92,24 +49,34 @@ public class MenuDto {
     }
 
     @Getter
-    @Builder
+    @Setter
     @ToString
-    public static class MoveResponse {
+    public static class RemoveRequest {
         // 기본 정보
-        private final String token;
-        private final String name;
-        private final String description;
-        // 상위 메뉴 정보
-        private final String path;
-        private final MoveResponse parent;
+        @NotNull(message = "token: 필수값입니다")
+        private String token;
+    }
+
+    public record BasicParentResponse(String token, String name, String description,
+                                      String path, boolean enable,
+                                      MenuDto.BasicParentResponse parent) {
     }
 
     @Getter
     @Builder
     @ToString
-    public static class RemoveResponse {
+    public static class BasicChildrenResponse {
         // 기본 정보
         private final String token;
+        private final String name;
+        private final String description;
+        private final boolean enable;
+        // 하위 메뉴 정보
+        private final String path;
+        private List<BasicChildrenResponse> children;
+    }
+
+    public record RemoveResponse(String token) {
     }
 
 }

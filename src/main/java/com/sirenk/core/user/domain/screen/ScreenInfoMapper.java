@@ -13,10 +13,6 @@ public interface ScreenInfoMapper {
 
     ScreenInfo.Basic basic(Screen screen);
 
-    ScreenInfo.Retrieve retrieve(Screen screen);
-
-    ScreenInfo.ChangeBasicInfo changeBasicInfo(Screen screen);
-
     ScreenInfo.Remove remove(Screen screen);
 
 }

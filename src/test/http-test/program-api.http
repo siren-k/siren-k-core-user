@@ -12,6 +12,7 @@ client.test("프로그램 등록", function() {
     client.assert(response.status === 200, "unexpected http status: " + response.status);
     client.assert(response.body.data.name === "프로그램", "unexpected data.name: " + response.body.data.name);
     client.assert(response.body.data.description === "프로그램 설명", "unexpected data.description: " + response.body.data.description);
+    client.assert(response.body.data.enable === true, "unexpected data.enable: " + response.body.data.enable);
 })
 client.global.set("program_token", response.body.data.token)
  %}
@@ -25,6 +26,7 @@ client.test("프로그램 조회", function() {
     client.assert(response.status === 200, "unexpected http status: " + response.status);
     client.assert(response.body.data.name === "프로그램", "unexpected data.name: " + response.body.data.name);
     client.assert(response.body.data.description === "프로그램 설명", "unexpected data.description: " + response.body.data.description);
+    client.assert(response.body.data.enable === true, "unexpected data.enable: " + response.body.data.enable);
 })
  %}
 
@@ -35,7 +37,8 @@ Content-Type: application/json
 {
   "token": "{{program_token}}",
   "name": "프로그램 변경",
-  "description": "프로그램 변경 설명"
+  "description": "프로그램 변경 설명",
+  "enable": false
 }
 
 > {%
@@ -43,6 +46,7 @@ client.test("프로그램 기본 정보 변경", function() {
     client.assert(response.status === 200, "unexpected http status: " + response.status);
     client.assert(response.body.data.name === "프로그램 변경", "unexpected data.name: " + response.body.data.name);
     client.assert(response.body.data.description === "프로그램 변경 설명", "unexpected data.description: " + response.body.data.description);
+    client.assert(response.body.data.enable === false, "unexpected data.enable: " + response.body.data.enable);
 })
  %}
 

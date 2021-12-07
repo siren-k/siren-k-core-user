@@ -15,17 +15,13 @@ public interface ApiDtoMapper {
 
     ApiCommand.Register of(ApiDto.RegisterRequest request);
 
-    ApiDto.RegisterResponse of(ApiInfo.Basic info);
-
     ApiCommand.Retrieve of(ApiDto.RetrieveRequest request);
-
-    ApiDto.RetrieveResponse of(ApiInfo.Retrieve info);
 
     ApiCommand.ChangeBasicInfo of(ApiDto.ChangeBasicInfoRequest request);
 
-    ApiDto.ChangeBasicInfoResponse of(ApiInfo.ChangeBasicInfo info);
-
     ApiCommand.Remove of(ApiDto.RemoveRequest request);
+
+    ApiDto.BasicResponse of(ApiInfo.Basic info);
 
     ApiDto.RemoveResponse of(ApiInfo.Remove info);
 

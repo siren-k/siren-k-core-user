@@ -15,17 +15,13 @@ public interface ProgramDtoMapper {
 
     ProgramCommand.Register of(ProgramDto.RegisterRequest request);
 
-    ProgramDto.RegisterResponse of(ProgramInfo.Register info);
-
     ProgramCommand.Retrieve of(ProgramDto.RetrieveRequest request);
-
-    ProgramDto.RetrieveResponse of(ProgramInfo.Retrieve info);
 
     ProgramCommand.ChangeBasicInfo of(ProgramDto.ChangeBasicInfoRequest request);
 
-    ProgramDto.ChangeBasicInfoResponse of(ProgramInfo.ChangeBasicInfo info);
-
     ProgramCommand.Remove of(ProgramDto.RemoveRequest request);
+
+    ProgramDto.BasicResponse of(ProgramInfo.Basic info);
 
     ProgramDto.RemoveResponse of(ProgramInfo.Remove info);
 

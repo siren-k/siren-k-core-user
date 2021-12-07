@@ -15,17 +15,13 @@ public interface AuthorityDtoMapper {
 
     AuthorityCommand.Register of(AuthorityDto.RegisterRequest request);
 
-    AuthorityDto.RegisterResponse of(AuthorityInfo.Basic info);
-
     AuthorityCommand.Retrieve of(AuthorityDto.RetrieveRequest request);
-
-    AuthorityDto.RetrieveResponse of(AuthorityInfo.Retrieve info);
 
     AuthorityCommand.ChangeBasicInfo of(AuthorityDto.ChangeBasicInfoRequest request);
 
-    AuthorityDto.ChangeBasicInfoResponse of(AuthorityInfo.ChangeBasicInfo info);
-
     AuthorityCommand.Remove of(AuthorityDto.RemoveRequest request);
+
+    AuthorityDto.BasicResponse of(AuthorityInfo.Basic info);
 
     AuthorityDto.RemoveResponse of(AuthorityInfo.Remove info);
 

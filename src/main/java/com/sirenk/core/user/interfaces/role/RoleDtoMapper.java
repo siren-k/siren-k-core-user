@@ -15,17 +15,13 @@ public interface RoleDtoMapper {
 
     RoleCommand.Register of(RoleDto.RegisterRequest request);
 
-    RoleDto.RegisterResponse of(RoleInfo.Register info);
-
     RoleCommand.Retrieve of(RoleDto.RetrieveRequest request);
-
-    RoleDto.RetrieveResponse of(RoleInfo.Retrieve info);
 
     RoleCommand.ChangeBasicInfo of(RoleDto.ChangeBasicInfoRequest request);
 
-    RoleDto.ChangeBasicInfoResponse of(RoleInfo.ChangeBasicInfo info);
-
     RoleCommand.Remove of(RoleDto.RemoveRequest request);
+
+    RoleDto.BasicResponse of(RoleInfo.Basic info);
 
     RoleDto.RemoveResponse of(RoleInfo.Remove info);
 

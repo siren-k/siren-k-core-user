@@ -18,7 +18,7 @@ public class ApiApiController {
     private final ApiDtoMapper apiDtoMapper;
 
     @PostMapping(value = "")
-    public CommonResponse<ApiDto.RegisterResponse> register(@RequestBody @Valid ApiDto.RegisterRequest request) {
+    public CommonResponse<ApiDto.BasicResponse> register(@RequestBody @Valid ApiDto.RegisterRequest request) {
         var command = apiDtoMapper.of(request);
         var info = apiFacade.register(command);
         var response = apiDtoMapper.of(info);
@@ -26,7 +26,7 @@ public class ApiApiController {
     }
 
     @GetMapping(value = "{token}")
-    public CommonResponse<ApiDto.RetrieveResponse> retrieve(@Valid ApiDto.RetrieveRequest request) {
+    public CommonResponse<ApiDto.BasicResponse> retrieve(@Valid ApiDto.RetrieveRequest request) {
         var command = apiDtoMapper.of(request);
         var info = apiFacade.retrieve(command);
         var response = apiDtoMapper.of(info);
@@ -34,7 +34,7 @@ public class ApiApiController {
     }
 
     @PutMapping(value = "{token}")
-    public CommonResponse<ApiDto.ChangeBasicInfoResponse> changeBasicInfo(@RequestBody @Valid ApiDto.ChangeBasicInfoRequest request) {
+    public CommonResponse<ApiDto.BasicResponse> changeBasicInfo(@RequestBody @Valid ApiDto.ChangeBasicInfoRequest request) {
         var command = apiDtoMapper.of(request);
         var info = apiFacade.changeBasicInfo(command);
         var response = apiDtoMapper.of(info);

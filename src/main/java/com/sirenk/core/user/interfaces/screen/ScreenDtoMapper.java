@@ -15,17 +15,13 @@ public interface ScreenDtoMapper {
 
     ScreenCommand.Register of(ScreenDto.RegisterRequest request);
 
-    ScreenDto.RegisterResponse of(ScreenInfo.Basic info);
-
     ScreenCommand.Retrieve of(ScreenDto.RetrieveRequest request);
-
-    ScreenDto.RetrieveResponse of(ScreenInfo.Retrieve info);
 
     ScreenCommand.ChangeBasicInfo of(ScreenDto.ChangeBasicInfoRequest request);
 
-    ScreenDto.ChangeBasicInfoResponse of(ScreenInfo.ChangeBasicInfo info);
-
     ScreenCommand.Remove of(ScreenDto.RemoveRequest request);
+
+    ScreenDto.BasicResponse of(ScreenInfo.Basic info);
 
     ScreenDto.RemoveResponse of(ScreenInfo.Remove info);
 

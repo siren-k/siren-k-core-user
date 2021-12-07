@@ -11,50 +11,33 @@ public class DepartmentInfo {
     @Getter
     @Builder(toBuilder = true)
     @ToString
-    public static class Basic {
+    public static class BasicParent {
         // 기본 정보
         private String token;
         private String name;
+        private String description;
+        private boolean enable;
         private String path;
-        private int order;
         // 상위 부서 정보
-        private Basic parent;
+        private BasicParent parent;
+        // 기타 정보
+        private int order;
     }
 
     @Getter
     @Builder(toBuilder = true)
     @ToString
-    public static class Hierarchy {
+    public static class BasicChildren {
         // 기본 정보
         private String token;
         private String name;
+        private String description;
+        private boolean enable;
         private String path;
-        private int order;
         // 하위 부서 정보
-        private List<Hierarchy> children;
-    }
-
-    @Getter
-    @Builder
-    @ToString
-    public static class ChangeBasicInfo {
-        // 기본 정보
-        private String token;
-        private String name;
-        private String path;
-    }
-
-    @Getter
-    @Builder(toBuilder = true)
-    @ToString
-    public static class Move {
-        // 기본 정보
-        private String token;
-        private String name;
-        private String path;
+        private List<BasicChildren> children;
+        // 기타 정보
         private int order;
-        // 상위 부서 정보
-        private Move parent;
     }
 
     @Getter
