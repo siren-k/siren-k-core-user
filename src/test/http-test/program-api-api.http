@@ -1,0 +1,122 @@
+### API1 등록
+POST http://{{host-user}}/api/v1/api
+Content-Type: application/json
+
+{
+  "name": "API1",
+  "description": "API1 설명",
+  "method": "GET"
+}
+
+> {%
+client.test("API1 등록", function() {
+    client.assert(response.status === 200, "unexpected http status: " + response.status);
+    client.assert(response.body.data.name === "API1", "unexpected data.name: " + response.body.data.name);
+    client.assert(response.body.data.description === "API1 설명", "unexpected data.description: " + response.body.data.description);
+    client.assert(response.body.data.method === "GET", "unexpected data.method: " + response.body.data.method);
+    client.assert(response.body.data.enable === true, "unexpected data.enable: " + response.body.data.enable);
+})
+client.global.set("api_token_1", response.body.data.token)
+%}
+
+### 프로그램 등록
+POST http://{{host-user}}/api/v1/program
+Content-Type: application/json
+
+{
+  "name": "프로그램",
+  "description": "프로그램 설명",
+  "apiToken": "{{api_token_1}}"
+}
+
+> {%
+client.test("프로그램 등록", function() {
+    client.assert(response.status === 200, "unexpected http status: " + response.status);
+    client.assert(response.body.data.name === "프로그램", "unexpected data.name: " + response.body.data.name);
+    client.assert(response.body.data.description === "프로그램 설명", "unexpected data.description: " + response.body.data.description);
+    client.assert(response.body.data.enable === true, "unexpected data.enable: " + response.body.data.enable);
+    client.assert(response.body.data.api.name === "API1", "unexpected data.api.name: " + response.body.data.api.name);
+    client.assert(response.body.data.api.description === "API1 설명", "unexpected data.api.description: " + response.body.data.api.description);
+    client.assert(response.body.data.api.method === "GET", "unexpected data.api.method: " + response.body.data.api.method);
+    client.assert(response.body.data.api.enable === true, "unexpected data.api.name: " + response.body.data.api.enable);
+})
+client.global.set("program_token", response.body.data.token)
+ %}
+
+### API2 등록
+POST http://{{host-user}}/api/v1/api
+Content-Type: application/json
+
+{
+  "name": "API2",
+  "description": "API2 설명",
+  "method": "POST"
+}
+
+> {%
+client.test("API1 등록", function() {
+    client.assert(response.status === 200, "unexpected http status: " + response.status);
+    client.assert(response.body.data.name === "API2", "unexpected data.name: " + response.body.data.name);
+    client.assert(response.body.data.description === "API2 설명", "unexpected data.description: " + response.body.data.description);
+    client.assert(response.body.data.method === "POST", "unexpected data.method: " + response.body.data.method);
+    client.assert(response.body.data.enable === true, "unexpected data.enable: " + response.body.data.enable);
+})
+client.global.set("api_token_2", response.body.data.token)
+%}
+
+### 프로그램의 API 변경
+PUT http://{{host-user}}/api/v1/program/{{program_token}}/api/{{api_token_2}}
+Content-Type: application/json
+
+> {%
+client.test("프로그램의 API 변경", function() {
+    client.assert(response.status === 200, "unexpected http status: " + response.status);
+    client.assert(response.body.data.name === "프로그램", "unexpected data.name: " + response.body.data.name);
+    client.assert(response.body.data.description === "프로그램 설명", "unexpected data.description: " + response.body.data.description);
+    client.assert(response.body.data.enable === true, "unexpected data.enable: " + response.body.data.enable);
+    client.assert(response.body.data.api.name === "API2", "unexpected data.api.name: " + response.body.data.api.name);
+    client.assert(response.body.data.api.description === "API2 설명", "unexpected data.api.description: " + response.body.data.api.description);
+    client.assert(response.body.data.api.method === "POST", "unexpected data.api.method: " + response.body.data.api.method);
+    client.assert(response.body.data.api.enable === true, "unexpected data.api.name: " + response.body.data.api.enable);
+})
+client.global.set("program_token", response.body.data.token)
+ %}
+
+### 프로그램 삭제
+DELETE http://{{host-user}}/api/v1/program/{{program_token}}
+Content-Type: application/json
+
+> {%
+client.test("프로그램 삭제", function() {
+    client.assert(response.status === 200, "unexpected http status: " + response.status);
+    client.assert(response.body.data.token === String(client.global.get("program_token")), "unexpected data.name: " + response.body.data.token);
+})
+%}
+
+### API1 조회
+GET http://{{host-user}}/api/v1/api/{{api_token_1}}
+Content-Type: application/json
+
+> {%
+client.test("API1 조회", function() {
+    client.assert(response.status === 200, "unexpected http status: " + response.status);
+    client.assert(response.body.data.name === "API1", "unexpected data.name: " + response.body.data.name);
+    client.assert(response.body.data.description === "API1 설명", "unexpected data.description: " + response.body.data.description);
+    client.assert(response.body.data.method === "GET", "unexpected data.method: " + response.body.data.method);
+    client.assert(response.body.data.enable === true, "unexpected data.enable: " + response.body.data.enable);
+})
+%}
+
+### API2 조회
+GET http://{{host-user}}/api/v1/api/{{api_token_2}}
+Content-Type: application/json
+
+> {%
+client.test("API2 조회", function() {
+    client.assert(response.status === 200, "unexpected http status: " + response.status);
+    client.assert(response.body.data.name === "API2", "unexpected data.name: " + response.body.data.name);
+    client.assert(response.body.data.description === "API2 설명", "unexpected data.description: " + response.body.data.description);
+    client.assert(response.body.data.method === "POST", "unexpected data.method: " + response.body.data.method);
+    client.assert(response.body.data.enable === true, "unexpected data.enable: " + response.body.data.enable);
+})
+%}

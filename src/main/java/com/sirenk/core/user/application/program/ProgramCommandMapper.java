@@ -1,13 +1,12 @@
 package com.sirenk.core.user.application.program;
 
+import com.sirenk.core.user.domain.api.ApiCommand;
 import com.sirenk.core.user.domain.program.ProgramCommand;
 import com.sirenk.core.user.domain.program.screen.ScreenCommand;
 import org.mapstruct.InjectionStrategy;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;
-
-import javax.annotation.MatchesPattern;
 
 @Mapper(
         componentModel = "spring",
@@ -17,9 +16,15 @@ import javax.annotation.MatchesPattern;
 public interface ProgramCommandMapper {
 
     @Mapping(source = "command.screenToken", target = "token")
-    ScreenCommand.Retrieve retrieve(ProgramCommand.Register command);
+    ScreenCommand.Retrieve screen(ProgramCommand.Register command);
 
     @Mapping(source = "command.screenToken", target = "token")
-    ScreenCommand.Retrieve retrieve(ProgramCommand.ChangeScreen command);
+    ScreenCommand.Retrieve screen(ProgramCommand.ChangeScreen command);
+
+    @Mapping(source = "command.apiToken", target = "token")
+    ApiCommand.Retrieve api(ProgramCommand.Register command);
+
+    @Mapping(source = "command.apiToken", target = "token")
+    ApiCommand.Retrieve api(ProgramCommand.ChangeApi command);
 
 }

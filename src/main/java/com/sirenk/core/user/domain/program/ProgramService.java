@@ -10,6 +10,8 @@ public interface ProgramService {
 
     ProgramInfo.Basic changeScreen(ProgramCommand.ChangeScreen command);
 
+    ProgramInfo.Basic changeApi(ProgramCommand.ChangeApi newCommand);
+
     ProgramInfo.Remove remove(ProgramCommand.Remove command);
 
 }

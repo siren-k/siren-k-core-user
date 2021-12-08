@@ -1,4 +1,4 @@
-package com.sirenk.core.user.interfaces.api;
+package com.sirenk.core.user.interfaces.program.api;
 
 import com.sirenk.core.user.domain.api.Api;
 import lombok.Getter;

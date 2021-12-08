@@ -24,6 +24,12 @@ public class ApiServiceImpl implements ApiService {
 
     @Override
     @Transactional(readOnly = true)
+    public Api find(ApiCommand.Retrieve command) {
+        return apiReader.read(command.getToken());
+    }
+
+    @Override
+    @Transactional(readOnly = true)
     public ApiInfo.Basic retrieve(ApiCommand.Retrieve command) {
         var api = apiReader.read(command.getToken());
         return apiInfoMapper.basic(api);
