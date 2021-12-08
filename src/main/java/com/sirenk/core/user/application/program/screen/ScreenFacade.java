@@ -26,6 +26,10 @@ public class ScreenFacade {
         return screenService.changeBasicInfo(command);
     }
 
+    public ScreenInfo.Basic addScreenButton(ScreenCommand.AddScreenButton command) {
+        return screenService.addScreenButton(command);
+    }
+
     public ScreenInfo.Remove remove(ScreenCommand.Remove command) {
         return screenService.remove(command);
     }

@@ -1,6 +1,6 @@
-package com.sirenk.core.user.infrastructure.api;
+package com.sirenk.core.user.infrastructure.program.api;
 
-import com.sirenk.core.user.domain.api.Api;
+import com.sirenk.core.user.domain.program.api.Api;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

@@ -1,7 +1,7 @@
 package com.sirenk.core.user.interfaces.program.api;
 
-import com.sirenk.core.user.domain.api.ApiCommand;
-import com.sirenk.core.user.domain.api.ApiInfo;
+import com.sirenk.core.user.domain.program.api.ApiCommand;
+import com.sirenk.core.user.domain.program.api.ApiInfo;
 import org.mapstruct.InjectionStrategy;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;

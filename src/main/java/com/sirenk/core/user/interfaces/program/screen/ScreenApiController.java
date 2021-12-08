@@ -41,6 +41,14 @@ public class ScreenApiController {
         return CommonResponse.success(response);
     }
 
+    @PutMapping(value = "{token}/button")
+    public CommonResponse<ScreenDto.BasicResponse> addScreenButton(@RequestBody @Valid ScreenDto.AddScreenButtonRequest request) {
+        var command = screenDtoMapper.of(request);
+        var info = screenFacade.addScreenButton(command);
+        var response = screenDtoMapper.of(info);
+        return CommonResponse.success(response);
+    }
+
     @DeleteMapping(value = "{token}")
     public CommonResponse<ScreenDto.RemoveResponse> remove(@Valid ScreenDto.RemoveRequest request) {
         var command = screenDtoMapper.of(request);

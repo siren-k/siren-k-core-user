@@ -4,7 +4,21 @@ Content-Type: application/json
 
 {
   "name": "화면",
-  "description": "화면 설명"
+  "description": "화면 설명",
+  "buttons": [
+    {
+      "name": "버튼1",
+      "description": "버튼1 설명",
+      "method": "POST",
+      "url": "/api/v1/test1"
+    },
+    {
+      "name": "버튼2",
+      "description": "버튼2 설명",
+      "method": "GET",
+      "url": "/api/v1/test2"
+    }
+  ]
 }
 
 > {%
@@ -13,8 +27,20 @@ client.test("화면 등록", function() {
     client.assert(response.body.data.name === "화면", "unexpected data.name: " + response.body.data.name);
     client.assert(response.body.data.description === "화면 설명", "unexpected data.description: " + response.body.data.description);
     client.assert(response.body.data.enable === true, "unexpected data.enable: " + response.body.data.enable);
+    client.assert(response.body.data.buttons[0].name === "버튼1", "unexpected data.button[0].name: " + response.body.data.buttons[0].name);
+    client.assert(response.body.data.buttons[0].description === "버튼1 설명", "unexpected data.button[0].description: " + response.body.data.buttons[0].description);
+    client.assert(response.body.data.buttons[0].method === "POST", "unexpected data.button[0].method: " + response.body.data.buttons[0].method);
+    client.assert(response.body.data.buttons[0].url === "/api/v1/test1", "unexpected data.button[0].url: " + response.body.data.buttons[0].url);
+    client.assert(response.body.data.buttons[0].enable === true, "unexpected data.button[0].enable: " + response.body.data.buttons[0].enable);
+    client.assert(response.body.data.buttons[1].name === "버튼2", "unexpected data.button[0].name: " + response.body.data.buttons[1].name);
+    client.assert(response.body.data.buttons[1].description === "버튼2 설명", "unexpected data.button[0].description: " + response.body.data.buttons[1].description);
+    client.assert(response.body.data.buttons[1].method === "GET", "unexpected data.button[0].method: " + response.body.data.buttons[1].method);
+    client.assert(response.body.data.buttons[1].url === "/api/v1/test2", "unexpected data.button[0].url: " + response.body.data.buttons[1].url);
+    client.assert(response.body.data.buttons[1].enable === true, "unexpected data.button[0].enable: " + response.body.data.buttons[1].enable);
 })
 client.global.set("screen_token", response.body.data.token)
+client.global.set("screen_button_token_1", response.body.data.buttons[0].token)
+client.global.set("screen_button_token_2", response.body.data.buttons[1].token)
 %}
 
 ### 화면 조회
@@ -27,6 +53,18 @@ client.test("화면 조회", function() {
     client.assert(response.body.data.name === "화면", "unexpected data.name: " + response.body.data.name);
     client.assert(response.body.data.description === "화면 설명", "unexpected data.description: " + response.body.data.description);
     client.assert(response.body.data.enable === true, "unexpected data.enable: " + response.body.data.enable);
+    client.assert(response.body.data.buttons[0].token === String(client.global.get("screen_button_token_1")), "unexpected data.button[0].token: " + response.body.data.buttons[0].token);
+    client.assert(response.body.data.buttons[0].name === "버튼1", "unexpected data.button[0].name: " + response.body.data.buttons[0].name);
+    client.assert(response.body.data.buttons[0].description === "버튼1 설명", "unexpected data.button[0].description: " + response.body.data.buttons[0].description);
+    client.assert(response.body.data.buttons[0].method === "POST", "unexpected data.button[0].method: " + response.body.data.buttons[0].method);
+    client.assert(response.body.data.buttons[0].url === "/api/v1/test1", "unexpected data.button[0].url: " + response.body.data.buttons[0].url);
+    client.assert(response.body.data.buttons[0].enable === true, "unexpected data.button[0].enable: " + response.body.data.buttons[0].enable);
+    client.assert(response.body.data.buttons[1].token === String(client.global.get("screen_button_token_2")), "unexpected data.button[1].token: " + response.body.data.buttons[1].token);
+    client.assert(response.body.data.buttons[1].name === "버튼2", "unexpected data.button[0].name: " + response.body.data.buttons[1].name);
+    client.assert(response.body.data.buttons[1].description === "버튼2 설명", "unexpected data.button[0].description: " + response.body.data.buttons[1].description);
+    client.assert(response.body.data.buttons[1].method === "GET", "unexpected data.button[0].method: " + response.body.data.buttons[1].method);
+    client.assert(response.body.data.buttons[1].url === "/api/v1/test2", "unexpected data.button[0].url: " + response.body.data.buttons[1].url);
+    client.assert(response.body.data.buttons[1].enable === true, "unexpected data.button[0].enable: " + response.body.data.buttons[1].enable);
 })
 %}
 
@@ -38,7 +76,25 @@ Content-Type: application/json
   "token": "{{screen_token}}",
   "name": "화면 변경",
   "description": "화면 설명 변경",
-  "enable": false
+  "enable": false,
+  "buttons": [
+    {
+      "token": "{{screen_button_token_1}}",
+      "name": "버튼1 변경",
+      "description": "버튼1 설명 변경",
+      "method": "GET",
+      "url": "/api/v1/test2",
+      "enable": false
+    },
+    {
+      "token": "{{screen_button_token_2}}",
+      "name": "버튼2 변경",
+      "description": "버튼2 설명 변경",
+      "method": "POST",
+      "url": "/api/v1/test1",
+      "enable": false
+    }
+  ]
 }
 
 > {%
@@ -47,6 +103,71 @@ client.test("화면 기본 정보 변경", function() {
     client.assert(response.body.data.name === "화면 변경", "unexpected data.name: " + response.body.data.name);
     client.assert(response.body.data.description === "화면 설명 변경", "unexpected data.description: " + response.body.data.description);
     client.assert(response.body.data.enable === false, "unexpected data.enable: " + response.body.data.enable);
+    client.assert(response.body.data.buttons[0].token === String(client.global.get("screen_button_token_1")), "unexpected data.button[0].token: " + response.body.data.buttons[0].token);
+    client.assert(response.body.data.buttons[0].name === "버튼1 변경", "unexpected data.button[0].name: " + response.body.data.buttons[0].name);
+    client.assert(response.body.data.buttons[0].description === "버튼1 설명 변경", "unexpected data.button[0].description: " + response.body.data.buttons[0].description);
+    client.assert(response.body.data.buttons[0].method === "GET", "unexpected data.button[0].method: " + response.body.data.buttons[0].method);
+    client.assert(response.body.data.buttons[0].url === "/api/v1/test2", "unexpected data.button[0].url: " + response.body.data.buttons[0].url);
+    client.assert(response.body.data.buttons[0].enable === false, "unexpected data.button[0].enable: " + response.body.data.buttons[0].enable);
+    client.assert(response.body.data.buttons[1].token === String(client.global.get("screen_button_token_2")), "unexpected data.button[1].token: " + response.body.data.buttons[1].token);
+    client.assert(response.body.data.buttons[1].name === "버튼2 변경", "unexpected data.button[1].name: " + response.body.data.buttons[1].name);
+    client.assert(response.body.data.buttons[1].description === "버튼2 설명 변경", "unexpected data.button[1].description: " + response.body.data.buttons[1].description);
+    client.assert(response.body.data.buttons[1].method === "POST", "unexpected data.button[1].method: " + response.body.data.buttons[1].method);
+    client.assert(response.body.data.buttons[1].url === "/api/v1/test1", "unexpected data.button[1].url: " + response.body.data.buttons[1].url);
+    client.assert(response.body.data.buttons[1].enable === false, "unexpected data.button[1].enable: " + response.body.data.buttons[1].enable);
+})
+%}
+
+### 화면에 버튼 추가
+PUT http://{{host-user}}/api/v1/screen/{{screen_token}}/button
+Content-Type: application/json
+
+{
+  "token": "{{screen_token}}",
+  "buttons": [
+    {
+      "name": "버튼3",
+      "description": "버튼3 설명",
+      "method": "PUT",
+      "url": "/api/v1/test3"
+    },
+    {
+      "name": "버튼4",
+      "description": "버튼4 설명",
+      "method": "DELETE",
+      "url": "/api/v1/test4"
+    }
+  ]
+}
+
+> {%
+client.test("화면에 버튼 추가", function() {
+    client.assert(response.status === 200, "unexpected http status: " + response.status);
+    client.assert(response.body.data.name === "화면 변경", "unexpected data.name: " + response.body.data.name);
+    client.assert(response.body.data.description === "화면 설명 변경", "unexpected data.description: " + response.body.data.description);
+    client.assert(response.body.data.enable === false, "unexpected data.enable: " + response.body.data.enable);
+    client.assert(response.body.data.buttons[0].token === String(client.global.get("screen_button_token_1")), "unexpected data.button[0].token: " + response.body.data.buttons[0].token);
+    client.assert(response.body.data.buttons[0].name === "버튼1 변경", "unexpected data.button[0].name: " + response.body.data.buttons[0].name);
+    client.assert(response.body.data.buttons[0].description === "버튼1 설명 변경", "unexpected data.button[0].description: " + response.body.data.buttons[0].description);
+    client.assert(response.body.data.buttons[0].method === "GET", "unexpected data.button[0].method: " + response.body.data.buttons[0].method);
+    client.assert(response.body.data.buttons[0].url === "/api/v1/test2", "unexpected data.button[0].url: " + response.body.data.buttons[0].url);
+    client.assert(response.body.data.buttons[0].enable === false, "unexpected data.button[0].enable: " + response.body.data.buttons[0].enable);
+    client.assert(response.body.data.buttons[1].token === String(client.global.get("screen_button_token_2")), "unexpected data.button[1].token: " + response.body.data.buttons[1].token);
+    client.assert(response.body.data.buttons[1].name === "버튼2 변경", "unexpected data.button[0].name: " + response.body.data.buttons[1].name);
+    client.assert(response.body.data.buttons[1].description === "버튼2 설명 변경", "unexpected data.button[0].description: " + response.body.data.buttons[1].description);
+    client.assert(response.body.data.buttons[1].method === "POST", "unexpected data.button[0].method: " + response.body.data.buttons[1].method);
+    client.assert(response.body.data.buttons[1].url === "/api/v1/test1", "unexpected data.button[0].url: " + response.body.data.buttons[1].url);
+    client.assert(response.body.data.buttons[1].enable === false, "unexpected data.button[0].enable: " + response.body.data.buttons[1].enable);
+    client.assert(response.body.data.buttons[2].name === "버튼3", "unexpected data.button[2].name: " + response.body.data.buttons[2].name);
+    client.assert(response.body.data.buttons[2].description === "버튼3 설명", "unexpected data.button[2].description: " + response.body.data.buttons[2].description);
+    client.assert(response.body.data.buttons[2].method === "PUT", "unexpected data.button[2].method: " + response.body.data.buttons[2].method);
+    client.assert(response.body.data.buttons[2].url === "/api/v1/test3", "unexpected data.button[2].url: " + response.body.data.buttons[2].url);
+    client.assert(response.body.data.buttons[2].enable === true, "unexpected data.button[2].enable: " + response.body.data.buttons[2].enable);
+    client.assert(response.body.data.buttons[3].name === "버튼4", "unexpected data.button[3].name: " + response.body.data.buttons[3].name);
+    client.assert(response.body.data.buttons[3].description === "버튼4 설명", "unexpected data.button[3].description: " + response.body.data.buttons[3].description);
+    client.assert(response.body.data.buttons[3].method === "DELETE", "unexpected data.button[3].method: " + response.body.data.buttons[3].method);
+    client.assert(response.body.data.buttons[3].url === "/api/v1/test4", "unexpected data.button[3].url: " + response.body.data.buttons[3].url);
+    client.assert(response.body.data.buttons[3].enable === true, "unexpected data.button[3].enable: " + response.body.data.buttons[3].enable);
 })
 %}
 

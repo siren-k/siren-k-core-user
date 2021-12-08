@@ -1,4 +1,4 @@
-package com.sirenk.core.user.domain.api;
+package com.sirenk.core.user.domain.program.api;
 
 import com.sirenk.core.common.exception.InvalidParamException;
 import com.sirenk.core.common.jpa.AbstractEntity;

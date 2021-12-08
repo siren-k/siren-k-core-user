@@ -2,7 +2,7 @@ package com.sirenk.core.user.domain.program;
 
 import com.sirenk.core.common.jpa.AbstractEntity;
 import com.sirenk.core.common.util.TokenGenerator;
-import com.sirenk.core.user.domain.api.Api;
+import com.sirenk.core.user.domain.program.api.Api;
 import com.sirenk.core.user.domain.program.screen.Screen;
 import lombok.Builder;
 import lombok.Getter;

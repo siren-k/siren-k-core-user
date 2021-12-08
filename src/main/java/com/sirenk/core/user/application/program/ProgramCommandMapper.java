@@ -1,6 +1,6 @@
 package com.sirenk.core.user.application.program;
 
-import com.sirenk.core.user.domain.api.ApiCommand;
+import com.sirenk.core.user.domain.program.api.ApiCommand;
 import com.sirenk.core.user.domain.program.ProgramCommand;
 import com.sirenk.core.user.domain.program.screen.ScreenCommand;
 import org.mapstruct.InjectionStrategy;

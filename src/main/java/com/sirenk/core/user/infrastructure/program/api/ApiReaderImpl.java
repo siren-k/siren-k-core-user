@@ -1,8 +1,8 @@
-package com.sirenk.core.user.infrastructure.api;
+package com.sirenk.core.user.infrastructure.program.api;
 
 import com.sirenk.core.common.exception.EntityNotFoundException;
-import com.sirenk.core.user.domain.api.Api;
-import com.sirenk.core.user.domain.api.ApiReader;
+import com.sirenk.core.user.domain.program.api.Api;
+import com.sirenk.core.user.domain.program.api.ApiReader;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
