@@ -157,14 +157,15 @@ create table api
 (
     -- 기본 정보
     api_id          bigint auto_increment primary key comment 'API의 식별자',
-    api_token       varchar(255) not null comment 'API를 구분하기 위한 대체키',
-    api_name        varchar(255) not null comment 'API의 이름',
+    api_token       varchar(255)  not null comment 'API를 구분하기 위한 대체키',
+    api_name        varchar(255)  not null comment 'API의 이름',
     api_description varchar(1024) comment 'API의 설명',
-    api_method      varchar(255) not null comment 'API 호출 방법(GET, POST, PUT, DELETE, etc)',
+    api_method      varchar(255)  not null comment 'API 호출 방법(GET, POST, PUT, DELETE, etc)',
+    api_url         varchar(4096) not null comment 'API의 URL',
     api_enable      boolean default true comment 'API의 사용 여부',
 
-    created_at      datetime(6)  not null comment 'API의 정보 생성 일시',
-    updated_at      datetime(6)  null comment 'API의 정보 수정 일시'
+    created_at      datetime(6)   not null comment 'API의 정보 생성 일시',
+    updated_at      datetime(6)   null comment 'API의 정보 수정 일시'
 ) comment 'API' charset = utf8mb4;
 
 create

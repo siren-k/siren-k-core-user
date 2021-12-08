@@ -19,6 +19,8 @@ public class ApiDto {
         private String description;
         @NotNull(message = "method: 필수값입니다")
         private Api.Method method;
+        @NotNull(message = "url: 필수값입니다")
+        private String url;
     }
 
     @Getter
@@ -42,6 +44,8 @@ public class ApiDto {
         @NotNull(message = "method: 필수값입니다")
         private Api.Method method;
         private String description;
+        @NotNull(message = "url: 필수값입니다")
+        private String url;
         @NotNull(message = "enable: 필수값입니다")
         private boolean enable;
     }
@@ -56,7 +60,7 @@ public class ApiDto {
     }
 
     public record BasicResponse(String token, String name, String description,
-                                Api.Method method, boolean enable) {
+                                Api.Method method, String url, boolean enable) {
     }
 
     public record RemoveResponse(String token) {

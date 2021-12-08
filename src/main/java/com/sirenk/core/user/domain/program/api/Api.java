@@ -36,36 +36,14 @@ public class Api extends AbstractEntity {
     @Enumerated(EnumType.STRING)
     @Column(name = "api_method")
     private Method method;
+    @Column(name = "api_url", length = 4096)
+    private String url;
     @Column(name = "api_enable")
     private boolean enable;
 
     // 프로그램 정보
     @OneToOne(mappedBy = "api")
     private Program program;
-
-    @Builder
-    public Api(String name, String description, Method method,
-               Program program
-    ) {
-        if (StringUtils.isEmpty(name)) throw new InvalidParamException("Api.name");
-
-        // 기본 정보
-        this.token = TokenGenerator.randomCharacterWithPrefix(PREFIX_API);
-        this.name = name;
-        this.description = description;
-        this.method = method;
-        this.enable = true;
-
-        // 프로그램 정보
-        this.program = program;
-    }
-
-    public void changeBasicInfo(String name, String description, boolean enable, Method method) {
-        this.name = name;
-        this.description = description;
-        this.enable = enable;
-        this.method = method;
-    }
 
     @Getter
     @AllArgsConstructor
@@ -75,6 +53,37 @@ public class Api extends AbstractEntity {
         PUT("HTTP PUT Method"),
         DELETE("HTTP DELETE Method");
         private final String description;
+    }
+
+    @Builder
+    public Api(String name, String description, Method method, String url,
+               Program program
+    ) {
+        if (StringUtils.isEmpty(name)) throw new InvalidParamException("Api.name");
+        if (method == null) throw new InvalidParamException("Api.method");
+        if (StringUtils.isEmpty(url)) throw new InvalidParamException("Api.url");
+
+        // 기본 정보
+        this.token = TokenGenerator.randomCharacterWithPrefix(PREFIX_API);
+        this.name = name;
+        this.description = description;
+        this.method = method;
+        this.url = url;
+        this.enable = true;
+
+        // 프로그램 정보
+        this.program = program;
+    }
+
+    public void changeBasicInfo(String name, String description,
+                                Method method, String url,
+                                boolean enable
+    ) {
+        this.name = name;
+        this.description = description;
+        this.enable = enable;
+        this.method = method;
+        this.url = url;
     }
 
 }

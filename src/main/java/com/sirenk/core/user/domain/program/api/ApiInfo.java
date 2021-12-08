@@ -15,6 +15,7 @@ public class ApiInfo {
         private String name;
         private String description;
         private Api.Method method;
+        private String url;
         private boolean enable;
     }
 
