@@ -1,5 +1,6 @@
 package com.sirenk.core.user.interfaces.program;
 
+import com.sirenk.core.user.interfaces.program.screen.ScreenDto;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -16,6 +17,8 @@ public class ProgramDto {
         @NotNull(message = "name: 필수값입니다")
         private String name;
         private String description;
+        // 화면 정보
+        private String screenToken;
     }
 
     @Getter
@@ -43,14 +46,26 @@ public class ProgramDto {
     @Getter
     @Setter
     @ToString
+    public static class ChangeScreenRequest {
+        // 기본 정보
+        @NotNull(message = "token: 필수값입니다")
+        private String token;
+        // 화면 정보
+        @NotNull(message = "screenToken: 필수값입니다")
+        private String screenToken;
+    }
+
+    @Getter
+    @Setter
+    @ToString
     public static class RemoveRequest {
         // 기본 정보
         @NotNull(message = "token: 필수값입니다")
         private String token;
     }
 
-    public record BasicResponse(String token, String name, String description,
-                                boolean enable) {
+    public record BasicResponse(String token, String name, String description, boolean enable,
+                                ScreenDto.BasicResponse screen) {
     }
 
     public record RemoveResponse(String token) {

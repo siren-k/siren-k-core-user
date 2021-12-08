@@ -1,4 +1,4 @@
-package com.sirenk.core.user.domain.screen;
+package com.sirenk.core.user.domain.program.screen;
 
 public interface ScreenReader {
 

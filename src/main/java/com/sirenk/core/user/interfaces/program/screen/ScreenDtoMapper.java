@@ -1,7 +1,7 @@
-package com.sirenk.core.user.interfaces.screen;
+package com.sirenk.core.user.interfaces.program.screen;
 
-import com.sirenk.core.user.domain.screen.ScreenCommand;
-import com.sirenk.core.user.domain.screen.ScreenInfo;
+import com.sirenk.core.user.domain.program.screen.ScreenCommand;
+import com.sirenk.core.user.domain.program.screen.ScreenInfo;
 import org.mapstruct.InjectionStrategy;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;

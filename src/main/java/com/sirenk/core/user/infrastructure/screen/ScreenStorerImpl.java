@@ -2,10 +2,8 @@ package com.sirenk.core.user.infrastructure.screen;
 
 import com.sirenk.core.common.exception.EntityDuplicationException;
 import com.sirenk.core.common.exception.InvalidParamException;
-import com.sirenk.core.user.domain.api.Api;
-import com.sirenk.core.user.domain.api.ApiStorer;
-import com.sirenk.core.user.domain.screen.Screen;
-import com.sirenk.core.user.domain.screen.ScreenStorer;
+import com.sirenk.core.user.domain.program.screen.Screen;
+import com.sirenk.core.user.domain.program.screen.ScreenStorer;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;

@@ -1,0 +1,114 @@
+### 화면1 등록
+POST http://{{host-user}}/api/v1/screen
+Content-Type: application/json
+
+{
+  "name": "화면1",
+  "description": "화면1 설명"
+}
+
+> {%
+client.test("화면1 등록", function() {
+    client.assert(response.status === 200, "unexpected http status: " + response.status);
+    client.assert(response.body.data.name === "화면1", "unexpected data.name: " + response.body.data.name);
+    client.assert(response.body.data.description === "화면1 설명", "unexpected data.description: " + response.body.data.description);
+    client.assert(response.body.data.enable === true, "unexpected data.enable: " + response.body.data.enable);
+})
+client.global.set("screen_token_1", response.body.data.token)
+%}
+
+### 프로그램 등록
+POST http://{{host-user}}/api/v1/program
+Content-Type: application/json
+
+{
+  "name": "프로그램",
+  "description": "프로그램 설명",
+  "screenToken": "{{screen_token_1}}"
+}
+
+> {%
+client.test("프로그램 등록", function() {
+    client.assert(response.status === 200, "unexpected http status: " + response.status);
+    client.assert(response.body.data.name === "프로그램", "unexpected data.name: " + response.body.data.name);
+    client.assert(response.body.data.description === "프로그램 설명", "unexpected data.description: " + response.body.data.description);
+    client.assert(response.body.data.enable === true, "unexpected data.enable: " + response.body.data.enable);
+    client.assert(response.body.data.screen.name === "화면1", "unexpected data.screen.name: " + response.body.data.screen.name);
+    client.assert(response.body.data.screen.description === "화면1 설명", "unexpected data.screen.name: " + response.body.data.screen.description);
+    client.assert(response.body.data.screen.enable === true, "unexpected data.screen.name: " + response.body.data.screen.enable);
+})
+client.global.set("program_token", response.body.data.token)
+ %}
+
+### 화면2 등록
+POST http://{{host-user}}/api/v1/screen
+Content-Type: application/json
+
+{
+  "name": "화면2",
+  "description": "화면2 설명"
+}
+
+> {%
+client.test("화면2 등록", function() {
+    client.assert(response.status === 200, "unexpected http status: " + response.status);
+    client.assert(response.body.data.name === "화면2", "unexpected data.name: " + response.body.data.name);
+    client.assert(response.body.data.description === "화면2 설명", "unexpected data.description: " + response.body.data.description);
+    client.assert(response.body.data.enable === true, "unexpected data.enable: " + response.body.data.enable);
+})
+client.global.set("screen_token_2", response.body.data.token)
+%}
+
+### 프로그램의 화면 변경
+PUT http://{{host-user}}/api/v1/program/{{program_token}}/screen/{{screen_token_2}}
+Content-Type: application/json
+
+> {%
+client.test("프로그램의 화면 변경", function() {
+    client.assert(response.status === 200, "unexpected http status: " + response.status);
+    client.assert(response.body.data.name === "프로그램", "unexpected data.name: " + response.body.data.name);
+    client.assert(response.body.data.description === "프로그램 설명", "unexpected data.description: " + response.body.data.description);
+    client.assert(response.body.data.enable === true, "unexpected data.enable: " + response.body.data.enable);
+    client.assert(response.body.data.screen.name === "화면2", "unexpected data.screen.name: " + response.body.data.screen.name);
+    client.assert(response.body.data.screen.description === "화면2 설명", "unexpected data.screen.name: " + response.body.data.screen.description);
+    client.assert(response.body.data.screen.enable === true, "unexpected data.screen.name: " + response.body.data.screen.enable);
+})
+client.global.set("program_token", response.body.data.token)
+ %}
+
+### 프로그램 삭제
+DELETE http://{{host-user}}/api/v1/program/{{program_token}}
+Content-Type: application/json
+
+> {%
+client.test("프로그램 삭제", function() {
+    client.assert(response.status === 200, "unexpected http status: " + response.status);
+    client.assert(response.body.data.token === String(client.global.get("program_token")), "unexpected data.name: " + response.body.data.token);
+})
+%}
+
+### 화면1 조회
+GET http://{{host-user}}/api/v1/screen/{{screen_token_1}}
+Content-Type: application/json
+
+> {%
+client.test("화면1 조회", function() {
+    client.assert(response.status === 200, "unexpected http status: " + response.status);
+    client.assert(response.body.data.name === "화면1", "unexpected data.name: " + response.body.data.name);
+    client.assert(response.body.data.description === "화면1 설명", "unexpected data.description: " + response.body.data.description);
+    client.assert(response.body.data.enable === true, "unexpected data.enable: " + response.body.data.enable);
+})
+%}
+
+### 화면2 조회
+GET http://{{host-user}}/api/v1/screen/{{screen_token_2}}
+Content-Type: application/json
+
+> {%
+client.test("화면2 조회", function() {
+    client.assert(response.status === 200, "unexpected http status: " + response.status);
+    client.assert(response.body.data.name === "화면2", "unexpected data.name: " + response.body.data.name);
+    client.assert(response.body.data.description === "화면2 설명", "unexpected data.description: " + response.body.data.description);
+    client.assert(response.body.data.enable === true, "unexpected data.enable: " + response.body.data.enable);
+})
+%}

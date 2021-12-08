@@ -84,6 +84,9 @@ create table program
     program_description varchar(1024) comment '프로그램의 설명',
     program_enable      boolean default true comment '프로그램의 사용 여부',
 
+    -- 화면 정보
+    screen_id           bigint comment '프로그램에 속하는 화면의 식별자',
+
     created_at          datetime(6)  not null comment '프로그램의 정보 생성 일시',
     updated_at          datetime(6)  null comment '프로그램의 정보 수정 일시'
 ) comment '프로그램' charset = utf8mb4;

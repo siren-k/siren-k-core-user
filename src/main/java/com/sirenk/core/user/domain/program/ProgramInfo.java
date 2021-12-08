@@ -1,5 +1,6 @@
 package com.sirenk.core.user.domain.program;
 
+import com.sirenk.core.user.domain.program.screen.ScreenInfo;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;
@@ -15,6 +16,8 @@ public class ProgramInfo {
         private String name;
         private String description;
         private boolean enable;
+        // 화면 정보
+        private ScreenInfo.Basic screen;
     }
 
     @Getter

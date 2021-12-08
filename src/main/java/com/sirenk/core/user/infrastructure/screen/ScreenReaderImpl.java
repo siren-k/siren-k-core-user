@@ -1,8 +1,8 @@
 package com.sirenk.core.user.infrastructure.screen;
 
 import com.sirenk.core.common.exception.EntityNotFoundException;
-import com.sirenk.core.user.domain.screen.Screen;
-import com.sirenk.core.user.domain.screen.ScreenReader;
+import com.sirenk.core.user.domain.program.screen.Screen;
+import com.sirenk.core.user.domain.program.screen.ScreenReader;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;

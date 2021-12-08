@@ -1,8 +1,10 @@
-package com.sirenk.core.user.domain.screen;
+package com.sirenk.core.user.domain.program.screen;
 
 public interface ScreenService {
 
     ScreenInfo.Basic register(ScreenCommand.Register command);
+
+    Screen find(ScreenCommand.Retrieve command);
 
     ScreenInfo.Basic retrieve(ScreenCommand.Retrieve command);
 

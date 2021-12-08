@@ -39,6 +39,14 @@ public class ProgramServiceImpl implements ProgramService {
 
     @Override
     @Transactional
+    public ProgramInfo.Basic changeScreen(ProgramCommand.ChangeScreen command) {
+        var program = programReader.read(command.getToken());
+        program.changeScreen(command.getScreen());
+        return programInfoMapper.basic(program);
+    }
+
+    @Override
+    @Transactional
     public ProgramInfo.Remove remove(ProgramCommand.Remove command) {
         var program = programReader.read(command.getToken());
         programStorer.remove(program);

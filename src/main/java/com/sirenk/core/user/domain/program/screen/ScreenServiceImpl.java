@@ -1,4 +1,4 @@
-package com.sirenk.core.user.domain.screen;
+package com.sirenk.core.user.domain.program.screen;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -20,6 +20,12 @@ public class ScreenServiceImpl implements ScreenService {
         var initApi = command.toEntity();
         var screen = screenStorer.store(initApi);
         return screenInfoMapper.basic(screen);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Screen find(ScreenCommand.Retrieve command) {
+        return screenReader.read(command.getToken());
     }
 
     @Override

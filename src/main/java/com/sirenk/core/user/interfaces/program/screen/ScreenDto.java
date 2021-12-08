@@ -1,4 +1,4 @@
-package com.sirenk.core.user.interfaces.screen;
+package com.sirenk.core.user.interfaces.program.screen;
 
 import lombok.Getter;
 import lombok.Setter;

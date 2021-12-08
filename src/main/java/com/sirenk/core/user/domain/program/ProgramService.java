@@ -8,6 +8,8 @@ public interface ProgramService {
 
     ProgramInfo.Basic changeBasicInfo(ProgramCommand.ChangeBasicInfo command);
 
+    ProgramInfo.Basic changeScreen(ProgramCommand.ChangeScreen command);
+
     ProgramInfo.Remove remove(ProgramCommand.Remove command);
 
 }
