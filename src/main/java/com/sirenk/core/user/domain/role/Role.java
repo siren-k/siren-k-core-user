@@ -1,11 +1,13 @@
 package com.sirenk.core.user.domain.role;
 
+import com.sirenk.core.common.exception.InvalidParamException;
 import com.sirenk.core.common.jpa.AbstractEntity;
 import com.sirenk.core.common.util.TokenGenerator;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 
 import javax.persistence.*;
 
@@ -33,7 +35,10 @@ public class Role extends AbstractEntity {
     private boolean enable;
 
     @Builder
-    public Role(String name, String description) {
+    public Role(String name, String description
+    ) {
+        if (StringUtils.isEmpty(name)) throw new InvalidParamException("Role.name");
+
         // 기본 정보
         this.token = TokenGenerator.randomCharacterWithPrefix(PREFIX_ROLE);
         this.name = name;

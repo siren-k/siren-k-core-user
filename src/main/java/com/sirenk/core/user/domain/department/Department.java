@@ -48,14 +48,10 @@ public class Department extends AbstractEntity {
     // 추가 정보
     @Column(name = "department_order")
     private int order;
-    // private User header;
 
     @Builder
-    public Department(
-            String name,
-            String description,
-            Department parent,
-            int order
+    public Department(String name, String description, int order,
+                      Department parent
     ) {
         if (StringUtils.isEmpty(name)) throw new InvalidParamException("Department.name");
 

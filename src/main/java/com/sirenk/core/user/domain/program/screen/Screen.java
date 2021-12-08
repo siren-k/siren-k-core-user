@@ -49,7 +49,8 @@ public class Screen extends AbstractEntity {
     @Builder
     public Screen(
             String name, String description,
-            List<ScreenButton> buttons
+            List<ScreenButton> buttons,
+            Program program
     ) {
         if (StringUtils.isEmpty(name)) throw new InvalidParamException("Screen.name");
 
@@ -61,6 +62,9 @@ public class Screen extends AbstractEntity {
 
         // 버튼 정보
         this.buttons = buttons;
+
+        // 프로그램 정보
+        this.program = program;
     }
 
     public void changeBasicInfo(String name, String description, boolean enable) {

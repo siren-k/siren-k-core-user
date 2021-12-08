@@ -35,7 +35,8 @@ public class Authority extends AbstractEntity {
     private boolean enable;
 
     @Builder
-    public Authority(String name, String description) {
+    public Authority(String name, String description
+    ) {
         if (StringUtils.isEmpty(name)) throw new InvalidParamException("Authority.name");
 
         // 기본 정보

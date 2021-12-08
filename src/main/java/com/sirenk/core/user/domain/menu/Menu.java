@@ -1,12 +1,14 @@
 package com.sirenk.core.user.domain.menu;
 
 import com.google.common.collect.Lists;
+import com.sirenk.core.common.exception.InvalidParamException;
 import com.sirenk.core.common.jpa.AbstractEntity;
 import com.sirenk.core.common.util.TokenGenerator;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 
 import javax.persistence.*;
 import java.util.List;
@@ -44,7 +46,12 @@ public class Menu extends AbstractEntity {
     private final List<Menu> children = Lists.newArrayList();
 
     @Builder
-    public Menu(String name, String description, Menu parent) {
+    public Menu(
+            String name, String description,
+            Menu parent
+    ) {
+        if (StringUtils.isEmpty(name)) throw new InvalidParamException("Menu.name");
+
         // 기본 정보
         this.token = TokenGenerator.randomCharacterWithPrefix(PREFIX_PROGRAM);
         this.name = name;
