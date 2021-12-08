@@ -42,8 +42,10 @@ public class ApiServiceImpl implements ApiService {
         api.changeBasicInfo(
                 command.getName(),
                 command.getDescription(),
-                command.isEnable(),
-                command.getMethod());
+                command.getMethod(),
+                command.getUrl(),
+                command.isEnable()
+        );
         return apiInfoMapper.basic(api);
     }
 

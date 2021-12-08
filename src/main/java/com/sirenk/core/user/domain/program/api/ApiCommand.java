@@ -14,12 +14,14 @@ public class ApiCommand {
         private String name;
         private String description;
         private Api.Method method;
+        private String url;
 
         public Api toEntity() {
             return Api.builder()
                     .name(name)
                     .description(description)
                     .method(method)
+                    .url(url)
                     .build();
         }
     }
@@ -41,6 +43,7 @@ public class ApiCommand {
         private String name;
         private String description;
         private Api.Method method;
+        private String url;
         private boolean enable;
     }
 
