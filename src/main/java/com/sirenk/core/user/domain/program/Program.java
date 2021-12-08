@@ -1,5 +1,6 @@
 package com.sirenk.core.user.domain.program;
 
+import com.sirenk.core.common.exception.InvalidParamException;
 import com.sirenk.core.common.jpa.AbstractEntity;
 import com.sirenk.core.common.util.TokenGenerator;
 import com.sirenk.core.user.domain.program.api.Api;
@@ -8,6 +9,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 
 import javax.persistence.*;
 
@@ -45,12 +47,11 @@ public class Program extends AbstractEntity {
     private Api api;
 
     @Builder
-    public Program(
-            String name,
-            String description,
-            Screen screen,
-            Api api
+    public Program(String name, String description,
+                   Screen screen, Api api
     ) {
+        if (StringUtils.isEmpty(name)) throw new InvalidParamException("Program.name");
+
         // 기본 정보
         this.token = TokenGenerator.randomCharacterWithPrefix(PREFIX_PROGRAM);
         this.name = name;

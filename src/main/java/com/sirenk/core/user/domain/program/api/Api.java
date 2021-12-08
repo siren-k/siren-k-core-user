@@ -55,6 +55,9 @@ public class Api extends AbstractEntity {
         this.description = description;
         this.method = method;
         this.enable = true;
+
+        // 프로그램 정보
+        this.program = program;
     }
 
     public void changeBasicInfo(String name, String description, boolean enable, Method method) {
