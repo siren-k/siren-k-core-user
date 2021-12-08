@@ -57,12 +57,14 @@ public class ProgramFacade {
         return programService.changeBasicInfo(command);
     }
 
+    @Transactional
     public ProgramInfo.Basic changeScreen(ProgramCommand.ChangeScreen command) {
         var screen = screenService.find(programCommandMapper.screen(command));
         var newCommand = command.toBuilder().screen(screen).build();
         return programService.changeScreen(newCommand);
     }
 
+    @Transactional
     public ProgramInfo.Basic changeApi(ProgramCommand.ChangeApi command) {
         var api = apiService.find(programCommandMapper.api(command));
         var newCommand = command.toBuilder().api(api).build();
