@@ -1,5 +1,6 @@
 package com.sirenk.core.user.domain.program;
 
+import com.sirenk.core.user.domain.api.ApiInfo;
 import com.sirenk.core.user.domain.program.screen.ScreenInfo;
 import lombok.Builder;
 import lombok.Getter;
@@ -18,6 +19,8 @@ public class ProgramInfo {
         private boolean enable;
         // 화면 정보
         private ScreenInfo.Basic screen;
+        // API 정보
+        private ApiInfo.Basic api;
     }
 
     @Getter

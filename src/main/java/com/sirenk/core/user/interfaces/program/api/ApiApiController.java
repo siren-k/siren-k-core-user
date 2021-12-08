@@ -1,4 +1,4 @@
-package com.sirenk.core.user.interfaces.api;
+package com.sirenk.core.user.interfaces.program.api;
 
 import com.sirenk.core.common.response.CommonResponse;
 import com.sirenk.core.user.application.api.ApiFacade;

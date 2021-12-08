@@ -49,6 +49,14 @@ public class ProgramApiController {
         return CommonResponse.success(response);
     }
 
+    @PutMapping(value = "{token}/api/{apiToken}")
+    public CommonResponse<ProgramDto.BasicResponse> changeApi(@Valid ProgramDto.ChangeApiRequest request) {
+        var command = programDtoMapper.of(request);
+        var info = programFacade.changeApi(command);
+        var response = programDtoMapper.of(info);
+        return CommonResponse.success(response);
+    }
+
     @DeleteMapping(value = "{token}")
     public CommonResponse<ProgramDto.RemoveResponse> remove(@Valid ProgramDto.RemoveRequest request) {
         var command = programDtoMapper.of(request);

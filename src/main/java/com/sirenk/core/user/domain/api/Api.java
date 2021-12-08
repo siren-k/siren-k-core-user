@@ -3,6 +3,7 @@ package com.sirenk.core.user.domain.api;
 import com.sirenk.core.common.exception.InvalidParamException;
 import com.sirenk.core.common.jpa.AbstractEntity;
 import com.sirenk.core.common.util.TokenGenerator;
+import com.sirenk.core.user.domain.program.Program;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -38,8 +39,14 @@ public class Api extends AbstractEntity {
     @Column(name = "api_enable")
     private boolean enable;
 
+    // 프로그램 정보
+    @OneToOne(mappedBy = "api")
+    private Program program;
+
     @Builder
-    public Api(String name, String description, Method method) {
+    public Api(String name, String description, Method method,
+               Program program
+    ) {
         if (StringUtils.isEmpty(name)) throw new InvalidParamException("Api.name");
 
         // 기본 정보

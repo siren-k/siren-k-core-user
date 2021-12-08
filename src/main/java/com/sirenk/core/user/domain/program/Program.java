@@ -2,6 +2,7 @@ package com.sirenk.core.user.domain.program;
 
 import com.sirenk.core.common.jpa.AbstractEntity;
 import com.sirenk.core.common.util.TokenGenerator;
+import com.sirenk.core.user.domain.api.Api;
 import com.sirenk.core.user.domain.program.screen.Screen;
 import lombok.Builder;
 import lombok.Getter;
@@ -38,11 +39,17 @@ public class Program extends AbstractEntity {
     @JoinColumn(name = "screen_id")
     private Screen screen;
 
+    // API 정보
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "api_id")
+    private Api api;
+
     @Builder
     public Program(
             String name,
             String description,
-            Screen screen
+            Screen screen,
+            Api api
     ) {
         // 기본 정보
         this.token = TokenGenerator.randomCharacterWithPrefix(PREFIX_PROGRAM);
@@ -52,6 +59,9 @@ public class Program extends AbstractEntity {
 
         // 화면 정보
         this.screen = screen;
+
+        // API 정보
+        this.api = api;
     }
 
     public void changeBasicInfo(String name, String description, boolean enable) {
@@ -62,6 +72,10 @@ public class Program extends AbstractEntity {
 
     public void changeScreen(Screen screen) {
         this.screen = screen;
+    }
+
+    public void changeApi(Api api) {
+        this.api = api;
     }
 
 }
