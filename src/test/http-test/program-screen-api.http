@@ -1,4 +1,4 @@
-### 화면1 등록
+### 프로그램에 등록할 화면1 등록
 POST http://{{host-user}}/api/v1/screen
 Content-Type: application/json
 
@@ -8,7 +8,7 @@ Content-Type: application/json
 }
 
 > {%
-client.test("화면1 등록", function() {
+client.test("프로그램에 등록할 화면1 등록", function() {
     client.assert(response.status === 200, "unexpected http status: " + response.status);
     client.assert(response.body.data.name === "화면1", "unexpected data.name: " + response.body.data.name);
     client.assert(response.body.data.description === "화면1 설명", "unexpected data.description: " + response.body.data.description);
@@ -40,7 +40,7 @@ client.test("프로그램 등록", function() {
 client.global.set("program_token", response.body.data.token)
  %}
 
-### 화면2 등록
+### 프로그램에 등록할 화면2 등록
 POST http://{{host-user}}/api/v1/screen
 Content-Type: application/json
 
@@ -50,7 +50,7 @@ Content-Type: application/json
 }
 
 > {%
-client.test("화면2 등록", function() {
+client.test("프로그램에 등록할 화면2 등록", function() {
     client.assert(response.status === 200, "unexpected http status: " + response.status);
     client.assert(response.body.data.name === "화면2", "unexpected data.name: " + response.body.data.name);
     client.assert(response.body.data.description === "화면2 설명", "unexpected data.description: " + response.body.data.description);
@@ -59,12 +59,12 @@ client.test("화면2 등록", function() {
 client.global.set("screen_token_2", response.body.data.token)
 %}
 
-### 프로그램의 화면 변경
+### 프로그램의 화면1을 화면2로 변경
 PUT http://{{host-user}}/api/v1/program/{{program_token}}/screen/{{screen_token_2}}
 Content-Type: application/json
 
 > {%
-client.test("프로그램의 화면 변경", function() {
+client.test("프로그램의 화면1을 화면2로 변경", function() {
     client.assert(response.status === 200, "unexpected http status: " + response.status);
     client.assert(response.body.data.name === "프로그램", "unexpected data.name: " + response.body.data.name);
     client.assert(response.body.data.description === "프로그램 설명", "unexpected data.description: " + response.body.data.description);
