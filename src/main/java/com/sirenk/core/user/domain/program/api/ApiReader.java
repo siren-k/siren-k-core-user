@@ -1,4 +1,4 @@
-package com.sirenk.core.user.domain.api;
+package com.sirenk.core.user.domain.program.api;
 
 public interface ApiReader {
 

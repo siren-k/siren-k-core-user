@@ -1,4 +1,4 @@
-package com.sirenk.core.user.infrastructure.screen;
+package com.sirenk.core.user.infrastructure.program.screen;
 
 import com.sirenk.core.common.exception.EntityNotFoundException;
 import com.sirenk.core.user.domain.program.screen.Screen;

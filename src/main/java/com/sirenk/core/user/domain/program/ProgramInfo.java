@@ -1,6 +1,6 @@
 package com.sirenk.core.user.domain.program;
 
-import com.sirenk.core.user.domain.api.ApiInfo;
+import com.sirenk.core.user.domain.program.api.ApiInfo;
 import com.sirenk.core.user.domain.program.screen.ScreenInfo;
 import lombok.Builder;
 import lombok.Getter;

@@ -1,8 +1,8 @@
 package com.sirenk.core.user.application.api;
 
-import com.sirenk.core.user.domain.api.ApiCommand;
-import com.sirenk.core.user.domain.api.ApiInfo;
-import com.sirenk.core.user.domain.api.ApiService;
+import com.sirenk.core.user.domain.program.api.ApiCommand;
+import com.sirenk.core.user.domain.program.api.ApiInfo;
+import com.sirenk.core.user.domain.program.api.ApiService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

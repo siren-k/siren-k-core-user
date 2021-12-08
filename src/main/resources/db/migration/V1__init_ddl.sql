@@ -176,7 +176,7 @@ create
 create
     index api_idx03 on api (updated_at);
 
--- api
+-- screen
 drop table if exists screen;
 create table screen
 (
@@ -199,5 +199,38 @@ create
 
 create
     index screen_idx03 on screen (updated_at);
+
+-- screen button
+drop table if exists screen_button;
+create table screen_button
+(
+    -- 기본 정보
+    screen_button_id          bigint auto_increment primary key comment '화면버튼의 식별자',
+    screen_button_token       varchar(255)  not null comment '화면버튼을 구분하기 위한 대체키',
+    screen_button_name        varchar(255)  not null comment '화면버튼의 이름',
+    screen_button_description varchar(1024) comment '화면버튼의 설명',
+    screen_button_method      varchar(255)  not null comment '화면버튼 URL의 HTTP 메소드',
+    screen_button_url         varchar(4096) not null comment '화면버튼의 URL',
+    screen_button_enable      boolean default true comment '화면버튼의 사용 여부',
+
+    -- 화면 정보
+    screen_id                 bigint        not null comment '화면버튼이 속한 화면의 식별자',
+
+    created_at                datetime(6)   not null comment '화면버튼의 정보 생성 일시',
+    updated_at                datetime(6)   null comment '화면버튼의 정보 수정 일시'
+) comment '화면' charset = utf8mb4;
+
+alter table screen_button
+    add constraint fk_screen_button_01
+        foreign key (screen_id)
+            references screen (screen_id)
+            on update cascade
+            on delete cascade;
+
+create
+    index screen_button_idx01 on screen_button (created_at);
+
+create
+    index screen_button_idx03 on screen_button (updated_at);
 
 set foreign_key_checks = 1; -- 외래키 체크 설정

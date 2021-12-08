@@ -1,4 +1,4 @@
-package com.sirenk.core.user.domain.api;
+package com.sirenk.core.user.domain.program.api;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

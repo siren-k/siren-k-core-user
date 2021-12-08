@@ -1,5 +1,7 @@
 package com.sirenk.core.user.domain.program.screen;
 
+import com.sirenk.core.user.domain.program.screen.button.ScreenButtonInfoMapper;
+import com.sirenk.core.user.domain.program.screen.button.ScreenButtonStorer;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -13,13 +15,17 @@ public class ScreenServiceImpl implements ScreenService {
     private final ScreenStorer screenStorer;
     private final ScreenReader screenReader;
     private final ScreenInfoMapper screenInfoMapper;
+    private final ScreenButtonStorer screenButtonStorer;
+    private final ScreenButtonInfoMapper screenButtonInfoMapper;
 
     @Override
     @Transactional
     public ScreenInfo.Basic register(ScreenCommand.Register command) {
         var initApi = command.toEntity();
         var screen = screenStorer.store(initApi);
-        return screenInfoMapper.basic(screen);
+        var screenButtons = screenButtonStorer.store(screen, command.getButtons());
+        var info = screenInfoMapper.basic(screen);
+        return info.toBuilder().buttons(screenButtonInfoMapper.basic(screenButtons)).build();
     }
 
     @Override
@@ -40,7 +46,18 @@ public class ScreenServiceImpl implements ScreenService {
     public ScreenInfo.Basic changeBasicInfo(ScreenCommand.ChangeBasicInfo command) {
         var screen = screenReader.read(command.getToken());
         screen.changeBasicInfo(command.getName(), command.getDescription(), command.isEnable());
-        return screenInfoMapper.basic(screen);
+        var screenButtons = screenButtonStorer.store(command.getButtons());
+        var info = screenInfoMapper.basic(screen);
+        return info.toBuilder().buttons(screenButtonInfoMapper.basic(screenButtons)).build();
+    }
+
+    @Override
+    @Transactional
+    public ScreenInfo.Basic addScreenButton(ScreenCommand.AddScreenButton command) {
+        var screen = screenReader.read(command.getToken());
+        screenButtonStorer.store(screen, command.getButtons());
+        var info = screenInfoMapper.basic(screen);
+        return info.toBuilder().buttons(screenButtonInfoMapper.basic(screen.getButtons())).build();
     }
 
     @Override

@@ -1,4 +1,4 @@
-package com.sirenk.core.user.infrastructure.screen;
+package com.sirenk.core.user.infrastructure.program.screen;
 
 import com.sirenk.core.user.domain.program.screen.Screen;
 import org.springframework.data.jpa.repository.JpaRepository;

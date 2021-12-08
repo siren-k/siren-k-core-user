@@ -1,8 +1,8 @@
 package com.sirenk.core.user.application.program;
 
-import com.sirenk.core.user.domain.api.Api;
-import com.sirenk.core.user.domain.api.ApiCommand;
-import com.sirenk.core.user.domain.api.ApiService;
+import com.sirenk.core.user.domain.program.api.Api;
+import com.sirenk.core.user.domain.program.api.ApiCommand;
+import com.sirenk.core.user.domain.program.api.ApiService;
 import com.sirenk.core.user.domain.program.ProgramCommand;
 import com.sirenk.core.user.domain.program.ProgramInfo;
 import com.sirenk.core.user.domain.program.ProgramService;

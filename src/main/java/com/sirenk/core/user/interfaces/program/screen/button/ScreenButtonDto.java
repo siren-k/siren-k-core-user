@@ -1,13 +1,13 @@
-package com.sirenk.core.user.interfaces.program.api;
+package com.sirenk.core.user.interfaces.program.screen.button;
 
-import com.sirenk.core.user.domain.program.api.Api;
+import com.sirenk.core.user.domain.program.screen.button.ScreenButton;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
 import javax.validation.constraints.NotNull;
 
-public class ApiDto {
+public class ScreenButtonDto {
 
     @Getter
     @Setter
@@ -18,16 +18,9 @@ public class ApiDto {
         private String name;
         private String description;
         @NotNull(message = "method: 필수값입니다")
-        private Api.Method method;
-    }
-
-    @Getter
-    @Setter
-    @ToString
-    public static class RetrieveRequest {
-        // 기본 정보
-        @NotNull(message = "token: 필수값입니다")
-        private String token;
+        private ScreenButton.Method method;
+        @NotNull(message = "url: 필수값입니다")
+        private String url;
     }
 
     @Getter
@@ -39,27 +32,18 @@ public class ApiDto {
         private String token;
         @NotNull(message = "name: 필수값입니다")
         private String name;
-        @NotNull(message = "method: 필수값입니다")
-        private Api.Method method;
         private String description;
+        @NotNull(message = "method: 필수값입니다")
+        private ScreenButton.Method method;
+        @NotNull(message = "url: 필수값입니다")
+        private String url;
         @NotNull(message = "enable: 필수값입니다")
         private boolean enable;
     }
 
-    @Getter
-    @Setter
-    @ToString
-    public static class RemoveRequest {
-        // 기본 정보
-        @NotNull(message = "token: 필수값입니다")
-        private String token;
-    }
-
     public record BasicResponse(String token, String name, String description,
-                                Api.Method method, boolean enable) {
-    }
-
-    public record RemoveResponse(String token) {
+                                ScreenButton.Method method, String url,
+                                boolean enable) {
     }
 
 }

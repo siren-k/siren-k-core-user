@@ -10,6 +10,8 @@ public interface ScreenService {
 
     ScreenInfo.Basic changeBasicInfo(ScreenCommand.ChangeBasicInfo command);
 
+    ScreenInfo.Basic addScreenButton(ScreenCommand.AddScreenButton command);
+
     ScreenInfo.Remove remove(ScreenCommand.Remove command);
 
 }
