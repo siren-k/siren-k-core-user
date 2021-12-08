@@ -1,17 +1,18 @@
 package com.sirenk.core.user.application.program;
 
-import com.sirenk.core.user.domain.program.api.Api;
-import com.sirenk.core.user.domain.program.api.ApiCommand;
-import com.sirenk.core.user.domain.program.api.ApiService;
 import com.sirenk.core.user.domain.program.ProgramCommand;
 import com.sirenk.core.user.domain.program.ProgramInfo;
 import com.sirenk.core.user.domain.program.ProgramService;
+import com.sirenk.core.user.domain.program.api.Api;
+import com.sirenk.core.user.domain.program.api.ApiCommand;
+import com.sirenk.core.user.domain.program.api.ApiService;
 import com.sirenk.core.user.domain.program.screen.Screen;
 import com.sirenk.core.user.domain.program.screen.ScreenCommand;
 import com.sirenk.core.user.domain.program.screen.ScreenService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
 @Service
@@ -23,6 +24,7 @@ public class ProgramFacade {
     private final ApiService apiService;
     private final ProgramCommandMapper programCommandMapper;
 
+    @Transactional
     public ProgramInfo.Basic register(ProgramCommand.Register command) {
         var screen = findScreen(programCommandMapper.screen(command));
         var api = findApi(programCommandMapper.api(command));

@@ -26,6 +26,9 @@ public class ScreenButtonStorerImpl implements ScreenButtonStorer {
 
     @Override
     public List<ScreenButton> store(Screen screen, List<ScreenButtonCommand.Register> commands) {
+        if (commands == null || commands.size() == 0) {
+            return Lists.newArrayList();
+        }
         return commands.stream()
                 .map(command -> {
                     var initScreenButton =

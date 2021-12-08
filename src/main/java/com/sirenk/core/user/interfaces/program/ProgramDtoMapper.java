@@ -29,10 +29,6 @@ public interface ProgramDtoMapper {
 
     ProgramCommand.Remove of(ProgramDto.RemoveRequest request);
 
-//    @Mappings({
-//            @Mapping(source = "info.screen", target = "screen"),
-//            @Mapping(source = "info.screen.buttons", target = "screen.buttons")
-//    })
     ProgramDto.BasicResponse of(ProgramInfo.Basic info);
 
     ProgramDto.RemoveResponse of(ProgramInfo.Remove info);
