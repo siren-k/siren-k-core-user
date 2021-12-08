@@ -41,6 +41,14 @@ public class ProgramApiController {
         return CommonResponse.success(response);
     }
 
+    @PutMapping(value = "{token}/screen/{screenToken}")
+    public CommonResponse<ProgramDto.BasicResponse> changeScreen(@Valid ProgramDto.ChangeScreenRequest request) {
+        var command = programDtoMapper.of(request);
+        var info = programFacade.changeScreen(command);
+        var response = programDtoMapper.of(info);
+        return CommonResponse.success(response);
+    }
+
     @DeleteMapping(value = "{token}")
     public CommonResponse<ProgramDto.RemoveResponse> remove(@Valid ProgramDto.RemoveRequest request) {
         var command = programDtoMapper.of(request);

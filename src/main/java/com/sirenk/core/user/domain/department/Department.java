@@ -33,12 +33,12 @@ public class Department extends AbstractEntity {
     private String name;
     @Column(name = "department_description")
     private String description;
+    @Column(name = "department_path", length = 2048)
+    private String path;
     @Column(name = "department_enable")
     private boolean enable;
 
     // 상위 부서 정보
-    @Column(name = "department_path", length = 2048)
-    private String path;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "department_parent_id")
     private Department parent;

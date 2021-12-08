@@ -1,6 +1,6 @@
 package com.sirenk.core.user.infrastructure.screen;
 
-import com.sirenk.core.user.domain.screen.Screen;
+import com.sirenk.core.user.domain.program.screen.Screen;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

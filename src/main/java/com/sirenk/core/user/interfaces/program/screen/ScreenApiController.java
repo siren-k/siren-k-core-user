@@ -1,8 +1,7 @@
-package com.sirenk.core.user.interfaces.screen;
+package com.sirenk.core.user.interfaces.program.screen;
 
 import com.sirenk.core.common.response.CommonResponse;
-import com.sirenk.core.user.application.api.ApiFacade;
-import com.sirenk.core.user.application.screen.ScreenFacade;
+import com.sirenk.core.user.application.program.screen.ScreenFacade;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;

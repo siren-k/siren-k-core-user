@@ -1,5 +1,6 @@
 package com.sirenk.core.user.domain.program;
 
+import com.sirenk.core.user.domain.program.screen.Screen;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;
@@ -13,11 +14,15 @@ public class ProgramCommand {
         // 기본 정보
         private String name;
         private String description;
+        // 화면 정보
+        private String screenToken;
+        private Screen screen;
 
         public Program toEntity() {
             return Program.builder()
                     .name(name)
                     .description(description)
+                    .screen(screen)
                     .build();
         }
     }
@@ -39,6 +44,17 @@ public class ProgramCommand {
         private String name;
         private String description;
         private boolean enable;
+    }
+
+    @Getter
+    @Builder(toBuilder = true)
+    @ToString
+    public static class ChangeScreen {
+        // 기본 정보
+        private String token;
+        // 화면 정보
+        private String screenToken;
+        private Screen screen;
     }
 
     @Getter

@@ -1,8 +1,8 @@
-package com.sirenk.core.user.application.screen;
+package com.sirenk.core.user.application.program.screen;
 
-import com.sirenk.core.user.domain.screen.ScreenCommand;
-import com.sirenk.core.user.domain.screen.ScreenInfo;
-import com.sirenk.core.user.domain.screen.ScreenService;
+import com.sirenk.core.user.domain.program.screen.ScreenCommand;
+import com.sirenk.core.user.domain.program.screen.ScreenInfo;
+import com.sirenk.core.user.domain.program.screen.ScreenService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

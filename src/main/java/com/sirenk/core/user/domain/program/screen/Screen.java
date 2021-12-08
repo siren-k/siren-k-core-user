@@ -1,8 +1,9 @@
-package com.sirenk.core.user.domain.screen;
+package com.sirenk.core.user.domain.program.screen;
 
 import com.sirenk.core.common.exception.InvalidParamException;
 import com.sirenk.core.common.jpa.AbstractEntity;
 import com.sirenk.core.common.util.TokenGenerator;
+import com.sirenk.core.user.domain.program.Program;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -33,6 +34,10 @@ public class Screen extends AbstractEntity {
     private String description;
     @Column(name = "screen_enable")
     private boolean enable;
+
+    // 프로그램 정보
+    @OneToOne(mappedBy = "screen")
+    private Program program;
 
     @Builder
     public Screen(String name, String description) {

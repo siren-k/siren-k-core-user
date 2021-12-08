@@ -1,4 +1,4 @@
-package com.sirenk.core.user.domain.screen;
+package com.sirenk.core.user.domain.program.screen;
 
 import lombok.Builder;
 import lombok.Getter;
