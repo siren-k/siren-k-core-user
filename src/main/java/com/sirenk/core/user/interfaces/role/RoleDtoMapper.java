@@ -4,6 +4,7 @@ import com.sirenk.core.user.domain.role.RoleCommand;
 import com.sirenk.core.user.domain.role.RoleInfo;
 import org.mapstruct.InjectionStrategy;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;
 
 @Mapper(
@@ -20,6 +21,12 @@ public interface RoleDtoMapper {
     RoleCommand.ChangeBasicInfo of(RoleDto.ChangeBasicInfoRequest request);
 
     RoleCommand.Remove of(RoleDto.RemoveRequest request);
+
+    @Mapping(target = "authority", ignore = true)
+    RoleCommand.AttachAuthority of(RoleDto.AttachAuthorityRequest request);
+
+    @Mapping(target = "authority", ignore = true)
+    RoleCommand.DetachAuthority of(RoleDto.DetachAuthorityRequest request);
 
     RoleDto.RoleBasicResponse of(RoleInfo.RoleBasic info);
 

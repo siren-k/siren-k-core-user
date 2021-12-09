@@ -59,7 +59,7 @@ public class AuthorityDto {
     @Getter
     @Setter
     @ToString
-    public static class DeattachProgramRequest {
+    public static class DetachProgramRequest {
         // 기본 정보
         @NotNull(message = "token: 필수값입니다")
         private String token;

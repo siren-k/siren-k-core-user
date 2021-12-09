@@ -38,10 +38,28 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
+    @Transactional
     public RoleInfo.RoleRemove remove(RoleCommand.Remove command) {
         var role = roleReader.read(command.getToken());
         roleStorer.remove(role);
         return roleInfoMapper.remove(role);
     }
+
+    @Override
+    @Transactional
+    public RoleInfo.RoleBasic attachAuthority(RoleCommand.AttachAuthority command) {
+        var role = roleReader.read(command.getToken());
+        role.attachAuthority(command.getAuthority());
+        return roleInfoMapper.basic(role);
+    }
+
+    @Override
+    @Transactional
+    public RoleInfo.RoleBasic detachAuthority(RoleCommand.DetachAuthority command) {
+        var role = roleReader.read(command.getToken());
+        role.detachAuthority(command.getAuthority());
+        return roleInfoMapper.basic(role);
+    }
+
 
 }

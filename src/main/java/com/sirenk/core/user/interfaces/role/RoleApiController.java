@@ -41,6 +41,22 @@ public class RoleApiController {
         return CommonResponse.success(response);
     }
 
+    @PutMapping(value = "{token}/authority/{authorityToken}")
+    public CommonResponse<RoleDto.RoleBasicResponse> attachAuthority(@Valid RoleDto.AttachAuthorityRequest request) {
+        var command = roleDtoMapper.of(request);
+        var info = roleFacade.attachAuthority(command);
+        var response = roleDtoMapper.of(info);
+        return CommonResponse.success(response);
+    }
+
+    @DeleteMapping(value = "{token}/authority/{authorityToken}")
+    public CommonResponse<RoleDto.RoleBasicResponse> detachAuthority(@Valid RoleDto.DetachAuthorityRequest request) {
+        var command = roleDtoMapper.of(request);
+        var info = roleFacade.detachAuthority(command);
+        var response = roleDtoMapper.of(info);
+        return CommonResponse.success(response);
+    }
+
     @DeleteMapping(value = "{token}")
     public CommonResponse<RoleDto.RoleRemoveResponse> remove(@Valid RoleDto.RemoveRequest request) {
         var command = roleDtoMapper.of(request);

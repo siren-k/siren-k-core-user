@@ -25,7 +25,7 @@ public class AuthorityServiceImpl implements AuthorityService {
     @Override
     @Transactional(readOnly = true)
     public Authority find(AuthorityCommand.Retrieve command) {
-        return null;
+        return authorityReader.read(command.getToken());
     }
 
     @Override
@@ -60,7 +60,7 @@ public class AuthorityServiceImpl implements AuthorityService {
     }
 
     @Override
-    public AuthorityInfo.AuthorityBasic detachProgram(AuthorityCommand.DeattachProgram command) {
+    public AuthorityInfo.AuthorityBasic detachProgram(AuthorityCommand.DetachProgram command) {
         var authority = authorityReader.read(command.getToken());
         authority.detachProgram(command.getProgram());
         return authorityInfoMapper.basic(authority);

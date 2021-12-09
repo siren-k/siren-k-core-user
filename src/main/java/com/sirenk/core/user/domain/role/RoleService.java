@@ -10,4 +10,8 @@ public interface RoleService {
 
     RoleInfo.RoleRemove remove(RoleCommand.Remove command);
 
+    RoleInfo.RoleBasic attachAuthority(RoleCommand.AttachAuthority command);
+
+    RoleInfo.RoleBasic detachAuthority(RoleCommand.DetachAuthority command);
+
 }
