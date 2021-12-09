@@ -41,9 +41,9 @@ public class ScreenButtonDto {
         private boolean enable;
     }
 
-    public record BasicResponse(String token, String name, String description,
-                                ScreenButton.Method method, String url,
-                                boolean enable) {
+    public record ScreenButtonBasicResponse(String token, String name, String description,
+                                            ScreenButton.Method method, String url,
+                                            boolean enable) {
     }
 
 }

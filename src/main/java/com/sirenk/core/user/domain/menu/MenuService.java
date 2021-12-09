@@ -4,16 +4,16 @@ import java.util.List;
 
 public interface MenuService {
 
-    MenuInfo.BasicParent register(MenuCommand.Register command);
+    MenuInfo.MenuBasicParent register(MenuCommand.Register command);
 
     Menu find(MenuCommand.Retrieve command);
 
-    List<MenuInfo.BasicChildren> retrieve();
+    List<MenuInfo.MenuBasicChildren> retrieve();
 
-    MenuInfo.BasicParent changeBasicInfo(MenuCommand.ChangeBasicInfo command);
+    MenuInfo.MenuBasicParent changeBasicInfo(MenuCommand.ChangeBasicInfo command);
 
-    MenuInfo.BasicParent move(MenuCommand.Move command);
+    MenuInfo.MenuBasicParent move(MenuCommand.Move command);
 
-    MenuInfo.Remove remove(MenuCommand.Remove command);
+    MenuInfo.MenuRemove remove(MenuCommand.Remove command);
 
 }

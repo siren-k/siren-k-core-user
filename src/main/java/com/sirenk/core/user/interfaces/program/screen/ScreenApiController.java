@@ -18,7 +18,7 @@ public class ScreenApiController {
     private final ScreenDtoMapper screenDtoMapper;
 
     @PostMapping(value = "")
-    public CommonResponse<ScreenDto.BasicResponse> register(@RequestBody @Valid ScreenDto.RegisterRequest request) {
+    public CommonResponse<ScreenDto.ScreenBasicResponse> register(@RequestBody @Valid ScreenDto.RegisterRequest request) {
         var command = screenDtoMapper.of(request);
         var info = screenFacade.register(command);
         var response = screenDtoMapper.of(info);
@@ -26,7 +26,7 @@ public class ScreenApiController {
     }
 
     @GetMapping(value = "{token}")
-    public CommonResponse<ScreenDto.BasicResponse> retrieve(@Valid ScreenDto.RetrieveRequest request) {
+    public CommonResponse<ScreenDto.ScreenBasicResponse> retrieve(@Valid ScreenDto.RetrieveRequest request) {
         var command = screenDtoMapper.of(request);
         var info = screenFacade.retrieve(command);
         var response = screenDtoMapper.of(info);
@@ -34,7 +34,7 @@ public class ScreenApiController {
     }
 
     @PutMapping(value = "{token}")
-    public CommonResponse<ScreenDto.BasicResponse> changeBasicInfo(@RequestBody @Valid ScreenDto.ChangeBasicInfoRequest request) {
+    public CommonResponse<ScreenDto.ScreenBasicResponse> changeBasicInfo(@RequestBody @Valid ScreenDto.ChangeBasicInfoRequest request) {
         var command = screenDtoMapper.of(request);
         var info = screenFacade.changeBasicInfo(command);
         var response = screenDtoMapper.of(info);
@@ -42,7 +42,7 @@ public class ScreenApiController {
     }
 
     @PutMapping(value = "{token}/button")
-    public CommonResponse<ScreenDto.BasicResponse> addScreenButton(@RequestBody @Valid ScreenDto.AddScreenButtonRequest request) {
+    public CommonResponse<ScreenDto.ScreenBasicResponse> addScreenButton(@RequestBody @Valid ScreenDto.AddScreenButtonRequest request) {
         var command = screenDtoMapper.of(request);
         var info = screenFacade.addScreenButton(command);
         var response = screenDtoMapper.of(info);
@@ -50,7 +50,7 @@ public class ScreenApiController {
     }
 
     @DeleteMapping(value = "{token}")
-    public CommonResponse<ScreenDto.RemoveResponse> remove(@Valid ScreenDto.RemoveRequest request) {
+    public CommonResponse<ScreenDto.ScreenRemoveResponse> remove(@Valid ScreenDto.RemoveRequest request) {
         var command = screenDtoMapper.of(request);
         var info = screenFacade.remove(command);
         var response = screenDtoMapper.of(info);

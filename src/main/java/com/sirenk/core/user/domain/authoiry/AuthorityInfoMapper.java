@@ -11,8 +11,8 @@ import org.mapstruct.ReportingPolicy;
 )
 public interface AuthorityInfoMapper {
 
-    AuthorityInfo.Basic basic(Authority authority);
+    AuthorityInfo.AuthorityBasic basic(Authority authority);
 
-    AuthorityInfo.Remove remove(Authority authority);
+    AuthorityInfo.AuthorityRemove remove(Authority authority);
 
 }

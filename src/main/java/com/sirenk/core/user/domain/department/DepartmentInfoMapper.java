@@ -13,16 +13,16 @@ import org.mapstruct.ReportingPolicy;
 public interface DepartmentInfoMapper {
 
     @Mapping(target = "parent", ignore = true)
-    DepartmentInfo.BasicParent of(Department department);
+    DepartmentInfo.DepartmentBasicParent of(Department department);
 
-    DepartmentInfo.BasicChildren retrieve(Department department);
-
-    @Mapping(target = "parent", ignore = true)
-    DepartmentInfo.BasicParent changeBasicInfo(Department department);
+    DepartmentInfo.DepartmentBasicChildren retrieve(Department department);
 
     @Mapping(target = "parent", ignore = true)
-    DepartmentInfo.BasicParent move(Department department);
+    DepartmentInfo.DepartmentBasicParent changeBasicInfo(Department department);
 
-    DepartmentInfo.Remove remove(Department department);
+    @Mapping(target = "parent", ignore = true)
+    DepartmentInfo.DepartmentBasicParent move(Department department);
+
+    DepartmentInfo.DepartmentRemove remove(Department department);
 
 }

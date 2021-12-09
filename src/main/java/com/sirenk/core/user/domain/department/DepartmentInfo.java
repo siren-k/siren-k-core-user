@@ -11,7 +11,7 @@ public class DepartmentInfo {
     @Getter
     @Builder(toBuilder = true)
     @ToString
-    public static class BasicParent {
+    public static class DepartmentBasicParent {
         // 기본 정보
         private String token;
         private String name;
@@ -19,7 +19,7 @@ public class DepartmentInfo {
         private boolean enable;
         private String path;
         // 상위 부서 정보
-        private BasicParent parent;
+        private DepartmentBasicParent parent;
         // 기타 정보
         private int order;
     }
@@ -27,7 +27,7 @@ public class DepartmentInfo {
     @Getter
     @Builder(toBuilder = true)
     @ToString
-    public static class BasicChildren {
+    public static class DepartmentBasicChildren {
         // 기본 정보
         private String token;
         private String name;
@@ -35,7 +35,7 @@ public class DepartmentInfo {
         private boolean enable;
         private String path;
         // 하위 부서 정보
-        private List<BasicChildren> children;
+        private List<DepartmentBasicChildren> children;
         // 기타 정보
         private int order;
     }
@@ -43,7 +43,7 @@ public class DepartmentInfo {
     @Getter
     @Builder
     @ToString
-    public static class Remove {
+    public static class DepartmentRemove {
         // 기본 정보
         private String token;
     }

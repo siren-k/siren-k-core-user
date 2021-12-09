@@ -12,20 +12,20 @@ public class ScreenInfo {
     @Getter
     @Builder(toBuilder = true)
     @ToString
-    public static class Basic {
+    public static class ScreenBasic {
         // 기본 정보
         private String token;
         private String name;
         private String description;
         private boolean enable;
         // 버튼 정보
-        private List<ScreenButtonInfo.Basic> buttons;
+        private List<ScreenButtonInfo.ScreenButtonBasic> buttons;
     }
 
     @Getter
     @Builder
     @ToString
-    public static class Remove {
+    public static class ScreenRemove {
         // 기본 정보
         private String token;
     }

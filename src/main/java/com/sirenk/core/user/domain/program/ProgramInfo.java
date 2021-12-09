@@ -11,22 +11,22 @@ public class ProgramInfo {
     @Getter
     @Builder
     @ToString
-    public static class Basic {
+    public static class ProgramBasic {
         // 기본 정보
         private String token;
         private String name;
         private String description;
         private boolean enable;
         // 화면 정보
-        private ScreenInfo.Basic screen;
+        private ScreenInfo.ScreenBasic screen;
         // API 정보
-        private ApiInfo.Basic api;
+        private ApiInfo.ApiBasic api;
     }
 
     @Getter
     @Builder
     @ToString
-    public static class Remove {
+    public static class ProgramRemove {
         // 기본 정보
         private String token;
     }

@@ -1,4 +1,4 @@
-package com.sirenk.core.user.application.api;
+package com.sirenk.core.user.application.program.api;
 
 import com.sirenk.core.user.domain.program.api.ApiCommand;
 import com.sirenk.core.user.domain.program.api.ApiInfo;
@@ -14,19 +14,19 @@ public class ApiFacade {
 
     private final ApiService apiService;
 
-    public ApiInfo.Basic register(ApiCommand.Register command) {
+    public ApiInfo.ApiBasic register(ApiCommand.Register command) {
         return apiService.register(command);
     }
 
-    public ApiInfo.Basic retrieve(ApiCommand.Retrieve command) {
+    public ApiInfo.ApiBasic retrieve(ApiCommand.Retrieve command) {
         return apiService.retrieve(command);
     }
 
-    public ApiInfo.Basic changeBasicInfo(ApiCommand.ChangeBasicInfo command) {
+    public ApiInfo.ApiBasic changeBasicInfo(ApiCommand.ChangeBasicInfo command) {
         return apiService.changeBasicInfo(command);
     }
 
-    public ApiInfo.Remove remove(ApiCommand.Remove command) {
+    public ApiInfo.ApiRemove remove(ApiCommand.Remove command) {
         return apiService.remove(command);
     }
 

@@ -4,6 +4,7 @@ import com.sirenk.core.user.domain.authoiry.AuthorityCommand;
 import com.sirenk.core.user.domain.authoiry.AuthorityInfo;
 import org.mapstruct.InjectionStrategy;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;
 
 @Mapper(
@@ -21,8 +22,14 @@ public interface AuthorityDtoMapper {
 
     AuthorityCommand.Remove of(AuthorityDto.RemoveRequest request);
 
-    AuthorityDto.BasicResponse of(AuthorityInfo.Basic info);
+    @Mapping(target = "program", ignore = true)
+    AuthorityCommand.AttachProgram of(AuthorityDto.AttachProgramRequest request);
 
-    AuthorityDto.RemoveResponse of(AuthorityInfo.Remove info);
+    @Mapping(target = "program", ignore = true)
+    AuthorityCommand.DeattachProgram of(AuthorityDto.DeattachProgramRequest request);
+
+    AuthorityDto.AuthorityBasicResponse of(AuthorityInfo.AuthorityBasic info);
+
+    AuthorityDto.AuthorityRemoveResponse of(AuthorityInfo.AuthorityRemove info);
 
 }

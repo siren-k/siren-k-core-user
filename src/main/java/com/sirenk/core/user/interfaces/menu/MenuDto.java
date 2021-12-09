@@ -57,15 +57,15 @@ public class MenuDto {
         private String token;
     }
 
-    public record BasicParentResponse(String token, String name, String description,
-                                      String path, boolean enable,
-                                      MenuDto.BasicParentResponse parent) {
+    public record MenuBasicParentResponse(String token, String name, String description,
+                                          String path, boolean enable,
+                                          MenuBasicParentResponse parent) {
     }
 
     @Getter
     @Builder
     @ToString
-    public static class BasicChildrenResponse {
+    public static class MenuBasicChildrenResponse {
         // 기본 정보
         private final String token;
         private final String name;
@@ -73,10 +73,10 @@ public class MenuDto {
         private final boolean enable;
         // 하위 메뉴 정보
         private final String path;
-        private List<BasicChildrenResponse> children;
+        private List<MenuBasicChildrenResponse> children;
     }
 
-    public record RemoveResponse(String token) {
+    public record MenuRemoveResponse(String token) {
     }
 
 }

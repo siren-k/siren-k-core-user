@@ -29,8 +29,8 @@ public interface ProgramDtoMapper {
 
     ProgramCommand.Remove of(ProgramDto.RemoveRequest request);
 
-    ProgramDto.BasicResponse of(ProgramInfo.Basic info);
+    ProgramDto.ProgramBasicResponse of(ProgramInfo.ProgramBasic info);
 
-    ProgramDto.RemoveResponse of(ProgramInfo.Remove info);
+    ProgramDto.ProgramRemoveResponse of(ProgramInfo.ProgramRemove info);
 
 }

@@ -19,7 +19,7 @@ public class MenuApiController {
     private final MenuDtoMapper menuDtoMapper;
 
     @PostMapping(value = "")
-    public CommonResponse<MenuDto.BasicParentResponse> register(@RequestBody @Valid MenuDto.RegisterRequest request) {
+    public CommonResponse<MenuDto.MenuBasicParentResponse> register(@RequestBody @Valid MenuDto.RegisterRequest request) {
         var command = menuDtoMapper.of(request);
         var info = menuFacade.register(command);
         var response = menuDtoMapper.of(info);
@@ -27,14 +27,14 @@ public class MenuApiController {
     }
 
     @GetMapping(value = "")
-    public CommonResponse<List<MenuDto.BasicChildrenResponse>> retrieve() {
+    public CommonResponse<List<MenuDto.MenuBasicChildrenResponse>> retrieve() {
         var info = menuFacade.retrieve();
         var response = menuDtoMapper.of(info);
         return CommonResponse.success(response);
     }
 
     @PutMapping(value = "{token}")
-    public CommonResponse<MenuDto.BasicParentResponse> changeBasicInfo(@RequestBody @Valid MenuDto.ChangeBasicInfoRequest request) {
+    public CommonResponse<MenuDto.MenuBasicParentResponse> changeBasicInfo(@RequestBody @Valid MenuDto.ChangeBasicInfoRequest request) {
         var command = menuDtoMapper.of(request);
         var info = menuFacade.changeBasicInfo(command);
         var response = menuDtoMapper.of(info);
@@ -42,7 +42,7 @@ public class MenuApiController {
     }
 
     @PutMapping(value = "{token}/move/{parentToken}")
-    public CommonResponse<MenuDto.BasicParentResponse> move(@Valid MenuDto.MoveRequest request) {
+    public CommonResponse<MenuDto.MenuBasicParentResponse> move(@Valid MenuDto.MoveRequest request) {
         var command = menuDtoMapper.of(request);
         var info = menuFacade.move(command);
         var response = menuDtoMapper.of(info);
@@ -50,7 +50,7 @@ public class MenuApiController {
     }
 
     @DeleteMapping(value = "{token}")
-    public CommonResponse<MenuDto.RemoveResponse> remove(MenuDto.RemoveRequest request) {
+    public CommonResponse<MenuDto.MenuRemoveResponse> remove(MenuDto.RemoveRequest request) {
         var command = menuDtoMapper.of(request);
         var info = menuFacade.remove(command);
         var response = menuDtoMapper.of(info);

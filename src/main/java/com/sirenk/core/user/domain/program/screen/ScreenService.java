@@ -2,16 +2,16 @@ package com.sirenk.core.user.domain.program.screen;
 
 public interface ScreenService {
 
-    ScreenInfo.Basic register(ScreenCommand.Register command);
+    ScreenInfo.ScreenBasic register(ScreenCommand.Register command);
 
     Screen find(ScreenCommand.Retrieve command);
 
-    ScreenInfo.Basic retrieve(ScreenCommand.Retrieve command);
+    ScreenInfo.ScreenBasic retrieve(ScreenCommand.Retrieve command);
 
-    ScreenInfo.Basic changeBasicInfo(ScreenCommand.ChangeBasicInfo command);
+    ScreenInfo.ScreenBasic changeBasicInfo(ScreenCommand.ChangeBasicInfo command);
 
-    ScreenInfo.Basic addScreenButton(ScreenCommand.AddScreenButton command);
+    ScreenInfo.ScreenBasic addScreenButton(ScreenCommand.AddScreenButton command);
 
-    ScreenInfo.Remove remove(ScreenCommand.Remove command);
+    ScreenInfo.ScreenRemove remove(ScreenCommand.Remove command);
 
 }

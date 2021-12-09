@@ -9,7 +9,7 @@ public class ScreenButtonInfo {
     @Getter
     @Builder
     @ToString
-    public static class Basic {
+    public static class ScreenButtonBasic {
         // 기본 정보
         private String token;
         private String name;

@@ -13,8 +13,8 @@ import java.util.List;
 )
 public interface ScreenButtonInfoMapper {
 
-    List<ScreenButtonInfo.Basic> basic(List<ScreenButton> screenButtons);
+    List<ScreenButtonInfo.ScreenButtonBasic> basic(List<ScreenButton> screenButtons);
 
-    ScreenButtonInfo.Basic basic(ScreenButton screenButton);
+    ScreenButtonInfo.ScreenButtonBasic basic(ScreenButton screenButton);
 
 }

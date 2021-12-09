@@ -20,7 +20,7 @@ public class ScreenServiceImpl implements ScreenService {
 
     @Override
     @Transactional
-    public ScreenInfo.Basic register(ScreenCommand.Register command) {
+    public ScreenInfo.ScreenBasic register(ScreenCommand.Register command) {
         var initApi = command.toEntity();
         var screen = screenStorer.store(initApi);
         var screenButtons = screenButtonStorer.store(screen, command.getButtons());
@@ -36,14 +36,14 @@ public class ScreenServiceImpl implements ScreenService {
 
     @Override
     @Transactional(readOnly = true)
-    public ScreenInfo.Basic retrieve(ScreenCommand.Retrieve command) {
+    public ScreenInfo.ScreenBasic retrieve(ScreenCommand.Retrieve command) {
         var screen = screenReader.read(command.getToken());
         return screenInfoMapper.basic(screen);
     }
 
     @Override
     @Transactional
-    public ScreenInfo.Basic changeBasicInfo(ScreenCommand.ChangeBasicInfo command) {
+    public ScreenInfo.ScreenBasic changeBasicInfo(ScreenCommand.ChangeBasicInfo command) {
         var screen = screenReader.read(command.getToken());
         screen.changeBasicInfo(command.getName(), command.getDescription(), command.isEnable());
         var screenButtons = screenButtonStorer.store(command.getButtons());
@@ -53,7 +53,7 @@ public class ScreenServiceImpl implements ScreenService {
 
     @Override
     @Transactional
-    public ScreenInfo.Basic addScreenButton(ScreenCommand.AddScreenButton command) {
+    public ScreenInfo.ScreenBasic addScreenButton(ScreenCommand.AddScreenButton command) {
         var screen = screenReader.read(command.getToken());
         screenButtonStorer.store(screen, command.getButtons());
         var info = screenInfoMapper.basic(screen);
@@ -62,7 +62,7 @@ public class ScreenServiceImpl implements ScreenService {
 
     @Override
     @Transactional
-    public ScreenInfo.Remove remove(ScreenCommand.Remove command) {
+    public ScreenInfo.ScreenRemove remove(ScreenCommand.Remove command) {
         var screen = screenReader.read(command.getToken());
         screenStorer.remove(screen);
         return screenInfoMapper.remove(screen);

@@ -19,7 +19,7 @@ public class DepartmentServiceImpl implements DepartmentService {
 
     @Override
     @Transactional
-    public DepartmentInfo.BasicParent register(DepartmentCommand.Register command) {
+    public DepartmentInfo.DepartmentBasicParent register(DepartmentCommand.Register command) {
         var initDepartment = command.toEntity();
         var department = departmentStorer.store(initDepartment);
         var info = departmentInfoMapper.of(department);
@@ -35,14 +35,14 @@ public class DepartmentServiceImpl implements DepartmentService {
 
     @Override
     @Transactional(readOnly = true)
-    public DepartmentInfo.BasicChildren retrieve(DepartmentCommand.Retrieve command) {
+    public DepartmentInfo.DepartmentBasicChildren retrieve(DepartmentCommand.Retrieve command) {
         var department = departmentReader.readRecursively(command.getToken());
         return departmentInfoMapper.retrieve(department);
     }
 
     @Override
     @Transactional
-    public DepartmentInfo.BasicParent changeBasicInfo(DepartmentCommand.ChangeBasicInfo command) {
+    public DepartmentInfo.DepartmentBasicParent changeBasicInfo(DepartmentCommand.ChangeBasicInfo command) {
         var deparment = departmentReader.read(command.getToken());
         deparment.changeBasicInfo(
                 command.getName(),
@@ -55,7 +55,7 @@ public class DepartmentServiceImpl implements DepartmentService {
 
     @Override
     @Transactional
-    public DepartmentInfo.BasicParent move(DepartmentCommand.Move command) {
+    public DepartmentInfo.DepartmentBasicParent move(DepartmentCommand.Move command) {
         var department = departmentReader.read(command.getToken());
         var parentDepartment = departmentReader.read(command.getParentToken());
         department.changeParent(parentDepartment);
@@ -67,7 +67,7 @@ public class DepartmentServiceImpl implements DepartmentService {
 
     @Override
     @Transactional
-    public DepartmentInfo.Remove remove(DepartmentCommand.Remove command) {
+    public DepartmentInfo.DepartmentRemove remove(DepartmentCommand.Remove command) {
         var department = departmentReader.read(command.getToken());
         if (department.getChildren().size() != 0) {
             throw new EntityHasChildrenException(ErrorCode.ENTITY_HAS_CHILDREN.getErrorMsg(department.getName(), department.getChildren().size()));

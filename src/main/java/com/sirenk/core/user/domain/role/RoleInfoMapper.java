@@ -11,8 +11,8 @@ import org.mapstruct.ReportingPolicy;
 )
 public interface RoleInfoMapper {
 
-    RoleInfo.Basic basic(Role role);
+    RoleInfo.RoleBasic basic(Role role);
 
-    RoleInfo.Remove remove(Role role);
+    RoleInfo.RoleRemove remove(Role role);
 
 }

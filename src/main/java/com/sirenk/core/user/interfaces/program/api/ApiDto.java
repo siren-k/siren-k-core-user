@@ -59,11 +59,11 @@ public class ApiDto {
         private String token;
     }
 
-    public record BasicResponse(String token, String name, String description,
-                                Api.Method method, String url, boolean enable) {
+    public record ApiBasicResponse(String token, String name, String description,
+                                   Api.Method method, String url, boolean enable) {
     }
 
-    public record RemoveResponse(String token) {
+    public record ApiRemoveResponse(String token) {
     }
 
 }
