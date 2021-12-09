@@ -141,6 +141,9 @@ create table authority
     authority_description varchar(1024) comment '권한의 설명',
     authority_enable      boolean default true comment '권한의 사용 여부',
 
+    -- 권한 정보
+    role_id               bigint comment '역할의 식별자',
+
     created_at            datetime(6)  not null comment '권한의 정보 생성 일시',
     updated_at            datetime(6)  null comment '권한의 정보 수정 일시'
 ) comment '권한' charset = utf8mb4;

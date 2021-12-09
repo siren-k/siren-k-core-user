@@ -5,6 +5,7 @@ import com.sirenk.core.common.exception.InvalidParamException;
 import com.sirenk.core.common.jpa.AbstractEntity;
 import com.sirenk.core.common.util.TokenGenerator;
 import com.sirenk.core.user.domain.program.Program;
+import com.sirenk.core.user.domain.role.Role;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -41,6 +42,11 @@ public class Authority extends AbstractEntity {
     @OneToMany(mappedBy = "authority")
     private List<Program> programs = Lists.newArrayList();
 
+    // 역할 정보
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "role_id")
+    private Role role;
+
     @Builder
     public Authority(String name, String description
     ) {
@@ -67,6 +73,14 @@ public class Authority extends AbstractEntity {
     public void detachProgram(Program program) {
         this.programs.remove(program);
         program.detachAuthority();
+    }
+
+    public void attachRole(Role role) {
+        this.role = role;
+    }
+
+    public void detachAuthority() {
+        this.role = null;
     }
 
 }

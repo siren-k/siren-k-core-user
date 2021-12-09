@@ -18,6 +18,6 @@ public interface AuthorityCommandMapper {
     ProgramCommand.Retrieve program(AuthorityCommand.AttachProgram command);
 
     @Mapping(source = "command.programToken", target = "token")
-    ProgramCommand.Retrieve program(AuthorityCommand.DeattachProgram command);
+    ProgramCommand.Retrieve program(AuthorityCommand.DetachProgram command);
 
 }

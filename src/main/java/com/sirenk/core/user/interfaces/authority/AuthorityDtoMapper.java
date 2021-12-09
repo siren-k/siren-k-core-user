@@ -26,7 +26,7 @@ public interface AuthorityDtoMapper {
     AuthorityCommand.AttachProgram of(AuthorityDto.AttachProgramRequest request);
 
     @Mapping(target = "program", ignore = true)
-    AuthorityCommand.DeattachProgram of(AuthorityDto.DeattachProgramRequest request);
+    AuthorityCommand.DetachProgram of(AuthorityDto.DetachProgramRequest request);
 
     AuthorityDto.AuthorityBasicResponse of(AuthorityInfo.AuthorityBasic info);
 

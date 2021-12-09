@@ -64,7 +64,7 @@ public class AuthorityCommand {
     @Getter
     @Builder(toBuilder = true)
     @ToString
-    public static class DeattachProgram {
+    public static class DetachProgram {
         // 기본 정보
         private String token;
         // 프로그램 정보

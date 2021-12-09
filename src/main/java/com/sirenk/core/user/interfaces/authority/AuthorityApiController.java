@@ -50,7 +50,7 @@ public class AuthorityApiController {
     }
 
     @DeleteMapping(value = "{token}/program/{programToken}")
-    public CommonResponse<AuthorityDto.AuthorityBasicResponse> deattachProgram(@Valid AuthorityDto.DeattachProgramRequest request) {
+    public CommonResponse<AuthorityDto.AuthorityBasicResponse> deattachProgram(@Valid AuthorityDto.DetachProgramRequest request) {
         var command = authorityDtoMapper.of(request);
         var info = authorityFacade.detachProgram(command);
         var response = authorityDtoMapper.of(info);

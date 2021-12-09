@@ -43,7 +43,7 @@ public class AuthorityFacade {
     }
 
     @Transactional
-    public AuthorityInfo.AuthorityBasic detachProgram(AuthorityCommand.DeattachProgram command) {
+    public AuthorityInfo.AuthorityBasic detachProgram(AuthorityCommand.DetachProgram command) {
         var program = programService.find(authorityCommandMapper.program(command));
         var newCommand =
                 command.toBuilder().program(program).build();

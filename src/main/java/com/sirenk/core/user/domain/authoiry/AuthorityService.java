@@ -14,6 +14,6 @@ public interface AuthorityService {
 
     AuthorityInfo.AuthorityBasic attachProgram(AuthorityCommand.AttachProgram command);
 
-    AuthorityInfo.AuthorityBasic detachProgram(AuthorityCommand.DeattachProgram newCommand);
+    AuthorityInfo.AuthorityBasic detachProgram(AuthorityCommand.DetachProgram newCommand);
 
 }

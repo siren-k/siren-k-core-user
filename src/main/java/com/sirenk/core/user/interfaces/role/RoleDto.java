@@ -1,10 +1,13 @@
 package com.sirenk.core.user.interfaces.role;
 
+import com.sirenk.core.user.interfaces.authority.AuthorityDto;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 public class RoleDto {
 
@@ -45,14 +48,47 @@ public class RoleDto {
     @Getter
     @Setter
     @ToString
+    public static class AttachAuthorityRequest {
+        // 기본 정보
+        @NotNull(message = "token: 필수값입니다")
+        private String token;
+        // 권한 정보
+        @NotNull(message = "authorityToken: 필수값입니다")
+        private String authorityToken;
+    }
+
+    @Getter
+    @Setter
+    @ToString
+    public static class DetachAuthorityRequest {
+        // 기본 정보
+        @NotNull(message = "token: 필수값입니다")
+        private String token;
+        // 권한 정보
+        @NotNull(message = "authorityToken: 필수값입니다")
+        private String authorityToken;
+    }
+
+    @Getter
+    @Setter
+    @ToString
     public static class RemoveRequest {
         // 기본 정보
         @NotNull(message = "token: 필수값입니다")
         private String token;
     }
 
-    public record RoleBasicResponse(String token, String name, String description,
-                                    boolean enable) {
+    @Getter
+    @Builder
+    @ToString
+    public static class RoleBasicResponse {
+        // 기본 정보
+        private final String token;
+        private final String name;
+        private final String description;
+        private final boolean enable;
+        // 권한 정보
+        private final List<AuthorityDto.AuthorityBasicResponse> authorities;
     }
 
     public record RoleRemoveResponse(String token) {
