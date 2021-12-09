@@ -11,7 +11,7 @@ public class MenuInfo {
     @Getter
     @Builder(toBuilder = true)
     @ToString
-    public static class BasicParent {
+    public static class MenuBasicParent {
         // 기본 정보
         private String token;
         private String name;
@@ -19,13 +19,13 @@ public class MenuInfo {
         private boolean enable;
         // 상위 메뉴 정보
         private String path;
-        private BasicParent parent;
+        private MenuBasicParent parent;
     }
 
     @Getter
     @Builder(toBuilder = true)
     @ToString
-    public static class BasicChildren {
+    public static class MenuBasicChildren {
         // 기본 정보
         private String token;
         private String name;
@@ -33,13 +33,13 @@ public class MenuInfo {
         private boolean enable;
         // 하위 메뉴 정보
         private String path;
-        private List<BasicChildren> children;
+        private List<MenuBasicChildren> children;
     }
 
     @Getter
     @Builder
     @ToString
-    public static class Remove {
+    public static class MenuRemove {
         // 기본 정보
         private String token;
     }

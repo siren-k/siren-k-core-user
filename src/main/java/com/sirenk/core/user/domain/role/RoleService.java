@@ -2,12 +2,12 @@ package com.sirenk.core.user.domain.role;
 
 public interface RoleService {
 
-    RoleInfo.Basic register(RoleCommand.Register command);
+    RoleInfo.RoleBasic register(RoleCommand.Register command);
 
-    RoleInfo.Basic retrieve(RoleCommand.Retrieve command);
+    RoleInfo.RoleBasic retrieve(RoleCommand.Retrieve command);
 
-    RoleInfo.Basic changeBasicInfo(RoleCommand.ChangeBasicInfo command);
+    RoleInfo.RoleBasic changeBasicInfo(RoleCommand.ChangeBasicInfo command);
 
-    RoleInfo.Remove remove(RoleCommand.Remove command);
+    RoleInfo.RoleRemove remove(RoleCommand.Remove command);
 
 }

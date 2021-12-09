@@ -11,8 +11,8 @@ import org.mapstruct.ReportingPolicy;
 )
 public interface ProgramInfoMapper {
 
-    ProgramInfo.Basic basic(Program program);
+    ProgramInfo.ProgramBasic basic(Program program);
 
-    ProgramInfo.Remove remove(Program program);
+    ProgramInfo.ProgramRemove remove(Program program);
 
 }

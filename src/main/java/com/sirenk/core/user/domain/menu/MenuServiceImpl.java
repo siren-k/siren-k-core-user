@@ -22,7 +22,7 @@ public class MenuServiceImpl implements MenuService {
 
     @Override
     @Transactional
-    public MenuInfo.BasicParent register(MenuCommand.Register command) {
+    public MenuInfo.MenuBasicParent register(MenuCommand.Register command) {
         var initMenu = command.toEntity();
         var menu = menuStorer.store(initMenu);
         var info = menuInfoMapper.of(menu);
@@ -38,8 +38,8 @@ public class MenuServiceImpl implements MenuService {
   
     @Override
     @Transactional(readOnly = true)
-    public List<MenuInfo.BasicChildren> retrieve() {
-        List<MenuInfo.BasicChildren> infos = new ArrayList<>();
+    public List<MenuInfo.MenuBasicChildren> retrieve() {
+        List<MenuInfo.MenuBasicChildren> infos = new ArrayList<>();
         var menus = menuReader.read();
         for (Menu menu : menus) {
             var info = menuInfoMapper.retrieve(menu);
@@ -50,7 +50,7 @@ public class MenuServiceImpl implements MenuService {
 
     @Override
     @Transactional
-    public MenuInfo.BasicParent changeBasicInfo(MenuCommand.ChangeBasicInfo command) {
+    public MenuInfo.MenuBasicParent changeBasicInfo(MenuCommand.ChangeBasicInfo command) {
         var menu = menuReader.read(command.getToken());
         menu.changeBasicInfo(command.getName(), command.getDescription(), command.isEnable());
         return menuInfoMapper.changeBasicInfo(menu);
@@ -58,7 +58,7 @@ public class MenuServiceImpl implements MenuService {
 
     @Override
     @Transactional
-    public MenuInfo.BasicParent move(MenuCommand.Move command) {
+    public MenuInfo.MenuBasicParent move(MenuCommand.Move command) {
         var menu = menuReader.read(command.getToken());
         var parentMenu= menuReader.read(command.getParentToken());
         menu.changeParent(parentMenu);
@@ -70,7 +70,7 @@ public class MenuServiceImpl implements MenuService {
 
     @Override
     @Transactional
-    public MenuInfo.Remove remove(MenuCommand.Remove command) {
+    public MenuInfo.MenuRemove remove(MenuCommand.Remove command) {
         var menu = menuReader.read(command.getToken());
         if (menu.getChildren().size() > 0) {
             throw new EntityHasChildrenException(ErrorCode.ENTITY_HAS_CHILDREN.getErrorMsg(menu.getName(), menu.getChildren().size()));

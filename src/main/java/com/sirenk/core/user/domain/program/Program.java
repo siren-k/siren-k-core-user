@@ -3,6 +3,7 @@ package com.sirenk.core.user.domain.program;
 import com.sirenk.core.common.exception.InvalidParamException;
 import com.sirenk.core.common.jpa.AbstractEntity;
 import com.sirenk.core.common.util.TokenGenerator;
+import com.sirenk.core.user.domain.authoiry.Authority;
 import com.sirenk.core.user.domain.program.api.Api;
 import com.sirenk.core.user.domain.program.screen.Screen;
 import lombok.Builder;
@@ -12,6 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Slf4j
 @Getter
@@ -46,6 +48,10 @@ public class Program extends AbstractEntity {
     @JoinColumn(name = "api_id")
     private Api api;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "authority_id")
+    private Authority authority;
+
     @Builder
     public Program(String name, String description,
                    Screen screen, Api api
@@ -77,6 +83,27 @@ public class Program extends AbstractEntity {
 
     public void changeApi(Api api) {
         this.api = api;
+    }
+
+    public void attachAuthority(Authority authority) {
+        this.authority = authority;
+    }
+
+    public void detachAuthority() {
+        this.authority = null;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Program program = (Program) o;
+        return Objects.equals(id, program.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 
 }

@@ -2,16 +2,18 @@ package com.sirenk.core.user.domain.program;
 
 public interface ProgramService {
 
-    ProgramInfo.Basic register(ProgramCommand.Register command);
+    ProgramInfo.ProgramBasic register(ProgramCommand.Register command);
 
-    ProgramInfo.Basic retrieve(ProgramCommand.Retrieve command);
+    Program find(ProgramCommand.Retrieve command);
 
-    ProgramInfo.Basic changeBasicInfo(ProgramCommand.ChangeBasicInfo command);
+    ProgramInfo.ProgramBasic retrieve(ProgramCommand.Retrieve command);
 
-    ProgramInfo.Basic changeScreen(ProgramCommand.ChangeScreen command);
+    ProgramInfo.ProgramBasic changeBasicInfo(ProgramCommand.ChangeBasicInfo command);
 
-    ProgramInfo.Basic changeApi(ProgramCommand.ChangeApi newCommand);
+    ProgramInfo.ProgramBasic changeScreen(ProgramCommand.ChangeScreen command);
 
-    ProgramInfo.Remove remove(ProgramCommand.Remove command);
+    ProgramInfo.ProgramBasic changeApi(ProgramCommand.ChangeApi newCommand);
+
+    ProgramInfo.ProgramRemove remove(ProgramCommand.Remove command);
 
 }

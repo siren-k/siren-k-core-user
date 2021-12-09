@@ -51,11 +51,11 @@ public class RoleDto {
         private String token;
     }
 
-    public record BasicResponse(String token, String name, String description,
-                                boolean enable) {
+    public record RoleBasicResponse(String token, String name, String description,
+                                    boolean enable) {
     }
 
-    public record RemoveResponse(String token) {
+    public record RoleRemoveResponse(String token) {
     }
 
 }

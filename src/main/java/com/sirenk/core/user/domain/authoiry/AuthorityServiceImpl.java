@@ -16,7 +16,7 @@ public class AuthorityServiceImpl implements AuthorityService {
 
     @Override
     @Transactional
-    public AuthorityInfo.Basic register(AuthorityCommand.Register command) {
+    public AuthorityInfo.AuthorityBasic register(AuthorityCommand.Register command) {
         var initAuthority = command.toEntity();
         var authority = authorityStorer.store(initAuthority);
         return authorityInfoMapper.basic(authority);
@@ -30,24 +30,40 @@ public class AuthorityServiceImpl implements AuthorityService {
 
     @Override
     @Transactional(readOnly = true)
-    public AuthorityInfo.Basic retrieve(AuthorityCommand.Retrieve command) {
+    public AuthorityInfo.AuthorityBasic retrieve(AuthorityCommand.Retrieve command) {
         var authority = authorityReader.read(command.getToken());
         return authorityInfoMapper.basic(authority);
     }
 
     @Override
     @Transactional
-    public AuthorityInfo.Basic changeBasicInfo(AuthorityCommand.ChangeBasicInfo command) {
+    public AuthorityInfo.AuthorityBasic changeBasicInfo(AuthorityCommand.ChangeBasicInfo command) {
         var authority = authorityReader.read(command.getToken());
         authority.changeBasicInfo(command.getName(), command.getDescription(), command.isEnable());
         return authorityInfoMapper.basic(authority);
     }
 
     @Override
-    public AuthorityInfo.Remove remove(AuthorityCommand.Remove command) {
+    @Transactional
+    public AuthorityInfo.AuthorityRemove remove(AuthorityCommand.Remove command) {
         var authority = authorityReader.read(command.getToken());
         authorityStorer.remove(authority);
         return authorityInfoMapper.remove(authority);
+    }
+
+    @Override
+    @Transactional
+    public AuthorityInfo.AuthorityBasic attachProgram(AuthorityCommand.AttachProgram command) {
+        var authority = authorityReader.read(command.getToken());
+        authority.attachProgram(command.getProgram());
+        return authorityInfoMapper.basic(authority);
+    }
+
+    @Override
+    public AuthorityInfo.AuthorityBasic detachProgram(AuthorityCommand.DeattachProgram command) {
+        var authority = authorityReader.read(command.getToken());
+        authority.detachProgram(command.getProgram());
+        return authorityInfoMapper.basic(authority);
     }
 
 }

@@ -21,8 +21,8 @@ public interface RoleDtoMapper {
 
     RoleCommand.Remove of(RoleDto.RemoveRequest request);
 
-    RoleDto.BasicResponse of(RoleInfo.Basic info);
+    RoleDto.RoleBasicResponse of(RoleInfo.RoleBasic info);
 
-    RoleDto.RemoveResponse of(RoleInfo.Remove info);
+    RoleDto.RoleRemoveResponse of(RoleInfo.RoleRemove info);
 
 }

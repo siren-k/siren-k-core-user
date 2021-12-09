@@ -18,7 +18,7 @@ public class DepartmentApiController {
     private final DepartmentDtoMapper departmentDtoMapper;
 
     @PostMapping(value = "")
-    public CommonResponse<DepartmentDto.BasicParentResponse> register(@RequestBody @Valid DepartmentDto.RegisterRequest request) {
+    public CommonResponse<DepartmentDto.DepartmentBasicParentResponse> register(@RequestBody @Valid DepartmentDto.RegisterRequest request) {
         var command = departmentDtoMapper.of(request);
         var info = departmentFacade.register(command);
         var response = departmentDtoMapper.of(info);
@@ -26,7 +26,7 @@ public class DepartmentApiController {
     }
 
     @GetMapping(value = "{token}")
-    public CommonResponse<DepartmentDto.BasicChildrenResponse> retrieve(@Valid DepartmentDto.RetrieveRequest request) {
+    public CommonResponse<DepartmentDto.DepartmentBasicChildrenResponse> retrieve(@Valid DepartmentDto.RetrieveRequest request) {
         var command = departmentDtoMapper.of(request);
         var info = departmentFacade.retrieve(command);
         var response = departmentDtoMapper.of(info);
@@ -34,7 +34,7 @@ public class DepartmentApiController {
     }
 
     @PutMapping(value = "{token}")
-    public CommonResponse<DepartmentDto.BasicParentResponse> changeBasicInfo(@RequestBody @Valid DepartmentDto.ChangeBasicInfoRequest request) {
+    public CommonResponse<DepartmentDto.DepartmentBasicParentResponse> changeBasicInfo(@RequestBody @Valid DepartmentDto.ChangeBasicInfoRequest request) {
         var command = departmentDtoMapper.of(request);
         var info = departmentFacade.changeBasicInfo(command);
         var response = departmentDtoMapper.of(info);
@@ -42,7 +42,7 @@ public class DepartmentApiController {
     }
 
     @PutMapping(value = "{token}/move/{parentToken}")
-    public CommonResponse<DepartmentDto.BasicParentResponse> move(@Valid DepartmentDto.MoveRequest request) {
+    public CommonResponse<DepartmentDto.DepartmentBasicParentResponse> move(@Valid DepartmentDto.MoveRequest request) {
         var command = departmentDtoMapper.of(request);
         var info = departmentFacade.move(command);
         var response = departmentDtoMapper.of(info);
@@ -50,7 +50,7 @@ public class DepartmentApiController {
     }
 
     @DeleteMapping(value = "{token}")
-    public CommonResponse<DepartmentDto.RemoveResponse> remove(@Valid DepartmentDto.RemoveRequest request) {
+    public CommonResponse<DepartmentDto.DepartmentRemoveResponse> remove(@Valid DepartmentDto.RemoveRequest request) {
         var command = departmentDtoMapper.of(request);
         var info = departmentFacade.remove(command);
         var response = departmentDtoMapper.of(info);

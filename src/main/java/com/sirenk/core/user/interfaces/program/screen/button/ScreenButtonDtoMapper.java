@@ -20,6 +20,6 @@ public interface ScreenButtonDtoMapper {
     @Mapping(target = "screen", ignore = true)
     ScreenButtonCommand.ChangeBasicInfo of(ScreenButtonDto.ChangeBasicInfoRequest request);
 
-    ScreenButtonDto.BasicResponse of(ScreenButtonInfo.Basic info);
+    ScreenButtonDto.ScreenButtonBasicResponse of(ScreenButtonInfo.ScreenButtonBasic info);
 
 }

@@ -2,16 +2,16 @@ package com.sirenk.core.user.domain.department;
 
 public interface DepartmentService {
 
-    DepartmentInfo.BasicParent register(DepartmentCommand.Register command);
+    DepartmentInfo.DepartmentBasicParent register(DepartmentCommand.Register command);
 
     Department find(DepartmentCommand.Retrieve command);
 
-    DepartmentInfo.BasicChildren retrieve(DepartmentCommand.Retrieve command);
+    DepartmentInfo.DepartmentBasicChildren retrieve(DepartmentCommand.Retrieve command);
 
-    DepartmentInfo.BasicParent changeBasicInfo(DepartmentCommand.ChangeBasicInfo command);
+    DepartmentInfo.DepartmentBasicParent changeBasicInfo(DepartmentCommand.ChangeBasicInfo command);
 
-    DepartmentInfo.BasicParent move(DepartmentCommand.Move command);
+    DepartmentInfo.DepartmentBasicParent move(DepartmentCommand.Move command);
 
-    DepartmentInfo.Remove remove(DepartmentCommand.Remove command);
+    DepartmentInfo.DepartmentRemove remove(DepartmentCommand.Remove command);
 
 }

@@ -27,8 +27,8 @@ public interface ScreenDtoMapper {
 
     ScreenCommand.AddScreenButton of(ScreenDto.AddScreenButtonRequest request);
 
-    ScreenDto.BasicResponse of(ScreenInfo.Basic info);
+    ScreenDto.ScreenBasicResponse of(ScreenInfo.ScreenBasic info);
 
-    ScreenDto.RemoveResponse of(ScreenInfo.Remove info);
+    ScreenDto.ScreenRemoveResponse of(ScreenInfo.ScreenRemove info);
 
 }

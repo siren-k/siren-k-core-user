@@ -1,0 +1,397 @@
+### 프로그램에 등록할 화면1 등록
+POST http://{{host-user}}/api/v1/screen
+Content-Type: application/json
+
+{
+  "name": "화면1",
+  "description": "화면1 설명",
+  "buttons": [
+    {
+      "name": "버튼1",
+      "description": "버튼1 설명",
+      "method": "POST",
+      "url": "/api/v1/test1"
+    },
+    {
+      "name": "버튼2",
+      "description": "버튼2 설명",
+      "method": "GET",
+      "url": "/api/v1/test2"
+    }
+  ]
+}
+
+> {%
+client.test("프로그램에 등록할 화면1 등록", function() {
+    client.assert(response.status === 200, "unexpected http status: " + response.status);
+    client.assert(response.body.data.name === "화면1", "unexpected data.name: " + response.body.data.name);
+    client.assert(response.body.data.description === "화면1 설명", "unexpected data.description: " + response.body.data.description);
+    client.assert(response.body.data.enable === true, "unexpected data.enable: " + response.body.data.enable);
+    client.assert(response.body.data.buttons[0].name === "버튼1", "unexpected data.button[0].name: " + response.body.data.buttons[0].name);
+    client.assert(response.body.data.buttons[0].description === "버튼1 설명", "unexpected data.button[0].description: " + response.body.data.buttons[0].description);
+    client.assert(response.body.data.buttons[0].method === "POST", "unexpected data.button[0].method: " + response.body.data.buttons[0].method);
+    client.assert(response.body.data.buttons[0].url === "/api/v1/test1", "unexpected data.button[0].url: " + response.body.data.buttons[0].url);
+    client.assert(response.body.data.buttons[0].enable === true, "unexpected data.button[0].enable: " + response.body.data.buttons[0].enable);
+    client.assert(response.body.data.buttons[1].name === "버튼2", "unexpected data.button[0].name: " + response.body.data.buttons[1].name);
+    client.assert(response.body.data.buttons[1].description === "버튼2 설명", "unexpected data.button[0].description: " + response.body.data.buttons[1].description);
+    client.assert(response.body.data.buttons[1].method === "GET", "unexpected data.button[0].method: " + response.body.data.buttons[1].method);
+    client.assert(response.body.data.buttons[1].url === "/api/v1/test2", "unexpected data.button[0].url: " + response.body.data.buttons[1].url);
+    client.assert(response.body.data.buttons[1].enable === true, "unexpected data.button[0].enable: " + response.body.data.buttons[1].enable);
+})
+client.global.set("screen_token_1", response.body.data.token)
+%}
+
+### 프로그램에 등록할 API1 등록
+POST http://{{host-user}}/api/v1/api
+Content-Type: application/json
+
+{
+  "name": "API1",
+  "description": "API1 설명",
+  "method": "GET",
+  "url": "/api/v1/test1"
+}
+
+> {%
+client.test("프로그램에 등록할 API1 등록", function() {
+    client.assert(response.status === 200, "unexpected http status: " + response.status);
+    client.assert(response.body.data.name === "API1", "unexpected data.name: " + response.body.data.name);
+    client.assert(response.body.data.description === "API1 설명", "unexpected data.description: " + response.body.data.description);
+    client.assert(response.body.data.method === "GET", "unexpected data.method: " + response.body.data.method);
+    client.assert(response.body.data.url === "/api/v1/test1", "unexpected data.method: " + response.body.data.url);
+    client.assert(response.body.data.enable === true, "unexpected data.enable: " + response.body.data.enable);
+})
+client.global.set("api_token_1", response.body.data.token)
+%}
+
+### 권한에 등록할 프로그램1 등록
+POST http://{{host-user}}/api/v1/program
+Content-Type: application/json
+
+{
+  "name": "프로그램1",
+  "description": "프로그램1 설명",
+  "screenToken": "{{screen_token_1}}",
+  "apiToken": "{{api_token_1}}"
+}
+
+> {%
+client.test("권한에 등록할 프로그램 등록", function() {
+    client.assert(response.status === 200, "unexpected http status: " + response.status);
+    client.assert(response.body.data.name === "프로그램1", "unexpected data.name: " + response.body.data.name);
+    client.assert(response.body.data.description === "프로그램1 설명", "unexpected data.description: " + response.body.data.description);
+    client.assert(response.body.data.enable === true, "unexpected data.enable: " + response.body.data.enable);
+    client.assert(response.body.data.screen.name === "화면1", "unexpected data.screen.name: " + response.body.data.screen.name);
+    client.assert(response.body.data.screen.description === "화면1 설명", "unexpected data.screen.description: " + response.body.data.screen.description);
+    client.assert(response.body.data.screen.enable === true, "unexpected data.screen.name: " + response.body.data.screen.enable);
+    client.assert(response.body.data.api.name === "API1", "unexpected data.api.name: " + response.body.data.api.name);
+    client.assert(response.body.data.api.description === "API1 설명", "unexpected data.api.description: " + response.body.data.api.description);
+    client.assert(response.body.data.api.method === "GET", "unexpected data.api.method: " + response.body.data.api.method);
+    client.assert(response.body.data.api.url === "/api/v1/test1", "unexpected data.api.method: " + response.body.data.api.url);
+    client.assert(response.body.data.api.enable === true, "unexpected data.api.name: " + response.body.data.api.enable);
+})
+client.global.set("program_token_1", response.body.data.token)
+%}
+
+### 프로그램에 등록할 화면2 등록
+POST http://{{host-user}}/api/v1/screen
+Content-Type: application/json
+
+{
+  "name": "화면2",
+  "description": "화면2 설명",
+  "buttons": [
+    {
+      "name": "버튼1",
+      "description": "버튼1 설명",
+      "method": "POST",
+      "url": "/api/v1/test1"
+    },
+    {
+      "name": "버튼2",
+      "description": "버튼2 설명",
+      "method": "GET",
+      "url": "/api/v1/test2"
+    }
+  ]
+}
+
+> {%
+client.test("프로그램에 등록할 화면2 등록", function() {
+    client.assert(response.status === 200, "unexpected http status: " + response.status);
+    client.assert(response.body.data.name === "화면2", "unexpected data.name: " + response.body.data.name);
+    client.assert(response.body.data.description === "화면2 설명", "unexpected data.description: " + response.body.data.description);
+    client.assert(response.body.data.enable === true, "unexpected data.enable: " + response.body.data.enable);
+    client.assert(response.body.data.buttons[0].name === "버튼1", "unexpected data.button[0].name: " + response.body.data.buttons[0].name);
+    client.assert(response.body.data.buttons[0].description === "버튼1 설명", "unexpected data.button[0].description: " + response.body.data.buttons[0].description);
+    client.assert(response.body.data.buttons[0].method === "POST", "unexpected data.button[0].method: " + response.body.data.buttons[0].method);
+    client.assert(response.body.data.buttons[0].url === "/api/v1/test1", "unexpected data.button[0].url: " + response.body.data.buttons[0].url);
+    client.assert(response.body.data.buttons[0].enable === true, "unexpected data.button[0].enable: " + response.body.data.buttons[0].enable);
+    client.assert(response.body.data.buttons[1].name === "버튼2", "unexpected data.button[0].name: " + response.body.data.buttons[1].name);
+    client.assert(response.body.data.buttons[1].description === "버튼2 설명", "unexpected data.button[0].description: " + response.body.data.buttons[1].description);
+    client.assert(response.body.data.buttons[1].method === "GET", "unexpected data.button[0].method: " + response.body.data.buttons[1].method);
+    client.assert(response.body.data.buttons[1].url === "/api/v1/test2", "unexpected data.button[0].url: " + response.body.data.buttons[1].url);
+    client.assert(response.body.data.buttons[1].enable === true, "unexpected data.button[0].enable: " + response.body.data.buttons[1].enable);
+})
+client.global.set("screen_token_2", response.body.data.token)
+%}
+
+### 프로그램에 등록할 API2 등록
+POST http://{{host-user}}/api/v1/api
+Content-Type: application/json
+
+{
+  "name": "API2",
+  "description": "API2 설명",
+  "method": "GET",
+  "url": "/api/v1/test2"
+}
+
+> {%
+client.test("프로그램에 등록할 API2 등록", function() {
+    client.assert(response.status === 200, "unexpected http status: " + response.status);
+    client.assert(response.body.data.name === "API2", "unexpected data.name: " + response.body.data.name);
+    client.assert(response.body.data.description === "API2 설명", "unexpected data.description: " + response.body.data.description);
+    client.assert(response.body.data.method === "GET", "unexpected data.method: " + response.body.data.method);
+    client.assert(response.body.data.url === "/api/v1/test2", "unexpected data.method: " + response.body.data.url);
+    client.assert(response.body.data.enable === true, "unexpected data.enable: " + response.body.data.enable);
+})
+client.global.set("api_token_2", response.body.data.token)
+%}
+
+### 권한에 등록할 프로그램2 등록
+POST http://{{host-user}}/api/v1/program
+Content-Type: application/json
+
+{
+  "name": "프로그램2",
+  "description": "프로그램2 설명",
+  "screenToken": "{{screen_token_2}}",
+  "apiToken": "{{api_token_2}}"
+}
+
+> {%
+client.test("권한에 등록할 프로그램2 등록", function() {
+    client.assert(response.status === 200, "unexpected http status: " + response.status);
+    client.assert(response.body.data.name === "프로그램2", "unexpected data.name: " + response.body.data.name);
+    client.assert(response.body.data.description === "프로그램2 설명", "unexpected data.description: " + response.body.data.description);
+    client.assert(response.body.data.enable === true, "unexpected data.enable: " + response.body.data.enable);
+    client.assert(response.body.data.screen.name === "화면2", "unexpected data.screen.name: " + response.body.data.screen.name);
+    client.assert(response.body.data.screen.description === "화면2 설명", "unexpected data.screen.description: " + response.body.data.screen.description);
+    client.assert(response.body.data.screen.enable === true, "unexpected data.screen.name: " + response.body.data.screen.enable);
+    client.assert(response.body.data.api.name === "API2", "unexpected data.api.name: " + response.body.data.api.name);
+    client.assert(response.body.data.api.description === "API2 설명", "unexpected data.api.description: " + response.body.data.api.description);
+    client.assert(response.body.data.api.method === "GET", "unexpected data.api.method: " + response.body.data.api.method);
+    client.assert(response.body.data.api.url === "/api/v1/test2", "unexpected data.api.method: " + response.body.data.api.url);
+    client.assert(response.body.data.api.enable === true, "unexpected data.api.name: " + response.body.data.api.enable);
+})
+client.global.set("program_token_2", response.body.data.token)
+%}
+
+### 권한 등록
+POST http://{{host-user}}/api/v1/authority
+Content-Type: application/json
+
+{
+  "name": "권한",
+  "description": "권한 설명"
+}
+
+> {%
+client.test("권한 등록", function() {
+    client.assert(response.status === 200, "unexpected http status: " + response.status);
+    client.assert(response.body.data.name === "권한", "unexpected data.name: " + response.body.data.name);
+    client.assert(response.body.data.description === "권한 설명", "unexpected data.description: " + response.body.data.description);
+    client.assert(response.body.data.enable === true, "unexpected data.enable: " + response.body.data.enable);
+})
+client.global.set("authority_token", response.body.data.token)
+%}
+
+### 권한에 프로그램1 등록
+PUT http://{{host-user}}/api/v1/authority/{{authority_token}}/program/{{program_token_1}}
+Content-Type: application/json
+
+> {%
+client.test("권한에 프로그램1 등록", function() {
+    client.assert(response.status === 200, "unexpected http status: " + response.status);
+    client.assert(response.body.data.name === "권한", "unexpected data.name: " + response.body.data.name);
+    client.assert(response.body.data.description === "권한 설명", "unexpected data.description: " + response.body.data.description);
+    client.assert(response.body.data.enable === true, "unexpected data.enable: " + response.body.data.enable);
+    client.assert(response.body.data.programs[0].name === "프로그램1", "unexpected data.programs[0].name: " + response.body.data.programs[0].name);
+    client.assert(response.body.data.programs[0].description === "프로그램1 설명", "unexpected data.programs[0].description: " + response.body.data.programs[0].description);
+    client.assert(response.body.data.programs[0].enable === true, "unexpected data.programs[0].name: " + response.body.data.programs[0].enable);
+    client.assert(response.body.data.programs[0].screen.name === "화면1", "unexpected data.programs[0].screen.description: " + response.body.data.programs[0].screen.name);
+    client.assert(response.body.data.programs[0].screen.description === "화면1 설명", "unexpected data.programs[0].screen.description: " + response.body.data.programs[0].screen.name);
+    client.assert(response.body.data.programs[0].screen.enable === true, "unexpected data.programs[0].screen.description: " + response.body.data.programs[0].screen.enable);
+    client.assert(response.body.data.programs[0].screen.buttons[0].name === "버튼1", "unexpected data.programs[0].screen.buttons[0].name: " + response.body.data.programs[0].screen.buttons[0].name);
+    client.assert(response.body.data.programs[0].screen.buttons[0].description === "버튼1 설명", "unexpected data.programs[0].screen.buttons[0].description: " + response.body.data.programs[0].screen.buttons[0].description);
+    client.assert(response.body.data.programs[0].screen.buttons[0].method === "POST", "unexpected data.programs[0].screen.buttons[0].method: " + response.body.data.programs[0].screen.buttons[0].method);
+    client.assert(response.body.data.programs[0].screen.buttons[0].url === "/api/v1/test1", "unexpected data.programs[0].screen.buttons[0].url: " + response.body.data.programs[0].screen.buttons[0].url);
+    client.assert(response.body.data.programs[0].screen.buttons[0].enable === true, "unexpected data.programs[0].screen.buttons[0].enable: " + response.body.data.programs[0].screen.buttons[0].enable);
+    client.assert(response.body.data.programs[0].screen.buttons[1].name === "버튼2", "unexpected data.programs[0].screen.buttons[1].name: " + response.body.data.programs[0].screen.buttons[1].name);
+    client.assert(response.body.data.programs[0].screen.buttons[1].description === "버튼2 설명", "unexpected data.programs[0].screen.buttons[1].description: " + response.body.data.programs[0].screen.buttons[1].description);
+    client.assert(response.body.data.programs[0].screen.buttons[1].method === "GET", "unexpected data.programs[0].screen.buttons[1].method: " + response.body.data.programs[0].screen.buttons[1].method);
+    client.assert(response.body.data.programs[0].screen.buttons[1].url === "/api/v1/test2", "unexpected data.programs[0].screen.buttons[1].url: " + response.body.data.programs[0].screen.buttons[1].url);
+    client.assert(response.body.data.programs[0].screen.buttons[1].enable === true, "unexpected data.programs[0].screen.buttons[1].enable: " + response.body.data.programs[0].screen.buttons[1].enable);
+    client.assert(response.body.data.programs[0].api.name === "API1", "unexpected data.programs[0].api.name: " + response.body.data.programs[0].api.name);
+    client.assert(response.body.data.programs[0].api.description === "API1 설명", "unexpected data.programs[0].api.description: " + response.body.data.programs[0].api.description);
+    client.assert(response.body.data.programs[0].api.method === "GET", "unexpected data.programs[0].api.method: " + response.body.data.programs[0].api.method);
+    client.assert(response.body.data.programs[0].api.url === "/api/v1/test1", "unexpected data.programs[0].api.url: " + response.body.data.programs[0].api.url);
+    client.assert(response.body.data.programs[0].api.enable === true, "unexpected data.programs[0].api.enable: " + response.body.data.programs[0].api.enable);
+})
+%}
+
+### 권한에 프로그램2 등록
+PUT http://{{host-user}}/api/v1/authority/{{authority_token}}/program/{{program_token_2}}
+Content-Type: application/json
+
+> {%
+client.test("권한에 프로그램 등록", function() {
+    client.assert(response.status === 200, "unexpected http status: " + response.status);
+    client.assert(response.body.data.name === "권한", "unexpected data.name: " + response.body.data.name);
+    client.assert(response.body.data.description === "권한 설명", "unexpected data.description: " + response.body.data.description);
+    client.assert(response.body.data.enable === true, "unexpected data.enable: " + response.body.data.enable);
+    client.assert(response.body.data.programs[0].name === "프로그램1", "unexpected data.programs[0].name: " + response.body.data.programs[0].name);
+    client.assert(response.body.data.programs[0].description === "프로그램1 설명", "unexpected data.programs[0].description: " + response.body.data.programs[0].description);
+    client.assert(response.body.data.programs[0].enable === true, "unexpected data.programs[0].name: " + response.body.data.programs[0].enable);
+    client.assert(response.body.data.programs[0].screen.name === "화면1", "unexpected data.programs[0].screen.description: " + response.body.data.programs[0].screen.name);
+    client.assert(response.body.data.programs[0].screen.description === "화면1 설명", "unexpected data.programs[0].screen.description: " + response.body.data.programs[0].screen.name);
+    client.assert(response.body.data.programs[0].screen.enable === true, "unexpected data.programs[0].screen.description: " + response.body.data.programs[0].screen.enable);
+    client.assert(response.body.data.programs[0].screen.buttons[0].name === "버튼1", "unexpected data.programs[0].screen.buttons[0].name: " + response.body.data.programs[0].screen.buttons[0].name);
+    client.assert(response.body.data.programs[0].screen.buttons[0].description === "버튼1 설명", "unexpected data.programs[0].screen.buttons[0].description: " + response.body.data.programs[0].screen.buttons[0].description);
+    client.assert(response.body.data.programs[0].screen.buttons[0].method === "POST", "unexpected data.programs[0].screen.buttons[0].method: " + response.body.data.programs[0].screen.buttons[0].method);
+    client.assert(response.body.data.programs[0].screen.buttons[0].url === "/api/v1/test1", "unexpected data.programs[0].screen.buttons[0].url: " + response.body.data.programs[0].screen.buttons[0].url);
+    client.assert(response.body.data.programs[0].screen.buttons[0].enable === true, "unexpected data.programs[0].screen.buttons[0].enable: " + response.body.data.programs[0].screen.buttons[0].enable);
+    client.assert(response.body.data.programs[0].screen.buttons[1].name === "버튼2", "unexpected data.programs[0].screen.buttons[1].name: " + response.body.data.programs[0].screen.buttons[1].name);
+    client.assert(response.body.data.programs[0].screen.buttons[1].description === "버튼2 설명", "unexpected data.programs[0].screen.buttons[1].description: " + response.body.data.programs[0].screen.buttons[1].description);
+    client.assert(response.body.data.programs[0].screen.buttons[1].method === "GET", "unexpected data.programs[0].screen.buttons[1].method: " + response.body.data.programs[0].screen.buttons[1].method);
+    client.assert(response.body.data.programs[0].screen.buttons[1].url === "/api/v1/test2", "unexpected data.programs[0].screen.buttons[1].url: " + response.body.data.programs[0].screen.buttons[1].url);
+    client.assert(response.body.data.programs[0].screen.buttons[1].enable === true, "unexpected data.programs[0].screen.buttons[1].enable: " + response.body.data.programs[0].screen.buttons[1].enable);
+    client.assert(response.body.data.programs[0].api.name === "API1", "unexpected data.programs[0].api.name: " + response.body.data.programs[0].api.name);
+    client.assert(response.body.data.programs[0].api.description === "API1 설명", "unexpected data.programs[0].api.description: " + response.body.data.programs[0].api.description);
+    client.assert(response.body.data.programs[0].api.method === "GET", "unexpected data.programs[0].api.method: " + response.body.data.programs[0].api.method);
+    client.assert(response.body.data.programs[0].api.url === "/api/v1/test1", "unexpected data.programs[0].api.url: " + response.body.data.programs[0].api.url);
+    client.assert(response.body.data.programs[0].api.enable === true, "unexpected data.programs[0].api.enable: " + response.body.data.programs[0].api.enable);
+    client.assert(response.body.data.programs[1].name === "프로그램2", "unexpected data.programs[1].name: " + response.body.data.programs[1].name);
+    client.assert(response.body.data.programs[1].description === "프로그램2 설명", "unexpected data.programs[1].description: " + response.body.data.programs[1].description);
+    client.assert(response.body.data.programs[1].enable === true, "unexpected data.programs[1].name: " + response.body.data.programs[1].enable);
+    client.assert(response.body.data.programs[1].screen.name === "화면2", "unexpected data.programs[1].screen.description: " + response.body.data.programs[1].screen.name);
+    client.assert(response.body.data.programs[1].screen.description === "화면2 설명", "unexpected data.programs[1].screen.description: " + response.body.data.programs[1].screen.name);
+    client.assert(response.body.data.programs[1].screen.enable === true, "unexpected data.programs[1].screen.description: " + response.body.data.programs[1].screen.enable);
+    client.assert(response.body.data.programs[1].screen.buttons[0].name === "버튼1", "unexpected data.programs[1].screen.buttons[0].name: " + response.body.data.programs[1].screen.buttons[0].name);
+    client.assert(response.body.data.programs[1].screen.buttons[0].description === "버튼1 설명", "unexpected data.programs[1].screen.buttons[0].description: " + response.body.data.programs[1].screen.buttons[0].description);
+    client.assert(response.body.data.programs[1].screen.buttons[0].method === "POST", "unexpected data.programs[1].screen.buttons[0].method: " + response.body.data.programs[1].screen.buttons[0].method);
+    client.assert(response.body.data.programs[1].screen.buttons[0].url === "/api/v1/test1", "unexpected data.programs[1].screen.buttons[0].url: " + response.body.data.programs[1].screen.buttons[0].url);
+    client.assert(response.body.data.programs[1].screen.buttons[0].enable === true, "unexpected data.programs[1].screen.buttons[0].enable: " + response.body.data.programs[1].screen.buttons[0].enable);
+    client.assert(response.body.data.programs[1].screen.buttons[1].name === "버튼2", "unexpected data.programs[1].screen.buttons[1].name: " + response.body.data.programs[1].screen.buttons[1].name);
+    client.assert(response.body.data.programs[1].screen.buttons[1].description === "버튼2 설명", "unexpected data.programs[1].screen.buttons[1].description: " + response.body.data.programs[1].screen.buttons[1].description);
+    client.assert(response.body.data.programs[1].screen.buttons[1].method === "GET", "unexpected data.programs[1].screen.buttons[1].method: " + response.body.data.programs[1].screen.buttons[1].method);
+    client.assert(response.body.data.programs[1].screen.buttons[1].url === "/api/v1/test2", "unexpected data.programs[1].screen.buttons[1].url: " + response.body.data.programs[1].screen.buttons[1].url);
+    client.assert(response.body.data.programs[1].screen.buttons[1].enable === true, "unexpected data.programs[1].screen.buttons[1].enable: " + response.body.data.programs[1].screen.buttons[1].enable);
+    client.assert(response.body.data.programs[1].api.name === "API2", "unexpected data.programs[1].api.name: " + response.body.data.programs[1].api.name);
+    client.assert(response.body.data.programs[1].api.description === "API2 설명", "unexpected data.programs[1].api.description: " + response.body.data.programs[1].api.description);
+    client.assert(response.body.data.programs[1].api.method === "GET", "unexpected data.programs[1].api.method: " + response.body.data.programs[1].api.method);
+    client.assert(response.body.data.programs[1].api.url === "/api/v1/test2", "unexpected data.programs[1].api.url: " + response.body.data.programs[1].api.url);
+    client.assert(response.body.data.programs[1].api.enable === true, "unexpected data.programs[1].api.enable: " + response.body.data.programs[1].api.enable);
+})
+%}
+
+### 권한 조회
+GET http://{{host-user}}/api/v1/authority/{{authority_token}}
+Content-Type: application/json
+
+> {%
+client.test("권한 조회", function() {
+    client.assert(response.status === 200, "unexpected http status: " + response.status);
+    client.assert(response.body.data.name === "권한", "unexpected data.name: " + response.body.data.name);
+    client.assert(response.body.data.description === "권한 설명", "unexpected data.description: " + response.body.data.description);
+    client.assert(response.body.data.enable === true, "unexpected data.enable: " + response.body.data.enable);
+    client.assert(response.body.data.programs[0].name === "프로그램1", "unexpected data.programs[0].name: " + response.body.data.programs[0].name);
+    client.assert(response.body.data.programs[0].description === "프로그램1 설명", "unexpected data.programs[0].description: " + response.body.data.programs[0].description);
+    client.assert(response.body.data.programs[0].enable === true, "unexpected data.programs[0].name: " + response.body.data.programs[0].enable);
+    client.assert(response.body.data.programs[0].screen.name === "화면1", "unexpected data.programs[0].screen.description: " + response.body.data.programs[0].screen.name);
+    client.assert(response.body.data.programs[0].screen.description === "화면1 설명", "unexpected data.programs[0].screen.description: " + response.body.data.programs[0].screen.name);
+    client.assert(response.body.data.programs[0].screen.enable === true, "unexpected data.programs[0].screen.description: " + response.body.data.programs[0].screen.enable);
+    client.assert(response.body.data.programs[0].screen.buttons[0].name === "버튼1", "unexpected data.programs[0].screen.buttons[0].name: " + response.body.data.programs[0].screen.buttons[0].name);
+    client.assert(response.body.data.programs[0].screen.buttons[0].description === "버튼1 설명", "unexpected data.programs[0].screen.buttons[0].description: " + response.body.data.programs[0].screen.buttons[0].description);
+    client.assert(response.body.data.programs[0].screen.buttons[0].method === "POST", "unexpected data.programs[0].screen.buttons[0].method: " + response.body.data.programs[0].screen.buttons[0].method);
+    client.assert(response.body.data.programs[0].screen.buttons[0].url === "/api/v1/test1", "unexpected data.programs[0].screen.buttons[0].url: " + response.body.data.programs[0].screen.buttons[0].url);
+    client.assert(response.body.data.programs[0].screen.buttons[0].enable === true, "unexpected data.programs[0].screen.buttons[0].enable: " + response.body.data.programs[0].screen.buttons[0].enable);
+    client.assert(response.body.data.programs[0].screen.buttons[1].name === "버튼2", "unexpected data.programs[0].screen.buttons[1].name: " + response.body.data.programs[0].screen.buttons[1].name);
+    client.assert(response.body.data.programs[0].screen.buttons[1].description === "버튼2 설명", "unexpected data.programs[0].screen.buttons[1].description: " + response.body.data.programs[0].screen.buttons[1].description);
+    client.assert(response.body.data.programs[0].screen.buttons[1].method === "GET", "unexpected data.programs[0].screen.buttons[1].method: " + response.body.data.programs[0].screen.buttons[1].method);
+    client.assert(response.body.data.programs[0].screen.buttons[1].url === "/api/v1/test2", "unexpected data.programs[0].screen.buttons[1].url: " + response.body.data.programs[0].screen.buttons[1].url);
+    client.assert(response.body.data.programs[0].screen.buttons[1].enable === true, "unexpected data.programs[0].screen.buttons[1].enable: " + response.body.data.programs[0].screen.buttons[1].enable);
+    client.assert(response.body.data.programs[0].api.name === "API1", "unexpected data.programs[0].api.name: " + response.body.data.programs[0].api.name);
+    client.assert(response.body.data.programs[0].api.description === "API1 설명", "unexpected data.programs[0].api.description: " + response.body.data.programs[0].api.description);
+    client.assert(response.body.data.programs[0].api.method === "GET", "unexpected data.programs[0].api.method: " + response.body.data.programs[0].api.method);
+    client.assert(response.body.data.programs[0].api.url === "/api/v1/test1", "unexpected data.programs[0].api.url: " + response.body.data.programs[0].api.url);
+    client.assert(response.body.data.programs[0].api.enable === true, "unexpected data.programs[0].api.enable: " + response.body.data.programs[0].api.enable);
+    client.assert(response.body.data.programs[1].name === "프로그램2", "unexpected data.programs[1].name: " + response.body.data.programs[1].name);
+    client.assert(response.body.data.programs[1].description === "프로그램2 설명", "unexpected data.programs[1].description: " + response.body.data.programs[1].description);
+    client.assert(response.body.data.programs[1].enable === true, "unexpected data.programs[1].name: " + response.body.data.programs[1].enable);
+    client.assert(response.body.data.programs[1].screen.name === "화면2", "unexpected data.programs[1].screen.description: " + response.body.data.programs[1].screen.name);
+    client.assert(response.body.data.programs[1].screen.description === "화면2 설명", "unexpected data.programs[1].screen.description: " + response.body.data.programs[1].screen.name);
+    client.assert(response.body.data.programs[1].screen.enable === true, "unexpected data.programs[1].screen.description: " + response.body.data.programs[1].screen.enable);
+    client.assert(response.body.data.programs[1].screen.buttons[0].name === "버튼1", "unexpected data.programs[1].screen.buttons[0].name: " + response.body.data.programs[1].screen.buttons[0].name);
+    client.assert(response.body.data.programs[1].screen.buttons[0].description === "버튼1 설명", "unexpected data.programs[1].screen.buttons[0].description: " + response.body.data.programs[1].screen.buttons[0].description);
+    client.assert(response.body.data.programs[1].screen.buttons[0].method === "POST", "unexpected data.programs[1].screen.buttons[0].method: " + response.body.data.programs[1].screen.buttons[0].method);
+    client.assert(response.body.data.programs[1].screen.buttons[0].url === "/api/v1/test1", "unexpected data.programs[1].screen.buttons[0].url: " + response.body.data.programs[1].screen.buttons[0].url);
+    client.assert(response.body.data.programs[1].screen.buttons[0].enable === true, "unexpected data.programs[1].screen.buttons[0].enable: " + response.body.data.programs[1].screen.buttons[0].enable);
+    client.assert(response.body.data.programs[1].screen.buttons[1].name === "버튼2", "unexpected data.programs[1].screen.buttons[1].name: " + response.body.data.programs[1].screen.buttons[1].name);
+    client.assert(response.body.data.programs[1].screen.buttons[1].description === "버튼2 설명", "unexpected data.programs[1].screen.buttons[1].description: " + response.body.data.programs[1].screen.buttons[1].description);
+    client.assert(response.body.data.programs[1].screen.buttons[1].method === "GET", "unexpected data.programs[1].screen.buttons[1].method: " + response.body.data.programs[1].screen.buttons[1].method);
+    client.assert(response.body.data.programs[1].screen.buttons[1].url === "/api/v1/test2", "unexpected data.programs[1].screen.buttons[1].url: " + response.body.data.programs[1].screen.buttons[1].url);
+    client.assert(response.body.data.programs[1].screen.buttons[1].enable === true, "unexpected data.programs[1].screen.buttons[1].enable: " + response.body.data.programs[1].screen.buttons[1].enable);
+    client.assert(response.body.data.programs[1].api.name === "API2", "unexpected data.programs[1].api.name: " + response.body.data.programs[1].api.name);
+    client.assert(response.body.data.programs[1].api.description === "API2 설명", "unexpected data.programs[1].api.description: " + response.body.data.programs[1].api.description);
+    client.assert(response.body.data.programs[1].api.method === "GET", "unexpected data.programs[1].api.method: " + response.body.data.programs[1].api.method);
+    client.assert(response.body.data.programs[1].api.url === "/api/v1/test2", "unexpected data.programs[1].api.url: " + response.body.data.programs[1].api.url);
+    client.assert(response.body.data.programs[1].api.enable === true, "unexpected data.programs[1].api.enable: " + response.body.data.programs[1].api.enable);
+})
+%}
+
+### 권한에서 프로그램2 삭제
+DELETE http://{{host-user}}/api/v1/authority/{{authority_token}}/program/{{program_token_2}}
+Content-Type: application/json
+
+> {%
+client.test("권한에서 프로그램2 삭제", function() {
+    client.assert(response.status === 200, "unexpected http status: " + response.status);
+    client.assert(response.body.data.name === "권한", "unexpected data.name: " + response.body.data.name);
+    client.assert(response.body.data.description === "권한 설명", "unexpected data.description: " + response.body.data.description);
+    client.assert(response.body.data.enable === true, "unexpected data.enable: " + response.body.data.enable);
+    client.assert(response.body.data.programs[0].name === "프로그램1", "unexpected data.programs[0].name: " + response.body.data.programs[0].name);
+    client.assert(response.body.data.programs[0].description === "프로그램1 설명", "unexpected data.programs[0].description: " + response.body.data.programs[0].description);
+    client.assert(response.body.data.programs[0].enable === true, "unexpected data.programs[0].name: " + response.body.data.programs[0].enable);
+    client.assert(response.body.data.programs[0].screen.name === "화면1", "unexpected data.programs[0].screen.description: " + response.body.data.programs[0].screen.name);
+    client.assert(response.body.data.programs[0].screen.description === "화면1 설명", "unexpected data.programs[0].screen.description: " + response.body.data.programs[0].screen.name);
+    client.assert(response.body.data.programs[0].screen.enable === true, "unexpected data.programs[0].screen.description: " + response.body.data.programs[0].screen.enable);
+    client.assert(response.body.data.programs[0].screen.buttons[0].name === "버튼1", "unexpected data.programs[0].screen.buttons[0].name: " + response.body.data.programs[0].screen.buttons[0].name);
+    client.assert(response.body.data.programs[0].screen.buttons[0].description === "버튼1 설명", "unexpected data.programs[0].screen.buttons[0].description: " + response.body.data.programs[0].screen.buttons[0].description);
+    client.assert(response.body.data.programs[0].screen.buttons[0].method === "POST", "unexpected data.programs[0].screen.buttons[0].method: " + response.body.data.programs[0].screen.buttons[0].method);
+    client.assert(response.body.data.programs[0].screen.buttons[0].url === "/api/v1/test1", "unexpected data.programs[0].screen.buttons[0].url: " + response.body.data.programs[0].screen.buttons[0].url);
+    client.assert(response.body.data.programs[0].screen.buttons[0].enable === true, "unexpected data.programs[0].screen.buttons[0].enable: " + response.body.data.programs[0].screen.buttons[0].enable);
+    client.assert(response.body.data.programs[0].screen.buttons[1].name === "버튼2", "unexpected data.programs[0].screen.buttons[1].name: " + response.body.data.programs[0].screen.buttons[1].name);
+    client.assert(response.body.data.programs[0].screen.buttons[1].description === "버튼2 설명", "unexpected data.programs[0].screen.buttons[1].description: " + response.body.data.programs[0].screen.buttons[1].description);
+    client.assert(response.body.data.programs[0].screen.buttons[1].method === "GET", "unexpected data.programs[0].screen.buttons[1].method: " + response.body.data.programs[0].screen.buttons[1].method);
+    client.assert(response.body.data.programs[0].screen.buttons[1].url === "/api/v1/test2", "unexpected data.programs[0].screen.buttons[1].url: " + response.body.data.programs[0].screen.buttons[1].url);
+    client.assert(response.body.data.programs[0].screen.buttons[1].enable === true, "unexpected data.programs[0].screen.buttons[1].enable: " + response.body.data.programs[0].screen.buttons[1].enable);
+    client.assert(response.body.data.programs[0].api.name === "API1", "unexpected data.programs[0].api.name: " + response.body.data.programs[0].api.name);
+    client.assert(response.body.data.programs[0].api.description === "API1 설명", "unexpected data.programs[0].api.description: " + response.body.data.programs[0].api.description);
+    client.assert(response.body.data.programs[0].api.method === "GET", "unexpected data.programs[0].api.method: " + response.body.data.programs[0].api.method);
+    client.assert(response.body.data.programs[0].api.url === "/api/v1/test1", "unexpected data.programs[0].api.url: " + response.body.data.programs[0].api.url);
+    client.assert(response.body.data.programs[0].api.enable === true, "unexpected data.programs[0].api.enable: " + response.body.data.programs[0].api.enable);
+})
+%}
+
+### 권한 삭제
+DELETE http://{{host-user}}/api/v1/authority/{{authority_token}}
+Content-Type: application/json
+
+> {%
+client.test("권한 삭제", function() {
+    client.assert(response.status === 200, "unexpected http status: " + response.status);
+    client.assert(response.body.data.token === String(client.global.get("authority_token")), "unexpected data.name: " + response.body.data.token);
+})
+%}

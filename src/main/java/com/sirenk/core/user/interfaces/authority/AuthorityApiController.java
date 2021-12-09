@@ -18,7 +18,7 @@ public class AuthorityApiController {
     private final AuthorityDtoMapper authorityDtoMapper;
 
     @PostMapping(value = "")
-    public CommonResponse<AuthorityDto.BasicResponse> register(@RequestBody @Valid AuthorityDto.RegisterRequest request) {
+    public CommonResponse<AuthorityDto.AuthorityBasicResponse> register(@RequestBody @Valid AuthorityDto.RegisterRequest request) {
         var command = authorityDtoMapper.of(request);
         var info = authorityFacade.register(command);
         var response = authorityDtoMapper.of(info);
@@ -26,7 +26,7 @@ public class AuthorityApiController {
     }
 
     @GetMapping(value = "{token}")
-    public CommonResponse<AuthorityDto.BasicResponse> retrieve(@Valid AuthorityDto.RetrieveRequest request) {
+    public CommonResponse<AuthorityDto.AuthorityBasicResponse> retrieve(@Valid AuthorityDto.RetrieveRequest request) {
         var command = authorityDtoMapper.of(request);
         var info = authorityFacade.retrieve(command);
         var response = authorityDtoMapper.of(info);
@@ -34,15 +34,31 @@ public class AuthorityApiController {
     }
 
     @PutMapping(value = "{token}")
-    public CommonResponse<AuthorityDto.BasicResponse> changeBasicInfo(@RequestBody @Valid AuthorityDto.ChangeBasicInfoRequest request) {
+    public CommonResponse<AuthorityDto.AuthorityBasicResponse> changeBasicInfo(@RequestBody @Valid AuthorityDto.ChangeBasicInfoRequest request) {
         var command = authorityDtoMapper.of(request);
         var info = authorityFacade.changeBasicInfo(command);
         var response = authorityDtoMapper.of(info);
         return CommonResponse.success(response);
     }
 
+    @PutMapping(value = "{token}/program/{programToken}")
+    public CommonResponse<AuthorityDto.AuthorityBasicResponse> attachProgram(@Valid AuthorityDto.AttachProgramRequest request) {
+        var command = authorityDtoMapper.of(request);
+        var info = authorityFacade.attachProgram(command);
+        var response = authorityDtoMapper.of(info);
+        return CommonResponse.success(response);
+    }
+
+    @DeleteMapping(value = "{token}/program/{programToken}")
+    public CommonResponse<AuthorityDto.AuthorityBasicResponse> deattachProgram(@Valid AuthorityDto.DeattachProgramRequest request) {
+        var command = authorityDtoMapper.of(request);
+        var info = authorityFacade.detachProgram(command);
+        var response = authorityDtoMapper.of(info);
+        return CommonResponse.success(response);
+    }
+
     @DeleteMapping(value = "{token}")
-    public CommonResponse<AuthorityDto.RemoveResponse> remove(@Valid AuthorityDto.RemoveRequest request) {
+    public CommonResponse<AuthorityDto.AuthorityRemoveResponse> remove(@Valid AuthorityDto.RemoveRequest request) {
         var command = authorityDtoMapper.of(request);
         var info = authorityFacade.remove(command);
         var response = authorityDtoMapper.of(info);

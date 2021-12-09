@@ -11,8 +11,8 @@ import org.mapstruct.ReportingPolicy;
 )
 public interface ScreenInfoMapper {
 
-    ScreenInfo.Basic basic(Screen screen);
+    ScreenInfo.ScreenBasic basic(Screen screen);
 
-    ScreenInfo.Remove remove(Screen screen);
+    ScreenInfo.ScreenRemove remove(Screen screen);
 
 }

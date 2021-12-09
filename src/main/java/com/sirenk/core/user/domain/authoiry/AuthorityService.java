@@ -2,14 +2,18 @@ package com.sirenk.core.user.domain.authoiry;
 
 public interface AuthorityService {
 
-    AuthorityInfo.Basic register(AuthorityCommand.Register command);
+    AuthorityInfo.AuthorityBasic register(AuthorityCommand.Register command);
 
     Authority find(AuthorityCommand.Retrieve command);
 
-    AuthorityInfo.Basic retrieve(AuthorityCommand.Retrieve command);
+    AuthorityInfo.AuthorityBasic retrieve(AuthorityCommand.Retrieve command);
 
-    AuthorityInfo.Basic changeBasicInfo(AuthorityCommand.ChangeBasicInfo command);
+    AuthorityInfo.AuthorityBasic changeBasicInfo(AuthorityCommand.ChangeBasicInfo command);
 
-    AuthorityInfo.Remove remove(AuthorityCommand.Remove command);
+    AuthorityInfo.AuthorityRemove remove(AuthorityCommand.Remove command);
+
+    AuthorityInfo.AuthorityBasic attachProgram(AuthorityCommand.AttachProgram command);
+
+    AuthorityInfo.AuthorityBasic detachProgram(AuthorityCommand.DeattachProgram newCommand);
 
 }

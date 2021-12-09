@@ -9,7 +9,7 @@ public class RoleInfo {
     @Getter
     @Builder
     @ToString
-    public static class Basic {
+    public static class RoleBasic {
         // 기본 정보
         private String token;
         private String name;
@@ -20,7 +20,7 @@ public class RoleInfo {
     @Getter
     @Builder
     @ToString
-    public static class Remove {
+    public static class RoleRemove {
         // 기본 정보
         private String token;
     }

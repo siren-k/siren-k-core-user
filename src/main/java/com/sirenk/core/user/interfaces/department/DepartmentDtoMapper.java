@@ -26,10 +26,10 @@ public interface DepartmentDtoMapper {
     DepartmentCommand.Remove of(DepartmentDto.RemoveRequest request);
 
     @Mapping(source = "info.parent", target = "parent")
-    DepartmentDto.BasicParentResponse of(DepartmentInfo.BasicParent info);
+    DepartmentDto.DepartmentBasicParentResponse of(DepartmentInfo.DepartmentBasicParent info);
 
-    DepartmentDto.BasicChildrenResponse of(DepartmentInfo.BasicChildren info);
+    DepartmentDto.DepartmentBasicChildrenResponse of(DepartmentInfo.DepartmentBasicChildren info);
 
-    DepartmentDto.RemoveResponse of(DepartmentInfo.Remove info);
+    DepartmentDto.DepartmentRemoveResponse of(DepartmentInfo.DepartmentRemove info);
 
 }

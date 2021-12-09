@@ -73,18 +73,17 @@ public class ScreenDto {
     @Getter
     @Builder
     @ToString
-    public static class BasicResponse {
+    public static class ScreenBasicResponse {
         // 기본 정보
         private final String token;
         private final String name;
         private final String description;
         private final boolean enable;
         // 버튼 정보
-        private final List<ScreenButtonDto.BasicResponse> buttons;
+        private final List<ScreenButtonDto.ScreenButtonBasicResponse> buttons;
     }
 
-    public record RemoveResponse(String token) {
-
+    public record ScreenRemoveResponse(String token) {
     }
 
 }

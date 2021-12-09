@@ -18,7 +18,7 @@ public class ProgramApiController {
     private final ProgramDtoMapper programDtoMapper;
 
     @PostMapping(value = "")
-    public CommonResponse<ProgramDto.BasicResponse> register(@RequestBody @Valid ProgramDto.RegisterRequest request) {
+    public CommonResponse<ProgramDto.ProgramBasicResponse> register(@RequestBody @Valid ProgramDto.RegisterRequest request) {
         var command = programDtoMapper.of(request);
         var info = programFacade.register(command);
         var response = programDtoMapper.of(info);
@@ -26,7 +26,7 @@ public class ProgramApiController {
     }
 
     @GetMapping(value = "{token}")
-    public CommonResponse<ProgramDto.BasicResponse> retrieve(@Valid ProgramDto.RetrieveRequest request) {
+    public CommonResponse<ProgramDto.ProgramBasicResponse> retrieve(@Valid ProgramDto.RetrieveRequest request) {
         var command = programDtoMapper.of(request);
         var info = programFacade.retrieve(command);
         var response = programDtoMapper.of(info);
@@ -34,7 +34,7 @@ public class ProgramApiController {
     }
 
     @PutMapping(value = "{token}")
-    public CommonResponse<ProgramDto.BasicResponse> changeBasicInfo(@RequestBody @Valid ProgramDto.ChangeBasicInfoRequest request) {
+    public CommonResponse<ProgramDto.ProgramBasicResponse> changeBasicInfo(@RequestBody @Valid ProgramDto.ChangeBasicInfoRequest request) {
         var command = programDtoMapper.of(request);
         var info = programFacade.changeBasicInfo(command);
         var response = programDtoMapper.of(info);
@@ -42,7 +42,7 @@ public class ProgramApiController {
     }
 
     @PutMapping(value = "{token}/screen/{screenToken}")
-    public CommonResponse<ProgramDto.BasicResponse> changeScreen(@Valid ProgramDto.ChangeScreenRequest request) {
+    public CommonResponse<ProgramDto.ProgramBasicResponse> changeScreen(@Valid ProgramDto.ChangeScreenRequest request) {
         var command = programDtoMapper.of(request);
         var info = programFacade.changeScreen(command);
         var response = programDtoMapper.of(info);
@@ -50,7 +50,7 @@ public class ProgramApiController {
     }
 
     @PutMapping(value = "{token}/api/{apiToken}")
-    public CommonResponse<ProgramDto.BasicResponse> changeApi(@Valid ProgramDto.ChangeApiRequest request) {
+    public CommonResponse<ProgramDto.ProgramBasicResponse> changeApi(@Valid ProgramDto.ChangeApiRequest request) {
         var command = programDtoMapper.of(request);
         var info = programFacade.changeApi(command);
         var response = programDtoMapper.of(info);
@@ -58,7 +58,7 @@ public class ProgramApiController {
     }
 
     @DeleteMapping(value = "{token}")
-    public CommonResponse<ProgramDto.RemoveResponse> remove(@Valid ProgramDto.RemoveRequest request) {
+    public CommonResponse<ProgramDto.ProgramRemoveResponse> remove(@Valid ProgramDto.RemoveRequest request) {
         var command = programDtoMapper.of(request);
         var info = programFacade.remove(command);
         var response = programDtoMapper.of(info);

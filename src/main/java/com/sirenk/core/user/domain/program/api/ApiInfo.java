@@ -9,7 +9,7 @@ public class ApiInfo {
     @Getter
     @Builder
     @ToString
-    public static class Basic {
+    public static class ApiBasic {
         // 기본 정보
         private String token;
         private String name;
@@ -22,7 +22,7 @@ public class ApiInfo {
     @Getter
     @Builder
     @ToString
-    public static class Remove {
+    public static class ApiRemove {
         // 기본 정보
         private String token;
     }

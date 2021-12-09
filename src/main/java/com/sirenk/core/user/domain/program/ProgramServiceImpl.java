@@ -16,22 +16,27 @@ public class ProgramServiceImpl implements ProgramService {
 
     @Override
     @Transactional
-    public ProgramInfo.Basic register(ProgramCommand.Register command) {
+    public ProgramInfo.ProgramBasic register(ProgramCommand.Register command) {
         var initProgram = command.toEntity();
         var program = programStorer.store(initProgram);
         return programInfoMapper.basic(program);
     }
 
     @Override
+    public Program find(ProgramCommand.Retrieve command) {
+        return programReader.read(command.getToken());
+    }
+
+    @Override
     @Transactional(readOnly = true)
-    public ProgramInfo.Basic retrieve(ProgramCommand.Retrieve command) {
+    public ProgramInfo.ProgramBasic retrieve(ProgramCommand.Retrieve command) {
         var program = programReader.read(command.getToken());
         return programInfoMapper.basic(program);
     }
 
     @Override
     @Transactional
-    public ProgramInfo.Basic changeBasicInfo(ProgramCommand.ChangeBasicInfo command) {
+    public ProgramInfo.ProgramBasic changeBasicInfo(ProgramCommand.ChangeBasicInfo command) {
         var program = programReader.read(command.getToken());
         program.changeBasicInfo(command.getName(), command.getDescription(), command.isEnable());
         return programInfoMapper.basic(program);
@@ -39,7 +44,7 @@ public class ProgramServiceImpl implements ProgramService {
 
     @Override
     @Transactional
-    public ProgramInfo.Basic changeScreen(ProgramCommand.ChangeScreen command) {
+    public ProgramInfo.ProgramBasic changeScreen(ProgramCommand.ChangeScreen command) {
         var program = programReader.read(command.getToken());
         program.changeScreen(command.getScreen());
         return programInfoMapper.basic(program);
@@ -47,7 +52,7 @@ public class ProgramServiceImpl implements ProgramService {
 
     @Override
     @Transactional
-    public ProgramInfo.Basic changeApi(ProgramCommand.ChangeApi command) {
+    public ProgramInfo.ProgramBasic changeApi(ProgramCommand.ChangeApi command) {
         var program = programReader.read(command.getToken());
         program.changeApi(command.getApi());
         return programInfoMapper.basic(program);
@@ -55,7 +60,7 @@ public class ProgramServiceImpl implements ProgramService {
 
     @Override
     @Transactional
-    public ProgramInfo.Remove remove(ProgramCommand.Remove command) {
+    public ProgramInfo.ProgramRemove remove(ProgramCommand.Remove command) {
         var program = programReader.read(command.getToken());
         programStorer.remove(program);
         return programInfoMapper.remove(program);

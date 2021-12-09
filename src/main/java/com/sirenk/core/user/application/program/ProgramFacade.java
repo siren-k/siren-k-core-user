@@ -25,7 +25,7 @@ public class ProgramFacade {
     private final ProgramCommandMapper programCommandMapper;
 
     @Transactional
-    public ProgramInfo.Basic register(ProgramCommand.Register command) {
+    public ProgramInfo.ProgramBasic register(ProgramCommand.Register command) {
         var screen = findScreen(programCommandMapper.screen(command));
         var api = findApi(programCommandMapper.api(command));
         var newCommand =
@@ -49,29 +49,29 @@ public class ProgramFacade {
         }
     }
 
-    public ProgramInfo.Basic retrieve(ProgramCommand.Retrieve command) {
+    public ProgramInfo.ProgramBasic retrieve(ProgramCommand.Retrieve command) {
         return programService.retrieve(command);
     }
 
-    public ProgramInfo.Basic changeBasicInfo(ProgramCommand.ChangeBasicInfo command) {
+    public ProgramInfo.ProgramBasic changeBasicInfo(ProgramCommand.ChangeBasicInfo command) {
         return programService.changeBasicInfo(command);
     }
 
     @Transactional
-    public ProgramInfo.Basic changeScreen(ProgramCommand.ChangeScreen command) {
+    public ProgramInfo.ProgramBasic changeScreen(ProgramCommand.ChangeScreen command) {
         var screen = screenService.find(programCommandMapper.screen(command));
         var newCommand = command.toBuilder().screen(screen).build();
         return programService.changeScreen(newCommand);
     }
 
     @Transactional
-    public ProgramInfo.Basic changeApi(ProgramCommand.ChangeApi command) {
+    public ProgramInfo.ProgramBasic changeApi(ProgramCommand.ChangeApi command) {
         var api = apiService.find(programCommandMapper.api(command));
         var newCommand = command.toBuilder().api(api).build();
         return programService.changeApi(newCommand);
     }
 
-    public ProgramInfo.Remove remove(ProgramCommand.Remove command) {
+    public ProgramInfo.ProgramRemove remove(ProgramCommand.Remove command) {
         return programService.remove(command);
     }
 

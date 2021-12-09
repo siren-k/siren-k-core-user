@@ -67,15 +67,15 @@ public class DepartmentDto {
         private String token;
     }
 
-    public record BasicParentResponse(String token, String name, String description, String path,
-                                      boolean enable, int order,
-                                      DepartmentDto.BasicParentResponse parent) {
+    public record DepartmentBasicParentResponse(String token, String name, String description, String path,
+                                                boolean enable, int order,
+                                                DepartmentBasicParentResponse parent) {
     }
 
     @Getter
     @Builder
     @ToString
-    public static class BasicChildrenResponse {
+    public static class DepartmentBasicChildrenResponse {
         // 기본 정보
         private final String token;
         private final String name;
@@ -83,12 +83,12 @@ public class DepartmentDto {
         private final String path;
         private final boolean enable;
         // 하위 부서 정보
-        private final List<BasicChildrenResponse> children;
+        private final List<DepartmentBasicChildrenResponse> children;
         // 추가 정보
         private final int order;
     }
 
-    public record RemoveResponse(String token) {
+    public record DepartmentRemoveResponse(String token) {
     }
 
 }

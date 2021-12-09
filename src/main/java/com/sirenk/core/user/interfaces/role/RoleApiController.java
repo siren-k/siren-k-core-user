@@ -18,7 +18,7 @@ public class RoleApiController {
     private final RoleDtoMapper roleDtoMapper;
 
     @PostMapping(value = "")
-    public CommonResponse<RoleDto.BasicResponse> register(@RequestBody @Valid RoleDto.RegisterRequest request) {
+    public CommonResponse<RoleDto.RoleBasicResponse> register(@RequestBody @Valid RoleDto.RegisterRequest request) {
         var command = roleDtoMapper.of(request);
         var info = roleFacade.register(command);
         var response = roleDtoMapper.of(info);
@@ -26,7 +26,7 @@ public class RoleApiController {
     }
 
     @GetMapping(value = "{token}")
-    public CommonResponse<RoleDto.BasicResponse> retrieve(@Valid RoleDto.RetrieveRequest request) {
+    public CommonResponse<RoleDto.RoleBasicResponse> retrieve(@Valid RoleDto.RetrieveRequest request) {
         var command = roleDtoMapper.of(request);
         var info = roleFacade.retrieve(command);
         var response = roleDtoMapper.of(info);
@@ -34,7 +34,7 @@ public class RoleApiController {
     }
 
     @PutMapping(value = "{token}")
-    public CommonResponse<RoleDto.BasicResponse> changeBasicInfo(@RequestBody @Valid RoleDto.ChangeBasicInfoRequest request) {
+    public CommonResponse<RoleDto.RoleBasicResponse> changeBasicInfo(@RequestBody @Valid RoleDto.ChangeBasicInfoRequest request) {
         var command = roleDtoMapper.of(request);
         var info = roleFacade.changeBasicInfo(command);
         var response = roleDtoMapper.of(info);
@@ -42,7 +42,7 @@ public class RoleApiController {
     }
 
     @DeleteMapping(value = "{token}")
-    public CommonResponse<RoleDto.RemoveResponse> remove(@Valid RoleDto.RemoveRequest request) {
+    public CommonResponse<RoleDto.RoleRemoveResponse> remove(@Valid RoleDto.RemoveRequest request) {
         var command = roleDtoMapper.of(request);
         var info = roleFacade.remove(command);
         var response = roleDtoMapper.of(info);

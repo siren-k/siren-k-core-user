@@ -16,7 +16,7 @@ public class ApiServiceImpl implements ApiService {
 
     @Override
     @Transactional
-    public ApiInfo.Basic register(ApiCommand.Register command) {
+    public ApiInfo.ApiBasic register(ApiCommand.Register command) {
         var initApi = command.toEntity();
         var api = apiStorer.store(initApi);
         return apiInfoMapper.basic(api);
@@ -30,14 +30,14 @@ public class ApiServiceImpl implements ApiService {
 
     @Override
     @Transactional(readOnly = true)
-    public ApiInfo.Basic retrieve(ApiCommand.Retrieve command) {
+    public ApiInfo.ApiBasic retrieve(ApiCommand.Retrieve command) {
         var api = apiReader.read(command.getToken());
         return apiInfoMapper.basic(api);
     }
 
     @Override
     @Transactional
-    public ApiInfo.Basic changeBasicInfo(ApiCommand.ChangeBasicInfo command) {
+    public ApiInfo.ApiBasic changeBasicInfo(ApiCommand.ChangeBasicInfo command) {
         var api = apiReader.read(command.getToken());
         api.changeBasicInfo(
                 command.getName(),
@@ -51,7 +51,7 @@ public class ApiServiceImpl implements ApiService {
 
     @Override
     @Transactional
-    public ApiInfo.Remove remove(ApiCommand.Remove command) {
+    public ApiInfo.ApiRemove remove(ApiCommand.Remove command) {
         var api = apiReader.read(command.getToken());
         apiStorer.remove(api);
         return apiInfoMapper.remove(api);

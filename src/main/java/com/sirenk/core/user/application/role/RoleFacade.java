@@ -14,19 +14,19 @@ public class RoleFacade {
 
     private final RoleService roleService;
 
-    public RoleInfo.Basic register(RoleCommand.Register command) {
+    public RoleInfo.RoleBasic register(RoleCommand.Register command) {
         return roleService.register(command);
     }
 
-    public RoleInfo.Basic retrieve(RoleCommand.Retrieve command) {
+    public RoleInfo.RoleBasic retrieve(RoleCommand.Retrieve command) {
         return roleService.retrieve(command);
     }
 
-    public RoleInfo.Basic changeBasicInfo(RoleCommand.ChangeBasicInfo command) {
+    public RoleInfo.RoleBasic changeBasicInfo(RoleCommand.ChangeBasicInfo command) {
         return roleService.changeBasicInfo(command);
     }
 
-    public RoleInfo.Remove remove(RoleCommand.Remove command) {
+    public RoleInfo.RoleRemove remove(RoleCommand.Remove command) {
         return roleService.remove(command);
     }
     

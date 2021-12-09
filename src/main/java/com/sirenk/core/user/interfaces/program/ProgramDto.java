@@ -79,12 +79,12 @@ public class ProgramDto {
         private String token;
     }
 
-    public record BasicResponse(String token, String name, String description, boolean enable,
-                                ScreenDto.BasicResponse screen,
-                                ApiDto.BasicResponse api) {
+    public record ProgramBasicResponse(String token, String name, String description, boolean enable,
+                                       ScreenDto.ScreenBasicResponse screen,
+                                       ApiDto.ApiBasicResponse api) {
     }
 
-    public record RemoveResponse(String token) {
+    public record ProgramRemoveResponse(String token) {
     }
 
 }

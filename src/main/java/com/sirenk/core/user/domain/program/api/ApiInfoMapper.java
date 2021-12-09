@@ -11,8 +11,8 @@ import org.mapstruct.ReportingPolicy;
 )
 public interface ApiInfoMapper {
 
-    ApiInfo.Basic basic(Api api);
+    ApiInfo.ApiBasic basic(Api api);
 
-    ApiInfo.Remove remove(Api api);
+    ApiInfo.ApiRemove remove(Api api);
 
 }

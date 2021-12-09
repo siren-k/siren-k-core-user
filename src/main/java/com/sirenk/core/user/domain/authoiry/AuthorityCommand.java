@@ -1,5 +1,6 @@
 package com.sirenk.core.user.domain.authoiry;
 
+import com.sirenk.core.user.domain.program.Program;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;
@@ -47,6 +48,28 @@ public class AuthorityCommand {
     public static class Remove {
         // 기본 정보
         private String token;
+    }
+
+    @Getter
+    @Builder(toBuilder = true)
+    @ToString
+    public static class AttachProgram {
+        // 기본 정보
+        private String token;
+        // 프로그램 정보
+        private String programToken;
+        private Program program;
+    }
+
+    @Getter
+    @Builder(toBuilder = true)
+    @ToString
+    public static class DeattachProgram {
+        // 기본 정보
+        private String token;
+        // 프로그램 정보
+        private String programToken;
+        private Program program;
     }
 
 }

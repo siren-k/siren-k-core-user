@@ -26,12 +26,12 @@ public interface MenuDtoMapper {
     MenuCommand.Remove of(MenuDto.RemoveRequest request);
 
     @Mapping(source = "info.parent", target = "parent")
-    MenuDto.BasicParentResponse of(MenuInfo.BasicParent info);
+    MenuDto.MenuBasicParentResponse of(MenuInfo.MenuBasicParent info);
 
-    List<MenuDto.BasicChildrenResponse> of(List<MenuInfo.BasicChildren> info);
+    List<MenuDto.MenuBasicChildrenResponse> of(List<MenuInfo.MenuBasicChildren> info);
 
-    MenuDto.BasicChildrenResponse of(MenuInfo.BasicChildren info);
+    MenuDto.MenuBasicChildrenResponse of(MenuInfo.MenuBasicChildren info);
 
-    MenuDto.RemoveResponse of(MenuInfo.Remove info);
+    MenuDto.MenuRemoveResponse of(MenuInfo.MenuRemove info);
 
 }
