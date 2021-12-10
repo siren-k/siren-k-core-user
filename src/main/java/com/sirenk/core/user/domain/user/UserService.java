@@ -6,6 +6,8 @@ public interface UserService {
 
     UserInfo.UserBasic retrieve(UserCommand.Retrieve command);
 
+    UserInfo.UserBasic changePassword(UserCommand.ChangePassword command);
+
     UserInfo.UserRemove remove(UserCommand.Remove command);
 
 }

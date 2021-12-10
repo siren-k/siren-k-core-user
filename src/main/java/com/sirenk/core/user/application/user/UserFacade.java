@@ -22,6 +22,10 @@ public class UserFacade {
         return userService.retrieve(command);
     }
 
+    public UserInfo.UserBasic changePassword(UserCommand.ChangePassword command) {
+        return userService.changePassword(command);
+    }
+
     public UserInfo.UserRemove remove(UserCommand.Remove command) {
         return userService.remove(command);
     }

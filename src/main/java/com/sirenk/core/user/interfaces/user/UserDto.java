@@ -36,6 +36,20 @@ public class UserDto {
     @Getter
     @Setter
     @ToString
+    public static class ChangePasswordRequest {
+        // 기본 정보
+        @NotNull(message = "token: 필수값입니다")
+        private String token;
+        // 인증 정보
+        @NotNull(message = "currentPassword: 필수값입니다")
+        private String currentPassword;
+        @NotNull(message = "newPassword: 필수값입니다")
+        private String newPassword;
+    }
+
+    @Getter
+    @Setter
+    @ToString
     public static class RemoveRequest {
         // 기본 정보
         @NotNull(message = "token: 필수값입니다")

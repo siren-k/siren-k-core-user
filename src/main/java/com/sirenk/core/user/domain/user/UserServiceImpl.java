@@ -31,6 +31,14 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
+    public UserInfo.UserBasic changePassword(UserCommand.ChangePassword command) {
+        var user = userReader.read(command.getToken());
+        user.changePassword(command.getCurrentPassword(), command.getNewPassword());
+        return userInfoMapper.basic(user);
+    }
+
+    @Override
+    @Transactional
     public UserInfo.UserRemove remove(UserCommand.Remove command) {
         var user = userReader.read(command.getToken());
         userStorer.remove(user);

@@ -33,6 +33,14 @@ public class UserApiController {
         return CommonResponse.success(response);
     }
 
+    @PutMapping(value = "{token}/password")
+    public CommonResponse<UserDto.UserBasicResponse> changePassword(@RequestBody @Valid UserDto.ChangePasswordRequest request) {
+        var command = userDtoMapper.of(request);
+        var info = userFacade.changePassword(command);
+        var response = userDtoMapper.of(info);
+        return CommonResponse.success(response);
+    }
+
     @DeleteMapping(value = "{token}")
     public CommonResponse<UserDto.UserRemoveResponse> remove(@Valid UserDto.RemoveRequest request) {
         var command = userDtoMapper.of(request);
