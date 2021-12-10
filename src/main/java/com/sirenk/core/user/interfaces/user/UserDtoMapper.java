@@ -17,6 +17,8 @@ public interface UserDtoMapper {
 
     UserCommand.Retrieve of(UserDto.RetrieveRequest request);
 
+    UserCommand.ChangePassword of(UserDto.ChangePasswordRequest request);
+
     UserCommand.Remove of(UserDto.RemoveRequest request);
 
     UserDto.UserBasicResponse of(UserInfo.UserBasic info);

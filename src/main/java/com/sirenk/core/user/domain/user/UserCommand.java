@@ -37,6 +37,17 @@ public class UserCommand {
     @Getter
     @Builder(toBuilder = true)
     @ToString
+    public static class ChangePassword {
+        // 기본 정보
+        private String token;
+        // 인증 정보
+        private String currentPassword;
+        private String newPassword;
+    }
+
+    @Getter
+    @Builder(toBuilder = true)
+    @ToString
     public static class Remove {
         // 기본 정보
         private String token;
