@@ -1,0 +1,47 @@
+### 사용자 등록
+POST http://{{host-user}}/api/v1/user
+Content-Type: application/json
+
+{
+  "name": "사용자",
+  "password": "비밀번호",
+  "email": "email@gmail.com"
+}
+
+> {%
+client.test("사용자 등록", function() {
+    client.assert(response.status === 200, "unexpected http status: " + response.status);
+    client.assert(response.body.data.name === "사용자", "unexpected data.name: " + response.body.data.name);
+    client.assert(response.body.data.enable === true, "unexpected data.enable: " + response.body.data.enable);
+    client.assert(response.body.data.password === "비밀번호", "unexpected data.password: " + response.body.data.password);
+    client.assert(response.body.data.locked === false, "unexpected data.locked: " + response.body.data.locked);
+    client.assert(response.body.data.email === "email@gmail.com", "unexpected data.email: " + response.body.data.email);
+})
+client.global.set("user_token", response.body.data.token)
+%}
+
+### 사용자 조회
+GET http://{{host-user}}/api/v1/user/{{user_token}}
+Content-Type: application/json
+
+> {%
+client.test("사용자 조회", function() {
+    client.assert(response.status === 200, "unexpected http status: " + response.status);
+    client.assert(response.body.data.name === "사용자", "unexpected data.name: " + response.body.data.name);
+    client.assert(response.body.data.enable === true, "unexpected data.enable: " + response.body.data.enable);
+    client.assert(response.body.data.password === "비밀번호", "unexpected data.password: " + response.body.data.password);
+    client.assert(response.body.data.locked === false, "unexpected data.locked: " + response.body.data.locked);
+    client.assert(response.body.data.email === "email@gmail.com", "unexpected data.email: " + response.body.data.email);
+})
+%}
+
+### 사용자 삭제
+DELETE http://{{host-user}}/api/v1/user/{{user_token}}
+Content-Type: application/json
+
+> {%
+client.test("사용자 삭제", function() {
+    client.assert(response.status === 200, "unexpected http status: " + response.status);
+    client.assert(response.body.data.token === String(client.global.get("user_token")), "unexpected data.email: " + response.body.data.token);
+})
+%}
