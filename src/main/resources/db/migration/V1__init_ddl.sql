@@ -9,7 +9,7 @@ create table department
     department_token       varchar(255)  not null comment '부서를 구분하기 위한 대체키',
     department_name        varchar(255)  not null comment '부서의 이름',
     department_description varchar(1024) comment '부서의 설명',
-    department_enable      boolean default true comment '부서 사용 여부',
+    department_enable      boolean       not null default true comment '부서 사용 여부',
 
     -- 상위 부서 정보
     department_path        varchar(2048) not null comment '부서와 상위 부서의 명칭 나열',
@@ -47,7 +47,7 @@ create table menu
     menu_token       varchar(255)  not null comment '메뉴를 구분하기 위한 대체키',
     menu_name        varchar(255)  not null comment '메뉴의 이름',
     menu_description varchar(1024) comment '메뉴의 설명',
-    menu_enable      boolean default true comment '메뉴 사용 여부',
+    menu_enable      boolean       not null default true comment '메뉴 사용 여부',
 
     -- 상위 메뉴 정보
     menu_path        varchar(4096) not null comment '메뉴와 상위 메뉴의 명칭 나열',
@@ -82,7 +82,7 @@ create table program
     program_token       varchar(255) not null comment '프로그램을 구분하기 위한 대체키',
     program_name        varchar(255) not null comment '프로그램의 이름',
     program_description varchar(1024) comment '프로그램의 설명',
-    program_enable      boolean default true comment '프로그램의 사용 여부',
+    program_enable      boolean      not null default true comment '프로그램의 사용 여부',
 
     -- 화면 정보
     screen_id           bigint comment '프로그램에 속하는 화면의 식별자',
@@ -91,11 +91,30 @@ create table program
     api_id              bigint comment '프로그램에 속하는 API의 식별자',
 
     -- 권한 정보
-    authority_id        bigint comment '프고르매이 속하는 권한의 식별자',
+    authority_id        bigint comment '프로그램이 속하는 권한의 식별자',
 
     created_at          datetime(6)  not null comment '프로그램의 정보 생성 일시',
     updated_at          datetime(6)  null comment '프로그램의 정보 수정 일시'
 ) comment '프로그램' charset = utf8mb4;
+
+alter table program
+    add constraint fk_program_01
+        foreign key (screen_id)
+            references screen (screen_id)
+            on update cascade
+            on delete cascade;
+
+alter table program
+    add constraint fk_program_02
+        foreign key (api_id)
+            references api (api_id)
+            on update cascade
+            on delete cascade;
+
+alter table program
+    add constraint fk_program_03
+        foreign key (authority_id)
+            references authority (authority_id);
 
 create
     index program_idx01 on program (program_token);
@@ -115,7 +134,7 @@ create table role
     role_token       varchar(255) not null comment '역할을 구분하기 위한 대체키',
     role_name        varchar(255) not null comment '역할의 이름',
     role_description varchar(1024) comment '역할의 설명',
-    role_enable      boolean default true comment '역할의 사용 여부',
+    role_enable      boolean      not null default true comment '역할의 사용 여부',
 
     created_at       datetime(6)  not null comment '역할의 정보 생성 일시',
     updated_at       datetime(6)  null comment '역할의 정보 수정 일시'
@@ -139,7 +158,7 @@ create table authority
     authority_token       varchar(255) not null comment '권한을 구분하기 위한 대체키',
     authority_name        varchar(255) not null comment '권한의 이름',
     authority_description varchar(1024) comment '권한의 설명',
-    authority_enable      boolean default true comment '권한의 사용 여부',
+    authority_enable      boolean      not null default true comment '권한의 사용 여부',
 
     -- 권한 정보
     role_id               bigint comment '역할의 식별자',
@@ -147,6 +166,11 @@ create table authority
     created_at            datetime(6)  not null comment '권한의 정보 생성 일시',
     updated_at            datetime(6)  null comment '권한의 정보 수정 일시'
 ) comment '권한' charset = utf8mb4;
+
+alter table authority
+    add constraint fk_authority_01
+        foreign key (role_id)
+            references role (role_id);
 
 create
     index authority_idx01 on authority (authority_token);
@@ -168,7 +192,7 @@ create table api
     api_description varchar(1024) comment 'API의 설명',
     api_method      varchar(255)  not null comment 'API 호출 방법(GET, POST, PUT, DELETE, etc)',
     api_url         varchar(4096) not null comment 'API의 URL',
-    api_enable      boolean default true comment 'API의 사용 여부',
+    api_enable      boolean       not null default true comment 'API의 사용 여부',
 
     created_at      datetime(6)   not null comment 'API의 정보 생성 일시',
     updated_at      datetime(6)   null comment 'API의 정보 수정 일시'
@@ -192,7 +216,7 @@ create table screen
     screen_token       varchar(255) not null comment '화면을 구분하기 위한 대체키',
     screen_name        varchar(255) not null comment '화면의 이름',
     screen_description varchar(1024) comment '화면의 설명',
-    screen_enable      boolean default true comment '화면의 사용 여부',
+    screen_enable      boolean      not null default true comment '화면의 사용 여부',
 
     created_at         datetime(6)  not null comment '화면의 정보 생성 일시',
     updated_at         datetime(6)  null comment '화면의 정보 수정 일시'
@@ -218,7 +242,7 @@ create table screen_button
     screen_button_description varchar(1024) comment '화면버튼의 설명',
     screen_button_method      varchar(255)  not null comment '화면버튼 URL의 HTTP 메소드',
     screen_button_url         varchar(4096) not null comment '화면버튼의 URL',
-    screen_button_enable      boolean default true comment '화면버튼의 사용 여부',
+    screen_button_enable      boolean       not null default true comment '화면버튼의 사용 여부',
 
     -- 화면 정보
     screen_id                 bigint        not null comment '화면버튼이 속한 화면의 식별자',
@@ -238,6 +262,51 @@ create
     index screen_button_idx01 on screen_button (created_at);
 
 create
-    index screen_button_idx03 on screen_button (updated_at);
+    index screen_button_idx02 on screen_button (updated_at);
+
+-- user
+drop table if exists user;
+create table user
+(
+    -- 기본 정보
+    user_id                         bigint auto_increment primary key comment '사용자의 식별자',
+    user_token                      varchar(255) not null comment '사용자를 구분하기 위한 대체키',
+    user_name                       varchar(255) not null comment '사용자의 이름',
+    user_enable                     boolean      not null default true comment '화면버튼의 사용 여부',
+
+    -- 인증 정보
+    user_password                   varchar(255) not null comment '사용자의 인증 비밀번호',
+    user_authentication_retry_count smallint     not null default 0 comment '사용자의 인증 비밃번호 제출 횟수',
+    user_last_password_change_date  datetime(6)  not null comment '사용자의 마지막 인증 비밀번호 갱신 일시',
+    user_locked                     boolean      not null default false comment '사용자 계정 잠김 상태',
+
+    -- 개인정보
+    user_email                      varchar(255) not null comment '사용자의 이메일 주소',
+    user_cell_phone                 varchar(255) comment '사용자의 셀룰러 전환번호',
+    user_work_phone                 varchar(255) comment '사용자의 직장 전화번호',
+    user_address_1                  varchar(1024) comment '사용자의 주소 1',
+    user_address_2                  varchar(1024) comment '사용자의 주소 2',
+    user_address_3                  varchar(1024) comment '사용자의 주소 3',
+    user_address_4                  varchar(1024) comment '사용자의 주소 4',
+    user_address_5                  varchar(1024) comment '사용자의 주소 5',
+
+    created_at                      datetime(6)  not null comment '화면버튼의 정보 생성 일시',
+    updated_at                      datetime(6)  null comment '화면버튼의 정보 수정 일시'
+) comment '사용자' charset = utf8mb4;
+
+create
+    index user_idx01 on user (user_token);
+
+create
+    index user_idx02 on user (user_authentication_retry_count);
+
+create
+    unique index user_idx03 on user (user_email);
+
+create
+    index user_idx04 on user (created_at);
+
+create
+    index user_idx05 on user (updated_at);
 
 set foreign_key_checks = 1; -- 외래키 체크 설정
