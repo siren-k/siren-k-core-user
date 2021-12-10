@@ -11,10 +11,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
                 "com.sirenk.core.common.http.response",
         }
 )
-public class UserApplication {
+public class SirenKCoreUserApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(UserApplication.class, args);
+        SpringApplication.run(SirenKCoreUserApplication.class, args);
     }
 
 }
