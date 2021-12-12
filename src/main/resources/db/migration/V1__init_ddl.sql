@@ -270,7 +270,7 @@ create table user
 (
     -- 기본 정보
     user_id                         bigint auto_increment primary key comment '사용자의 식별자',
-    user_token                      varchar(255) not null comment '사용자를 구분하기 위한 대체키',
+    user_email                      varchar(255) not null comment '사용자의 이메일 주소',
     user_name                       varchar(255) not null comment '사용자의 이름',
     user_enable                     boolean      not null default true comment '화면버튼의 사용 여부',
 
@@ -281,7 +281,6 @@ create table user
     user_locked                     boolean      not null default false comment '사용자 계정 잠김 상태',
 
     -- 개인정보
-    user_email                      varchar(255) not null comment '사용자의 이메일 주소',
     user_cell_phone                 varchar(255) comment '사용자의 셀룰러 전환번호',
     user_work_phone                 varchar(255) comment '사용자의 직장 전화번호',
     user_address_1                  varchar(1024) comment '사용자의 주소 1',
@@ -295,18 +294,15 @@ create table user
 ) comment '사용자' charset = utf8mb4;
 
 create
-    index user_idx01 on user (user_token);
+    unique index user_idx01 on user (user_email);
 
 create
     index user_idx02 on user (user_authentication_retry_count);
 
 create
-    unique index user_idx03 on user (user_email);
+    index user_idx03 on user (created_at);
 
 create
-    index user_idx04 on user (created_at);
-
-create
-    index user_idx05 on user (updated_at);
+    index user_idx04 on user (updated_at);
 
 set foreign_key_checks = 1; -- 외래키 체크 설정

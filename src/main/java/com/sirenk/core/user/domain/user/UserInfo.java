@@ -11,14 +11,12 @@ public class UserInfo {
     @ToString
     public static class UserBasic {
         // 기본 정보
-        private String token;
+        private String email;
         private String name;
         private boolean enable;
         // 인증 정보
         private String password;
         private boolean locked;
-        // 개인 정보
-        private String email;
     }
 
     @Getter
@@ -26,7 +24,7 @@ public class UserInfo {
     @ToString
     public static class UserRemove {
         // 기본 정보
-        private String token;
+        private String email;
     }
     
 }

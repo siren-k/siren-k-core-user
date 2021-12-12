@@ -23,7 +23,7 @@ public class UserReaderImpl implements UserReader {
 
     @Override
     public User read(String token) {
-        return userJpaRepository.findByToken(token)
+        return userJpaRepository.findByEmail(token)
                 .orElseThrow(EntityNotFoundException::new);
     }
 
