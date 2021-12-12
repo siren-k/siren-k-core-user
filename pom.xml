@@ -12,7 +12,7 @@
 
     <groupId>com.siren-k</groupId>
     <artifactId>core-user</artifactId>
-    <version>${siren-k.version}</version>
+    <version>0.0.1-SNAPSHOT</version>
     <name>core-user</name>
     <description>Siren-K User</description>
 
