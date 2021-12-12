@@ -1,12 +1,12 @@
-version: "3.8"
+version: '3.8'
 
 services:
-  user-db:
+  user-mariadb:
     container_name: user-mariadb
     image: mariadb:10.6.4
     restart: always
     ports:
-      - "13306:3306"
+      - '13306:3306'
     environment:
       - MYSQL_DATABASE=user-db
       - MYSQL_ROOT_PASSWORD=nownever123!@#
@@ -19,3 +19,14 @@ services:
       - --lower_case_table_names=1
     volumes:
       - ./mariadb:/var/lib/mysql
+
+  user-session-redis:
+    container_name: user-session-redis
+    image: redis:6.2.6
+    command: redis-server --requirepass changeme --port 6379
+    hostname: redis
+    labels:
+      - 'name=redis'
+      - 'mode=standalone'
+    ports:
+      - '6379:6379'
