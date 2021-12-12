@@ -11,17 +11,16 @@ public class UserCommand {
     @ToString
     public static class Register {
         // 기본 정보
+        private String email;
         private String name;
         // 인증 정보
         private String password;
-        // 개인 정보
-        private String email;
 
         public User toEntity() {
             return User.builder()
+                    .email(email)
                     .name(name)
                     .password(password)
-                    .email(email)
                     .build();
         }
     }
@@ -31,7 +30,7 @@ public class UserCommand {
     @ToString
     public static class Retrieve {
         // 기본 정보
-        private String token;
+        private String email;
     }
 
     @Getter
@@ -39,7 +38,7 @@ public class UserCommand {
     @ToString
     public static class ChangePassword {
         // 기본 정보
-        private String token;
+        private String email;
         // 인증 정보
         private String currentPassword;
         private String newPassword;
@@ -50,7 +49,7 @@ public class UserCommand {
     @ToString
     public static class Remove {
         // 기본 정보
-        private String token;
+        private String email;
     }
 
 }

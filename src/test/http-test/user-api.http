@@ -3,9 +3,9 @@ POST http://{{host-user}}/api/v1/user
 Content-Type: application/json
 
 {
+  "email": "email@gmail.com",
   "name": "사용자",
-  "password": "비밀번호",
-  "email": "email@gmail.com"
+  "password": "비밀번호"
 }
 
 > {%
@@ -17,11 +17,11 @@ client.test("사용자 등록", function() {
     client.assert(response.body.data.locked === false, "unexpected data.locked: " + response.body.data.locked);
     client.assert(response.body.data.email === "email@gmail.com", "unexpected data.email: " + response.body.data.email);
 })
-client.global.set("user_token", response.body.data.token)
+client.global.set("user_email", response.body.data.email)
 %}
 
 ### 사용자 조회
-GET http://{{host-user}}/api/v1/user/{{user_token}}
+GET http://{{host-user}}/api/v1/user/{{user_email}}
 Content-Type: application/json
 
 > {%
@@ -36,11 +36,11 @@ client.test("사용자 조회", function() {
 %}
 
 ### 사용자 비밀번호 변경
-PUT http://{{host-user}}/api/v1/user/{{user_token}}/password
+PUT http://{{host-user}}/api/v1/user/{{user_email}}/password
 Content-Type: application/json
 
 {
-  "token": "{{user_token}}",
+  "email": "{{user_email}}",
   "currentPassword": "비밀번호",
   "newPassword": "신규비밀번호"
 }
@@ -57,12 +57,16 @@ client.test("사용자 비밀번호 변경", function() {
 %}
 
 ### 사용자 삭제
-DELETE http://{{host-user}}/api/v1/user/{{user_token}}
+DELETE http://{{host-user}}/api/v1/user/{{user_email}}
 Content-Type: application/json
 
 > {%
 client.test("사용자 삭제", function() {
     client.assert(response.status === 200, "unexpected http status: " + response.status);
-    client.assert(response.body.data.token === String(client.global.get("user_token")), "unexpected data.email: " + response.body.data.token);
+    client.assert(response.body.data.email === String(client.global.get("user_email")), "unexpected data.email: " + response.body.data.email);
 })
 %}
+
+### 사용자 로그인
+PUT http://{{host-user}}/api/v1/user/{{user_email}}
+Content-Type: application/json

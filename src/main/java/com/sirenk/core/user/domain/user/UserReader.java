@@ -4,6 +4,6 @@ public interface UserReader {
 
     User read(Long id);
 
-    User read(String token);
+    User read(String email);
 
 }

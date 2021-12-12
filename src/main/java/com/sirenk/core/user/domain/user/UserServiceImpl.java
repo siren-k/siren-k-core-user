@@ -25,14 +25,14 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional(readOnly = true)
     public UserInfo.UserBasic retrieve(UserCommand.Retrieve command) {
-        var user = userReader.read(command.getToken());
+        var user = userReader.read(command.getEmail());
         return userInfoMapper.basic(user);
     }
 
     @Override
     @Transactional
     public UserInfo.UserBasic changePassword(UserCommand.ChangePassword command) {
-        var user = userReader.read(command.getToken());
+        var user = userReader.read(command.getEmail());
         user.changePassword(command.getCurrentPassword(), command.getNewPassword());
         return userInfoMapper.basic(user);
     }
@@ -40,7 +40,7 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public UserInfo.UserRemove remove(UserCommand.Remove command) {
-        var user = userReader.read(command.getToken());
+        var user = userReader.read(command.getEmail());
         userStorer.remove(user);
         return userInfoMapper.remove(user);
     }

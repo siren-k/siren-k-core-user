@@ -26,8 +26,8 @@ public class User extends AbstractEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
     private Long id;
-    @Column(name = "user_token")
-    private String token;
+    @Column(name = "user_email")
+    private String email;
     @Column(name = "user_name")
     private String name;
     @Column(name = "user_enable")
@@ -44,8 +44,6 @@ public class User extends AbstractEntity {
     private boolean locked;
 
     // 개인정보
-    @Column(name = "user_email")
-    private String email;
     @Column(name = "user_cell_phone")
     private String cellPhone;
     @Column(name = "user_work_phone")
@@ -65,7 +63,7 @@ public class User extends AbstractEntity {
     public User(String name, String password, String email
     ) {
         // 기본 정보
-        this.token = TokenGenerator.randomCharacterWithPrefix(PREFIX_USER);
+        this.email = email;
         this.name = name;
         this.enable = true;
 
@@ -74,9 +72,6 @@ public class User extends AbstractEntity {
         this.authenticationRetryCount = 0;
         this.lastPasswordChangeDate = ZonedDateTime.now();
         this.locked = false;
-
-        // 개인 정보
-        this.email = email;
     }
 
     public void changePassword(String currentPassword, String newPassword) {
