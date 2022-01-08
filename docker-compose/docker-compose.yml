@@ -23,7 +23,8 @@ services:
   user-session-redis:
     container_name: user-session-redis
     image: redis:6.2.6
-    command: redis-server --requirepass changeme --port 6379
+    restart: always
+    command: redis-server --requirepass nownever123!@# --port 6379
     hostname: redis
     labels:
       - 'name=redis'

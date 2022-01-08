@@ -1,13 +1,15 @@
 package com.sirenk.core.user.domain.user;
 
 import com.sirenk.core.common.exception.AuthenticationException;
+import com.sirenk.core.common.exception.InvalidParamException;
 import com.sirenk.core.common.jpa.AbstractEntity;
 import com.sirenk.core.common.response.ErrorCode;
-import com.sirenk.core.common.util.TokenGenerator;
+import com.sirenk.core.user.interfaces.user.session.Role;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 
 import javax.persistence.*;
 import java.time.ZonedDateTime;
@@ -60,8 +62,12 @@ public class User extends AbstractEntity {
     private String address5;
 
     @Builder
-    public User(String name, String password, String email
+    public User(String email, String name, String password
     ) {
+        if (StringUtils.isEmpty(email)) throw new InvalidParamException("User.email");
+        if (StringUtils.isEmpty(name)) throw new InvalidParamException("User.name");
+        if (StringUtils.isEmpty(password)) throw new InvalidParamException("User.password");
+
         // 기본 정보
         this.email = email;
         this.name = name;
@@ -85,6 +91,10 @@ public class User extends AbstractEntity {
                             .getErrorMsg("현재 비밀번호가 동일하지 않습니다")
             );
         }
+    }
+
+    public Role getRole() {
+        return Role.USER;
     }
 
 }

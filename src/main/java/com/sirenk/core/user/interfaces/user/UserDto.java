@@ -1,5 +1,6 @@
 package com.sirenk.core.user.interfaces.user;
 
+import com.sirenk.core.user.interfaces.user.session.UserSession;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -45,6 +46,18 @@ public class UserDto {
         @NotNull(message = "newPassword: 필수값입니다")
         private String newPassword;
     }
+
+    @Getter
+    @Setter
+    @ToString
+    public static class LoginRequest {
+        // 기본 정보
+        @NotNull(message = "email: 필수값입니다")
+        private String email;
+        @NotNull(message = "password: 필수값입니다")
+        private String password;
+    }
+
 
     @Getter
     @Setter

@@ -1,0 +1,30 @@
+### 사용자 등록
+POST http://{{host-user}}/api/v1/user
+Content-Type: application/json
+
+{
+  "email": "sample@gmail.com",
+  "name": "사용자",
+  "password": "비밀번호"
+}
+
+> {%
+client.test("사용자 등록", function() {
+    client.assert(response.status === 200, "unexpected http status: " + response.status);
+    client.assert(response.body.data.name === "사용자", "unexpected data.name: " + response.body.data.name);
+    client.assert(response.body.data.enable === true, "unexpected data.enable: " + response.body.data.enable);
+    client.assert(response.body.data.password === "비밀번호", "unexpected data.password: " + response.body.data.password);
+    client.assert(response.body.data.locked === false, "unexpected data.locked: " + response.body.data.locked);
+    client.assert(response.body.data.email === "email@gmail.com", "unexpected data.email: " + response.body.data.email);
+})
+client.global.set("user_email", response.body.data.email)
+%}
+
+### 사용자 로그인
+PUT http://{{host-user}}/api/v1/authentication/{{user_email}}
+Content-Type: application/json
+
+{
+  "email": "{{user_email}}",
+  "password": "비밀번호"
+}

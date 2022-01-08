@@ -8,6 +8,8 @@ public interface UserService {
 
     UserInfo.UserBasic changePassword(UserCommand.ChangePassword command);
 
+    UserInfo.UserBasic login(UserCommand.Login command);
+
     UserInfo.UserRemove remove(UserCommand.Remove command);
 
 }

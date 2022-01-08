@@ -47,6 +47,16 @@ public class UserCommand {
     @Getter
     @Builder(toBuilder = true)
     @ToString
+    public static class Login {
+        // 기본 정보
+        private String email;
+        // 인증 정보
+        private String password;
+    }
+
+    @Getter
+    @Builder(toBuilder = true)
+    @ToString
     public static class Remove {
         // 기본 정보
         private String email;

@@ -26,5 +26,5 @@ public class UserInfo {
         // 기본 정보
         private String email;
     }
-    
+
 }

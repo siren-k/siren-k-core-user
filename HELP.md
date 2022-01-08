@@ -1,3 +1,125 @@
+## Redis
+### localhost:6379 접속
+```
+$ redis-cli
+```
+### 원격접속
+```
+redis-cli -h {host name} -p {port number]
+```
+### 정보보기
+```
+redis-cli info
+```
+### help
+```
+redis-cli help
+```
+### 모니터링
+```
+redis-cli monitor
+```
+### CRUD 명령어
+#### 현재의 키값들을 확인
+```
+127.0.0.1:6379> keys *
+(empty list or set)
+```
+#### key / value 형태로 저장
+```
+127.0.0.1:6379>set k_one v_one
+OK
+
+127.0.0.1:6379>keys *
+1) "k_one"
+```
+#### 여러개의 key / value 형태로 저장
+```
+127.0.0.1:6379> mset k_two v_two k_tree v_tree
+OK
+
+127.0.0.1:6379> keys *
+1) "k_tree"
+2) "k_one"
+3) "k_two"
+```
+#### 소멸시간 지정해서 저장(시간은 초단위로 입력)
+```
+127.0.0.1:6379> setex k_four 10 k_four
+OK
+```
+#### key에 해당하는 value를 조회
+```
+127.0.0.1:6379> get k_four
+(nil)
+127.0.0.1:6379> get k_tree
+"v_tree"
+```
+#### 여러개의 key를 조회
+```
+127.0.0.1:6379> mget k_one k_two
+1) "v_one"
+2) "v_two"
+```
+#### 해당 key와 value을 삭제
+```
+127.0.0.1:6379> del k_tree
+(integer) 1
+
+127.0.0.1:6379> keys *
+1) "k_one"
+2) "k_two"
+```
+#### 타임아웃까지 남은 시간을 초단위로 반환
+```
+127.0.0.1:6379> setex k_tree 60 v_tree
+OK
+
+127.0.0.1:6379> ttl k_tree
+(integer) 54
+
+127.0.0.1:6379> pttl k_tree
+(integer) 48628
+
+127.0.0.1:6379> ttl k_tree
+(integer) -2
+
+127.0.0.1:6379> ttl k_one
+(integer) -1
+```
+#### *검색어*  key 검색
+```
+127.0.0.1:6379> keys *k*
+1) "k_one"
+2) "k_two"
+```
+#### key의 이름을 변경
+```
+127.0.0.1:6379> rename k_one one
+OK
+
+127.0.0.1:6379> keys *
+1) "one"
+2) "k_two"
+
+127.0.0.1:6379> renamenx k_two one
+(integer) 0
+
+127.0.0.1:6379> keys *
+1) "one"
+2) "k_two"
+```
+#### 모든 데이터(key와 value)를 삭제
+```
+127.0.0.1:6379> flushall
+OK
+
+127.0.0.1:6379> keys *
+(empty list or set)
+```
+
+---
+
 ## Docker
 ### 버전 확인
 ```

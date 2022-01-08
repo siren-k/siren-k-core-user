@@ -25,7 +25,7 @@ public class UserApiController {
         return CommonResponse.success(response);
     }
 
-    @GetMapping(value = "{token}")
+    @GetMapping(value = "{email}")
     public CommonResponse<UserDto.UserBasicResponse> retrieve(@Valid UserDto.RetrieveRequest request) {
         var command = userDtoMapper.of(request);
         var info = userFacade.retrieve(command);
@@ -33,7 +33,7 @@ public class UserApiController {
         return CommonResponse.success(response);
     }
 
-    @PutMapping(value = "{token}/password")
+    @PutMapping(value = "{email}/password")
     public CommonResponse<UserDto.UserBasicResponse> changePassword(@RequestBody @Valid UserDto.ChangePasswordRequest request) {
         var command = userDtoMapper.of(request);
         var info = userFacade.changePassword(command);
@@ -41,7 +41,7 @@ public class UserApiController {
         return CommonResponse.success(response);
     }
 
-    @DeleteMapping(value = "{token}")
+    @DeleteMapping(value = "{email}")
     public CommonResponse<UserDto.UserRemoveResponse> remove(@Valid UserDto.RemoveRequest request) {
         var command = userDtoMapper.of(request);
         var info = userFacade.remove(command);

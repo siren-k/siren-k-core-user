@@ -10,6 +10,10 @@ spring:
     open-in-view: false
     hibernate:
       ddl-auto: none
+  session:
+    store-type: redis
+    redis:
+      flush-mode: on_save
 
 management:
   endpoints:
@@ -36,6 +40,10 @@ spring:
     url: jdbc:mariadb://localhost:3306/user-db?serverTimezone=UTC&characterEncoding=UTF-8&allowPublicKeyRetrieval=true&useSSL=false
     username: nownever
     password: nownever123!@#
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    password: nownever123!@#
 
 ---
 
@@ -48,3 +56,7 @@ spring:
     url: jdbc:mariadb://localhost:13306/user-db?serverTimezone=UTC&characterEncoding=UTF-8&allowPublicKeyRetrieval=true&useSSL=false
     username: user-svc
     password: user-pass
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    password: nownever123!@#
