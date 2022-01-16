@@ -11,10 +11,10 @@
     </parent>
 
     <groupId>com.siren-k</groupId>
-    <artifactId>core-user</artifactId>
+    <artifactId>siren-k-core-user</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>core-user</name>
-    <description>Siren-K User</description>
+    <name>siren-k-core-user</name>
+    <description>Siren-K Core User</description>
 
     <properties>
         <java.version>17</java.version>
@@ -30,17 +30,17 @@
     <dependencies>
         <dependency>
             <groupId>com.siren-k</groupId>
-            <artifactId>core-common</artifactId>
+            <artifactId>siren-k-core-common</artifactId>
             <version>${siren-k.version}</version>
         </dependency>
         <dependency>
             <groupId>com.siren-k</groupId>
-            <artifactId>core-common-http</artifactId>
+            <artifactId>siren-k-core-common-http</artifactId>
             <version>${siren-k.version}</version>
         </dependency>
         <dependency>
             <groupId>com.siren-k</groupId>
-            <artifactId>core-common-jpa</artifactId>
+            <artifactId>siren-k-core-common-jpa</artifactId>
             <version>${siren-k.version}</version>
         </dependency>
 
